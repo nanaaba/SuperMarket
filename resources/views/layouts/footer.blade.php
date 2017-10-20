@@ -1,0 +1,314 @@
+
+<!-- Feature Box End-->
+<!--Footer Start-->
+<footer id="footer">
+    <div class="fpart-first">
+        <div class="container">
+            <div class="row">
+                <div class="contact col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                    <h5>Contact Details</h5>
+                    <ul>
+                        <li class="address"><i class="fa fa-map-marker"></i>Central Square, 22 Hoi Wing Road, New Delhi, India</li>
+                        <li class="mobile"><i class="fa fa-phone"></i>+91 9898777656</li>
+                        <li class="email"><i class="fa fa-envelope"></i>Send email via our <a href="contact-us.html">Contact Us</a>
+                    </ul>
+                </div>
+                <div class="column col-lg-2 col-md-2 col-sm-3 col-xs-12">
+                    <h5>Information</h5>
+                    <ul>
+                        <li><a href="about-us.html">About Us</a></li>
+                        <li><a href="about-us.html">Delivery Information</a></li>
+                        <li><a href="about-us.html">Privacy Policy</a></li>
+                        <li><a href="about-us.html">Terms &amp; Conditions</a></li>
+                    </ul>
+                </div>
+                <div class="column col-lg-2 col-md-2 col-sm-3 col-xs-12">
+                    <h5>Customer Service</h5>
+                    <ul>
+                        <li><a href="contact-us.html">Contact Us</a></li>
+                        <li><a href="returns.html">Returns</a></li>
+                        <li><a href="sitemap.html">Site Map</a></li>
+                    </ul>
+                </div>
+                <div class="column col-lg-2 col-md-2 col-sm-3 col-xs-12">
+                    <h5>Extras</h5>
+                    <ul>
+                        <li><a href="manufacturer.html">Brands</a></li>
+                        <li><a href="gift-voucher.html">Gift Vouchers</a></li>
+                        <li><a href="#">Affiliates</a></li>
+                        <li><a href="#">Specials</a></li>
+                    </ul>
+                </div>
+                <div class="column col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                    <h5>Newsletter</h5>
+                    <div class="form-group">
+                        <label class="control-label" for="subscribe">Sign up to receive latest news and updates.</label>
+                        <input id="signup" type="email" required="" placeholder="Email address" name="email" class="form-control">
+                    </div>
+                    <input type="submit" value="Subscribe" class="btn btn-primary">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="fpart-second">
+        <div class="container">
+            <div id="powered" class="clearfix">
+                <div class="powered_text pull-left flip">
+                    <p>Marketshop Ecommerce Template © 2016 | Template By <a href="http://harnishdesign.net" target="_blank">Harnish Design</a></p>
+                </div>
+                <div class="social pull-right flip"> <a href="#" target="_blank"> <img data-toggle="tooltip" src="image/socialicons/facebook.png" alt="Facebook" title="Facebook"></a> <a href="#" target="_blank"> <img data-toggle="tooltip" src="image/socialicons/twitter.png" alt="Twitter" title="Twitter"> </a> <a href="#" target="_blank"> <img data-toggle="tooltip" src="image/socialicons/google_plus.png" alt="Google+" title="Google+"> </a> <a href="#" target="_blank"> <img data-toggle="tooltip" src="image/socialicons/pinterest.png" alt="Pinterest" title="Pinterest"> </a> <a href="#" target="_blank"> <img data-toggle="tooltip" src="image/socialicons/rss.png" alt="RSS" title="RSS"> </a> </div>
+            </div>
+            <div class="bottom-row">
+                <div class="custom-text text-center"> <img alt="" src="image/logo-small.png">
+                    <p>This is a CMS block. You can insert any content (HTML, Text, Images) Here. Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                </div>
+                <div class="payments_types"> <a href="#" target="_blank"> <img data-toggle="tooltip" src="image/payment/payment_paypal.png" alt="paypal" title="PayPal"></a> <a href="#" target="_blank"> <img data-toggle="tooltip" src="image/payment/payment_american.png" alt="american-express" title="American Express"></a> <a href="#" target="_blank"> <img data-toggle="tooltip" src="image/payment/payment_2checkout.png" alt="2checkout" title="2checkout"></a> <a href="#" target="_blank"> <img data-toggle="tooltip" src="image/payment/payment_maestro.png" alt="maestro" title="Maestro"></a> <a href="#" target="_blank"> <img data-toggle="tooltip" src="image/payment/payment_discover.png" alt="discover" title="Discover"></a> <a href="#" target="_blank"> <img data-toggle="tooltip" src="image/payment/payment_mastercard.png" alt="mastercard" title="MasterCard"></a> </div>
+            </div>
+        </div>
+    </div>
+    <div id="back-top"><a data-toggle="tooltip" title="Back to Top" href="javascript:void(0)" class="backtotop"><i class="fa fa-chevron-up"></i></a></div>
+</footer>
+<!--Footer End-->
+<!-- Facebook Side Block Start -->
+<div id="facebook" class="fb-left sort-order-1">
+    <div class="facebook_icon"><i class="fa fa-facebook"></i></div>
+    <div class="fb-page" data-href="https://www.facebook.com/KoalaGhana/" data-small-header="true" data-adapt-container-width="true" data-hide-cover="true" data-show-facepile="true" data-show-posts="false">
+        <div class="fb-xfbml-parse-ignore">
+            <blockquote cite="https://www.facebook.com/KoalaGhana/"><a href="https://www.facebook.com/KoalaGhana/">Koala Ghana</a></blockquote>
+        </div>
+    </div>
+    <div id="fb-root"></div>
+    <script>(function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id))
+                return;
+            js = d.createElement(s);
+            js.id = id;
+            js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.4";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));</script>
+</div>
+
+
+<!-- Facebook Side Block End -->
+<!-- Twitter Side Block Start -->
+<div id="twitter_footer" class="twit-left sort-order-2">
+    <div class="twitter_icon"><i class="fa fa-twitter"></i></div>
+    <a href="https://twitter.com/intent/tweet?screen_name=KoalaGhana&ref_src=twsrc%5Etfw" class="twitter-mention-button" data-show-count="false">Tweet to @KoalaGhana</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+    <a class="twitter-timeline" href="https://twitter.com/KoalaGhana?ref_src=twsrc%5Etfw">Tweets by KoalaGhana</a> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script> 
+
+</div>
+
+
+<script type="text/javascript" src="{{ asset('js/jquery-2.1.1.min.js')}}"></script>
+<script type="text/javascript" src="{{ asset('js/bootstrap/js/bootstrap.min.js')}}"></script>
+<script type="text/javascript" src="{{ asset('js/jquery.easing-1.3.min.js')}}"></script>
+<script type="text/javascript" src="{{ asset('js/jquery.dcjqaccordion.min.js')}}"></script>
+<script type="text/javascript" src="{{ asset('js/owl.carousel.min.js')}}"></script>
+<script type="text/javascript" src="{{ asset('js/custom.js')}}"></script>
+<script type="text/javascript" src="{{ asset('js/jquery.redirect.js')}}"></script>
+<script type="text/javascript" src="{{ asset('js/sweetalert.min.js')}}"></script>
+
+<script type="text/javascript">
+
+//add product to cart
+
+        function addCart(productcode) {
+            alert(productcode);
+
+        }
+
+        function removeItem(productcode) {
+            $.ajax({
+                url: "cart/delete/" + productcode,
+                type: "DELETE",
+                data: {_token: "{{ csrf_token() }}"},
+                dataType: 'json',
+                success: function (data) {
+                    console.log(data);
+
+                    swal({
+                        title: "Success",
+                        text: data.message,
+                        type: "success",
+                        confirmButtonClass: "btn-success",
+                        confirmButtonText: "OK",
+                        closeOnConfirm: false
+                    },
+                    function () {
+                        var currenturl = window.location.href;
+                        window.location = currenturl;
+                    });
+                }
+            });
+        }
+//addproduct
+
+        $('.addproduct').on('submit', function (e) {
+
+            e.preventDefault();
+            var formData = $(this).serialize();
+            console.log(formData);
+            $.ajax({
+                url: "{{url('cart/add')}}",
+                type: "POST",
+                data: formData,
+                dataType: 'json',
+                success: function (data) {
+                    console.log(data);
+                    swal({
+                        title: "Success",
+                        text: data.message + ' .You have ' + data.totalitems + ' items in your cart',
+                        type: "success"
+
+                    });
+                }
+
+            });
+        });
+        //updatecart  updatecart  
+
+
+        $('.updatecart').on('submit', function (e) {
+
+            e.preventDefault();
+            var formData = $(this).serialize();
+            console.log(formData);
+            $.ajax({
+                url: "{{url('cart/update')}}",
+                type: "PUT",
+                data: formData,
+                dataType: 'json',
+                success: function (data) {
+                    console.log(data);
+                    swal({
+                        title: "Success",
+                        text: data.message,
+                        type: "success",
+                        confirmButtonClass: "btn-success",
+                        confirmButtonText: "OK",
+                        closeOnConfirm: false
+                    },
+                    function () {
+                        var currenturl = window.location.href;
+                        window.location = currenturl;
+                    });
+                }
+
+            });
+        });
+//        $.ajax({
+//            url: "{{url('category/all')}}",
+//            type: "GET",
+//            dataType: 'json',
+//            success: function (data) {
+//                var dataSet = data.data;
+//                $.each(dataSet, function (i, item) {
+//
+//                    $('#categorydiv').append('<div class="col-lg-1 col-md-2 col-sm-3 col-xs-6">' +
+//                            '<a href="#">' +
+//                            '<input type="checkbox" value="' + item.id + '" name="catids[]" id="myCheckbox' + item.id + '" />' +
+//                            '<label for="myCheckbox' + item.id + '">' +
+//                            ' <img src="http://tfs.knust.edu.gh/ecommerce/images/' + item.iconUrl + '"  height="40" width="40"  title="' + item.name + '"/>' +
+//                            '</label></a>' +
+//                            '<a href="#">' + item.name + '</a>\n\
+//                                 </div>'
+//                            );
+//                });
+//            }
+//        });
+        //shoppingForm
+        $('#shoppingForm').on('submit', function (e) {
+
+            e.preventDefault();
+            var formData = $(this).serialize();
+            console.log(formData);
+            $('.loader').addClass('be-loading-active');
+            $.ajax({
+                url: "{{url('category/items')}}",
+                type: "POST",
+                data: formData,
+                dataType: 'json',
+                success: function (data) {
+                    $('.loader').removeClass('be-loading-active');
+                    var jsondata = JSON.stringify(data);
+                    console.log('server data :' + jsondata);
+                    var redirect = 'shoppingroom';
+                    $.redirect('shoppingroom', jsondata, 'GET');
+                }
+
+            });
+        });
+//register user
+
+        $('#registerform').on('submit', function (e) {
+
+            e.preventDefault();
+            var formdata = $(this).serialize();
+            console.log('dat' + formdata);
+            $("#loader").show();
+            var password = $('#password').val();
+            var cpassword = $('#confirmpassword').val();
+            if (password !== cpassword) {
+                swal({
+                    title: "Error",
+                    text: "password do not match",
+                    type: "error",
+                    confirmButtonClass: "btn-danger",
+                    confirmButtonText: "OK",
+                    closeOnConfirm: true
+                });
+                $('#password').val('');
+                $('#confirmpassword').val('');
+                $("#loader").hide();
+            } else {
+
+
+                $.ajax({
+                    url: "{{url('registeruser')}}",
+                    type: "POST",
+                    data: formdata,
+                    dataType: "json",
+                    success: function (data) {
+                        console.log(data);
+                        $("#loader").hide();
+                        if (data.status == 1) {
+                            swal({
+                                title: "Error",
+                                text: data.message,
+                                type: "error",
+                                confirmButtonClass: "btn-danger",
+                                confirmButtonText: "Ok",
+                                closeOnConfirm: true
+                            });
+                        }
+
+
+                        if (data.status == 0) {
+                            swal({
+                                title: "Success",
+                                text: "You have been registered successfully.Your credentials have been sent to your email.You can login with your credentials.Thank you for choosing ishopElectronics.",
+                                type: "success",
+                                confirmButtonClass: "btn-success",
+                                confirmButtonText: "OK",
+                                closeOnConfirm: false
+                            },
+                            function () {
+                                window.location = "{{url('login')}}";
+                            });
+                        }
+
+                    },
+                    error: function (jXHR, textStatus, errorThrown) {
+                        alert(errorThrown);
+                    }
+                });
+            }
+
+
+
+        });
+
+
+
+</script>
