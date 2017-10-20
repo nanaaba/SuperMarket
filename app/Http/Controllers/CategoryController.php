@@ -9,6 +9,13 @@ use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 
 class CategoryController extends Controller {
+    
+    
+    public function showcategoryitems($categorycode) {
+        
+        $catitems = $this->retreiveCategoryItems($categorycode);
+          return redirect('category')->with('items', $catitems);
+    }
 
     public function getCategoriesItems(Request $request) {
 
@@ -17,8 +24,7 @@ class CategoryController extends Controller {
 
         $items = $this->retreiveCategoryProducts($catids);
 
-        return $items;
-        // return redirect('shoppingroom')->with('items', $items);
+        return redirect('shoppingroom')->with('items', $items);
     }
 
     public function retreiveCategories() {
@@ -68,6 +74,44 @@ class CategoryController extends Controller {
         $url = config('constants.TEST_URL');
 
         $baseurl = $url . '/categories/' . $ids . '/items';
+
+        $client = new Client([
+            'headers' => [
+                'Accept' => 'application/json'
+            ],
+            'http_errors' => false
+        ]);
+        try {
+
+            $response = $client->request('GET', $baseurl);
+
+            $body = $response->getBody();
+            $bodyObj = json_decode($body);
+
+            if ($response->getStatusCode() == 200) {
+
+                return $body;
+            } else {
+                return $body;
+            }
+        } catch (RequestException $e) {
+            return 'Http Exception : ' . $e->getMessage();
+        } catch (Exception $e) {
+            return 'Internal Server Error:' . $e->getMessage();
+        }
+    }
+
+    
+     public function retreiveCategoryItems($catid) {
+
+        /* function to retrieve all products  
+         * under a category       
+         */
+      
+
+        $url = config('constants.TEST_URL');
+
+        $baseurl = $url . '/categories/' . $catid . '/items';
 
         $client = new Client([
             'headers' => [

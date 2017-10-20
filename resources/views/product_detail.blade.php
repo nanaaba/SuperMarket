@@ -26,16 +26,30 @@
                     foreach ($featured as $value) {
                         ?>
                         <div class="product-thumb clearfix">
-                            <div class="image"><a href="product.html"><img src="{{asset("image/product/macbook_pro_1-50x50.jpg")}}" alt=" Strategies for Acquiring Your Own Laptop " title=" Strategies for Acquiring Your Own Laptop " class="img-responsive" /></a></div>
+                            <div class="image"><a href="<?php echo $value['itemID'] ?>"><img src="http://tfs.knust.edu.gh/ecommerce/images/<?php echo $value['iconUrl'] ?>" alt=" <?php echo $value['name'] ?> " title=" <?php echo $value['name'] ?>" height="50" width="50" class="img-responsive" /></a></div>
                             <div class="caption">
-                                <h4><a href="product.html">Strategies for Acquiring Your Own Laptop</a></h4>
-                                <p class="price"> <span class="price-new">$1,400.00</span> <span class="price-old">$1,900.00</span> <span class="saving">-26%</span> </p>
+                                <h4><a href="<?php echo $value['itemID'] ?>"><?php echo $value['name'] ?></a></h4>
+                                <p class="price"> <span class="price-new">GHS <?php echo $value['price'] ?></span> 
+                                </p>
                             </div>
                         </div>
                         <?php
                     }
                     ?>
 
+
+                </div>
+
+                <h3 class="subtitle">Promotions</h3>
+
+                <div class="banner owl-carousel">
+                    <?php
+                    $promotions = $setupObj['promotions'];
+
+                    foreach ($promotions as $value) {
+                        echo '<div class="item"> <a href="#"><img src="http://tfs.knust.edu.gh/ecommerce/images/' . $value['bannerUrl'] . '"" alt="small banner1" class="img-responsive" /></a> </div>';
+                    }
+                    ?>
 
                 </div>
 
@@ -55,27 +69,14 @@
                     }
                     ?>
                 </div>
-                <h3 class="subtitle">Promotions</h3>
 
-                <div class="banner owl-carousel">
-                    <?php
-                    $promotions = $setupObj['promotions'];
-
-                    foreach ($promotions as $value) {
-                        ?>
-                        <div class="item"> <a href="#"><img src="{{asset('image/banner/small-banner1-265x350.jpg')}}" alt="small banner1" class="img-responsive" /></a> </div>
-                        <?php
-                    }
-                    ?>
-
-                </div>
 
 
 
             </aside>
             <!--Right Part End -->
             <!--Middle Part Start-->
-            
+
             <div id="content" class="col-sm-9">
                 <div itemscope itemtype="http://schema.org/Product">
                     <h1 class="title" itemprop="name">
@@ -108,20 +109,29 @@
                             <div id="product">
 
                                 <div class="cart">
-                                    <div>
-                                        <div class="qty">
-                                            <label class="control-label" for="input-quantity">Qty</label>
-                                            <input type="text" name="quantity" value="1" size="2" id="input-quantity" class="form-control" />
-                                            <a class="qtyBtn plus" href="javascript:void(0);">+</a><br />
-                                            <a class="qtyBtn mines" href="javascript:void(0);">-</a>
-                                            <div class="clear"></div>
+                                    <form class="addproduct">
+
+                                        <input type="hidden" name="_token" value="<?php echo csrf_token() ?>"/>
+                                        <input type="hidden" name="productid" value="{{$productinfo['barcode']}}"/>
+                                        <input type="hidden" name="price" value="{{$productinfo['price']}}"/>
+                                        <input type="hidden" name="url" value="{{$productinfo['iconUrl']}}"/>
+                                        <input type="hidden" name="productname" value="{{$productinfo['name']}}"/>
+
+                                        <div>
+                                            <div class="qty">
+                                                <label class="control-label" for="input-quantity">Qty</label>
+                                                <input type="text" name="quantity" value="1" size="2" id="input-quantity" class="form-control" />
+                                                <a class="qtyBtn plus" href="javascript:void(0);">+</a><br />
+                                                <a class="qtyBtn mines" href="javascript:void(0);">-</a>
+                                                <div class="clear"></div>
+                                            </div>
+                                            <button type="submit" id="button-cart" class="btn btn-primary btn-lg">Add to Cart</button>
                                         </div>
-                                        <button type="button" id="button-cart" class="btn btn-primary btn-lg">Add to Cart</button>
-                                    </div>
-                                    <div>
-                                        <button type="button" class="wishlist" onClick=""><i class="fa fa-heart"></i> Add to Wish List</button>
-                                        <br />
-                                    </div>
+                                        <div>
+                                            <button type="button" class="wishlist" onClick=""><i class="fa fa-heart"></i> Add to Wish List</button>
+                                            <br />
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
                             <div class="rating" itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
@@ -216,28 +226,39 @@
                     </div>
                     <h3 class="subtitle">Related Products</h3>
                     <div class="owl-carousel related_pro">
-
                         <?php
-                        foreach ($featured as $value) {
-                            ?>
-                            <div class="product-thumb">
-                                <div class="image"><a href="product.html"><img src="{{asset('image/product/samsung_tab_1-200x200.jpg')}}" alt="Aspire Ultrabook Laptop" title="Aspire Ultrabook Laptop" class="img-responsive" /></a></div>
-                                <div class="caption">
-                                    <h4><a href="product.html">Aspire Ultrabook Laptop</a></h4>
-                                    <p class="price"> <span class="price-new">$230.00</span> <span class="price-old">$241.99</span> <span class="saving">-5%</span> </p>
-                                    <div class="rating"> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span> </div>
-                                </div>
-                                <div class="button-group">
-                                    <button class="btn-primary" type="button" onClick=""><span>Add to Cart</span></button>
-                                    <div class="add-to-links">
-                                        <button type="button" data-toggle="tooltip" title="Add to wishlist" onClick=""><i class="fa fa-heart"></i></button>
-                                        <button type="button" data-toggle="tooltip" title="Add to compare" onClick=""><i class="fa fa-exchange"></i></button>
-                                    </div>
-                                </div>
+                        $relateditems = $productinfo['relatedItems'];
+
+                        foreach ($relateditems as $value) {
+
+                            echo '<div class="product-thumb clearfix">
+                            <form class="addproduct">
+                              
+                                <input type="hidden" name="_token" value="' . csrf_token() . '"/>
+                            <input type="hidden" name="productid" value="' . $value['itemID'] . '"/>
+                                <input type="hidden" name="price" value="' . $value['price'] . '"/>
+                                    <input type="hidden" name="url" value="' . $value['iconUrl'] . '"/>
+                                    <input type="hidden" name="productname" value="' . $value['name'] . '"/>
+                                        <input type="hidden" name="quantity" value="1"/>
+                        <div class="image"><a href="product/' . $value['itemID'] . '">
+                            <img src="http://tfs.knust.edu.gh/ecommerce/images/' . $value['iconUrl'] . '" alt="' . $value['name'] . '" title="' . $value['name'] . '" class="img-responsive" /></a></div>
+                        <div class="caption">
+                            <h4><a href="product.html">' . $value['name'] . '</a></h4>
+                            <p class="price"><span class="price-new"> GHS ' . $value['price'] . '</span></p>
+                        </div>
+                        <div class="button-group">
+                            <button class="btn-primary" type="submit" ><span>Add to Cart</span></button>
+                            <div class="add-to-links">
+                                <button type="button" data-toggle="tooltip" title="Add to Wish List" onClick=""><i class="fa fa-heart"></i></button>
+                                <button type="button" data-toggle="tooltip" title="Compare this Product" onClick=""><i class="fa fa-exchange"></i></button>
                             </div>
-                            <?php
+                        </div>
+                        </form>
+                    </div>';
                         }
                         ?>
+
+
 
 
 

@@ -159,8 +159,12 @@
                     swal({
                         title: "Success",
                         text: data.message + ' .You have ' + data.totalitems + ' items in your cart',
-                        type: "success"
-
+                        type: "success",
+                        closeOnConfirm: false
+                    },
+                    function () {
+                        var currenturl = window.location.href;
+                        window.location = currenturl;
                     });
                 }
 
