@@ -194,8 +194,10 @@ class CartController extends Controller {
 
 
 
-        // $url = Config::get('constants.TEST_URL');
-        $baseurl = 'tfs.knust.edu.gh/ecommerce/cart/user';
+
+        $url = config('constants.TEST_URL');
+
+        $baseurl = $url . '/cart/user';
 
 
 
@@ -228,8 +230,9 @@ class CartController extends Controller {
 
 
 
-        // $url = Config::get('constants.TEST_URL');
-        $baseurl = 'tfs.knust.edu.gh/ecommerce/cart/user';
+        $url = config('constants.TEST_URL');
+
+        $baseurl = $url . '/cart/user';
 
 
 
@@ -276,8 +279,9 @@ class CartController extends Controller {
         }
 
 
-        // $url = Config::get('constants.TEST_URL');
-        $baseurl = 'tfs.knust.edu.gh/ecommerce/cart/user/bulk';
+        $url = config('constants.TEST_URL');
+
+        $baseurl = $url . '/cart/user/bulk';
 
 
 
@@ -311,8 +315,8 @@ class CartController extends Controller {
 
 
 
-        // $url = Config::get('constants.TEST_URL');
-        $baseurl = 'tfs.knust.edu.gh/ecommerce/cart/user/' . $item;
+        $url = config('constants.TEST_URL');
+        $baseurl = $url . '/cart/user/' . $item;
 
 
 
@@ -345,8 +349,8 @@ class CartController extends Controller {
 
 
 
-        // $url = Config::get('constants.TEST_URL');
-        $baseurl = 'tfs.knust.edu.gh/ecommerce/cart/user';
+        $url = config('constants.TEST_URL');
+        $baseurl = $url . '/cart/user';
 
 
 
@@ -378,8 +382,8 @@ class CartController extends Controller {
     public function checkoutitems() {
 
 
-        $items =  $this->retreiveCartList();
-        $items = json_decode($items['items'],true) ;
+        $items = $this->retreiveCartList();
+        $items = json_decode($items['items'], true);
 
 
         $data = array();
@@ -389,14 +393,15 @@ class CartController extends Controller {
             $data['quantity'] = $i['quantity'];
             array_push($results, $data);
         }
-        
+
         $dataArray = array(
-            'items'=>$results
+            'items' => $results
         );
 
 
-        // $url = Config::get('constants.TEST_URL');
-        $baseurl = 'tfs.knust.edu.gh/ecommerce/orders/checkout';
+        $url = config('constants.TEST_URL');
+
+        $baseurl = $url . '/orders/checkout';
 
 
 
@@ -416,7 +421,7 @@ class CartController extends Controller {
 
 
             $body = $response->getBody();
-             $bodobj = json_decode($body, true);
+            $bodobj = json_decode($body, true);
 
             return $bodobj['data'];
         } catch (RequestException $e) {

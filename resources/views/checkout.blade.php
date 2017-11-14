@@ -163,7 +163,7 @@
                                 </div>
                             </div>
                             <div class="col-sm-12">
-                                <input type="hidden" value="{{$items['totalAmt']}}" id="totalamount"/>
+                                <input type="hidden" value="{{$items['itemTotal']}}" id="totalamount"/>
                                 <div class="panel panel-default">
                                     <div class="panel-heading">
                                         <h4 class="panel-title"><i class="fa fa-pencil"></i> Add Comments About Your Order</h4>

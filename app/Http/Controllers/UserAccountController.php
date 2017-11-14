@@ -22,7 +22,7 @@ class UserAccountController extends Controller {
             $address = $this->getUserAddresses();
             $paymentmodes = $this->getPaymentModes();
             return view('checkout')->with('items', $items)->with('addresses', $address)
-                ->with('paymentmodes',$paymentmodes);
+                            ->with('paymentmodes', $paymentmodes);
         }
         return view('checkoutregister');
     }
@@ -75,8 +75,9 @@ class UserAccountController extends Controller {
         $data = $request->all();
 
 
-        // $url = Config::get('constants.TEST_URL');
-        $baseurl = 'tfs.knust.edu.gh/ecommerce/Account/Register';
+        $url = config('constants.TEST_URL');
+
+        $baseurl = $url . '/Account/Register';
 
 
 
@@ -139,8 +140,9 @@ class UserAccountController extends Controller {
          * email contain username and password
          */
 
-        // $url = Config::get('constants.TEST_URL');
-        $baseurl = 'tfs.knust.edu.gh/ecommerce/categories/user';
+        $url = config('constants.TEST_URL');
+
+        $baseurl = $url . '/categories/user';
 
 
 
@@ -241,20 +243,6 @@ class UserAccountController extends Controller {
         }
     }
 
-    public function sendemail($email) {
-
-        /* function to send email to user       
-         */
-    }
-
-    public function resetPassword(Request $request) {
-
-        /* function to reset user password
-         * call api to reset password 
-         * send new password to user email 
-         */
-    }
-
     public function addWishlistItem(Request $request) {
 
         $data = $request->all();
@@ -288,7 +276,9 @@ class UserAccountController extends Controller {
     public function createShoppingBag($bagname) {
 
 
-        $baseurl = 'tfs.knust.edu.gh/ecommerce/bag/user';
+        $url = config('constants.TEST_URL');
+
+        $baseurl = $url . '/bag/user';
 
         $client = new Client([
             'headers' => [
@@ -319,8 +309,9 @@ class UserAccountController extends Controller {
 
     public function additemtoBag($bagid, $itemid) {
 
+        $url = config('constants.TEST_URL');
 
-        $baseurl = 'tfs.knust.edu.gh/ecommerce/bag/user/items';
+        $baseurl = $url . '/bag/user/items';
 
         $client = new Client([
             'headers' => [
@@ -475,7 +466,9 @@ class UserAccountController extends Controller {
         $rating = $data['rating'];
         $itemId = $data['itemID'];
 
-        $baseurl = 'tfs.knust.edu.gh/ecommerce/items/reviews';
+        $url = config('constants.TEST_URL');
+
+        $baseurl = $url . '/items/reviews';
 
 
 
@@ -511,7 +504,9 @@ class UserAccountController extends Controller {
     public function authenticateuser(Request $request) {
 
         $data = $request->all();
-        $baseurl = 'tfs.knust.edu.gh/ecommerce/Account/Login';
+        $url = config('constants.TEST_URL');
+
+        $baseurl = $url . '/Account/Login';
 
 
 
@@ -661,9 +656,7 @@ class UserAccountController extends Controller {
         }
     }
 
-    
-    
-      public function getPaymentModes() {
+    public function getPaymentModes() {
 
 
         $url = config('constants.TEST_URL');
@@ -693,8 +686,6 @@ class UserAccountController extends Controller {
         }
     }
 
-    
-    
     public function addCheckutUserAddress($data, $userid) {
 
 
@@ -705,7 +696,9 @@ class UserAccountController extends Controller {
         $ycor = $data['ycor'];
         $description = $data['description'];
 
-        $baseurl = 'tfs.knust.edu.gh/ecommerce/customers/address';
+        $url = config('constants.TEST_URL');
+
+        $baseurl = $url . '/customers/address';
 
 
         $client = new Client([
@@ -752,7 +745,9 @@ class UserAccountController extends Controller {
         $ycor = $data['ycor'];
         $description = $data['description'];
 
-        $baseurl = 'tfs.knust.edu.gh/ecommerce/customers/address';
+        $url = config('constants.TEST_URL');
+
+        $baseurl = $url . '/customers/address';
 
 
         $client = new Client([
@@ -792,8 +787,10 @@ class UserAccountController extends Controller {
 
         $data = $request->all();
 
-       
-        $baseurl = 'tfs.knust.edu.gh/ecommerce/orders/checkout/confirm';
+
+        $url = config('constants.TEST_URL');
+
+        $baseurl = $url . '/orders/checkout/confirm';
 
 
         $client = new Client([
