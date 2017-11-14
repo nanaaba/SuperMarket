@@ -16,7 +16,7 @@
                         $categories = $setupObj['categories'];
 
                         foreach ($categories as $value) {
-                            echo '  <li><a href="category">' . $value['name'] . '</a> </li>';
+                            echo '  <li><a href="category/'.$value['categoryID'].'">' . $value['name'] . '</a> </li>';
                         }
                         ?>
 
@@ -28,15 +28,16 @@
 
 
                     <?php
-                    $specials = $setupObj['featured'];
+                    $specials = $setupObj['discounted'];
 
                     foreach ($specials as $value) {
-
+                        $price_diff = $value['price'] - $value['promoPrice'];
+                        $savings = ($price_diff / $value['price']) * 100;
                         echo '  <div class="product-thumb clearfix">
-                        <div class="image"><a href="product.html"><img src="image/product/macbook_pro_1-50x50.jpg" alt=" Strategies for Acquiring Your Own Laptop " title=" Strategies for Acquiring Your Own Laptop " class="img-responsive" /></a></div>
+                        <div class="image"><a href="product/' . $value['itemID'] . '">           <img src="http://tfs.knust.edu.gh/ecommerce/images/' . $value['iconUrl'] . '" alt="' . $value['name'] . '" title="' . $value['name'] . '" class="img-responsive" /></a></div>
                         <div class="caption">
-                            <h4><a href="product.html">Strategies for Acquiring Your Own Laptop</a></h4>
-                            <p class="price"> <span class="price-new">$1,400.00</span> <span class="price-old">$1,900.00</span> <span class="saving">-26%</span> </p>
+                            <h4><a href="product/' . $value['itemID'] . '">' . $value['name'] . '</a></h4>
+                            <p class="price"> <span class="price-new">GHS ' . $value['promoPrice'] . '</span> <span class="price-old">GHS ' . $value['price'] . '</span> <span class="saving">-' . round($savings, 2) . '%</span> </p>
                         </div>
                     </div>';
                     }
@@ -52,7 +53,7 @@
                     $promotions = $setupObj['promotions'];
 
                     foreach ($promotions as $value) {
-                        echo '<div class="item"> <a href="#"><img src="http://tfs.knust.edu.gh/ecommerce/images/' . $value['bannerUrl'] . '"" alt="small banner1" class="img-responsive" /></a> </div>';
+                        echo '<div class="item"> <a href="promotion/'.$value['promotionID'].'"><img src="http://tfs.knust.edu.gh/ecommerce/images/' . $value['bannerUrl'] . '"" alt="small banner1" class="img-responsive" /></a> </div>';
                     }
                     ?>
 
@@ -95,24 +96,34 @@
                               
                                 <input type="hidden" name="_token" value="' . csrf_token() . '"/>
                             <input type="hidden" name="productid" value="' . $value['itemID'] . '"/>
-                                <input type="hidden" name="price" value="' . $value['price'] . '"/>
+                                <input type="hidden" name="price" value="' . $value['promoPrice'] . '"/>
                                     <input type="hidden" name="url" value="' . $value['iconUrl'] . '"/>
                                     <input type="hidden" name="productname" value="' . $value['name'] . '"/>
                                         <input type="hidden" name="quantity" value="1"/>
                         <div class="image"><a href="product/' . $value['itemID'] . '">
                             <img src="http://tfs.knust.edu.gh/ecommerce/images/' . $value['iconUrl'] . '" alt="' . $value['name'] . '" title="' . $value['name'] . '" class="img-responsive" /></a></div>
                         <div class="caption">
-                            <h4><a href="product.html">' . $value['name'] . '</a></h4>
+                            <h4><a href="product/' . $value['itemID'] . '">' . $value['name'] . '</a></h4>
                             <p class="price"><span class="price-new"> GHS ' . $value['price'] . '</span></p>
                         </div>
                         <div class="button-group">
                             <button class="btn-primary" type="submit" ><span>Add to Cart</span></button>
-                            <div class="add-to-links">
-                                <button type="button" data-toggle="tooltip" title="Add to Wish List" onClick=""><i class="fa fa-heart"></i></button>
-                                <button type="button" data-toggle="tooltip" title="Compare this Product" onClick=""><i class="fa fa-exchange"></i></button>
+                           
+                            </div>
+                             </form>
+                            <div class="button-group">
+                              <div class="add-to-links">
+                               <form class="addwishlist">
+                                    <input type="hidden" name="productid" value="' . $value['itemID'] . '"/>
+                                    <input type="hidden" name="productname" value="' . $value['name'] . '"/>
+  <input type="hidden" name="userid" value="' . session('koalauser') . '"/>
+
+                                <button type="submit" data-toggle="tooltip" title="Add to Wish List" onClick=""><i class="fa fa-heart"></i></button>
+                            </form>                              
+        <button type="button" data-toggle="tooltip" title="Compare this Product" onClick=""><i class="fa fa-exchange"></i></button>
                             </div>
                         </div>
-                        </form>
+                       
                     </div>';
                     }
                     ?>
@@ -121,31 +132,53 @@
 
                 </div>
                 <!-- Bestsellers Product Start-->
-                
-                  <h3 class="subtitle">Favourites</h3>
+
+                <h3 class="subtitle">Favourites</h3>
+
+                <?php
+                $userid = session('koalauser');
+                $usercategories = session('usercategories');
+                $usercategories_size = sizeof($usercategories);
+                ?>
                 <div class="owl-carousel product_carousel">
+
                     <?php
-                       $favourites = $setupObj['categories'];
+                    if (empty($userid) || $usercategories_size == 0) {
+                        $favourites = $setupObj['categories'];
 
-                    foreach ($favourites as $value) {
+                        foreach ($favourites as $value) {
 
-                        echo '<div class="product-thumb clearfix">
-                              <div class="image"><a href="#">
+                            echo '<div class="product-thumb clearfix">
+                              <div class="image"><a href="category/'.$value['categoryID'].'">
                             <img src="http://tfs.knust.edu.gh/ecommerce/images/' . $value['iconUrl'] . '" height="100" width="100" alt="' . $value['name'] . '" title="' . $value['name'] . '" class="img-responsive" /></a></div>
                         <div class="caption">
-                            <h4><a href="#">' . $value['name'] . '</a></h4>
+                            <h4><a href="category/'.$value['categoryID'].'">' . $value['name'] . '</a></h4>
                            </div>
                         
                     </div>';
+                        }
+                    }
+
+                    if ($usercategories_size > 0) {
+                        foreach ($usercategories as $value) {
+
+                            echo '<div class="product-thumb clearfix">
+                              <div class="image"><a href="category/'.$value['categoryID'].'">
+                            <img src="http://tfs.knust.edu.gh/ecommerce/images/' . $value['iconUrl'] . '" height="100" width="100" alt="' . $value['name'] . '" title="' . $value['name'] . '" class="img-responsive" /></a></div>
+                        <div class="caption">
+                            <h4><a href="category/'.$value['categoryID'].'">' . $value['name'] . '</a></h4>
+                           </div>
+                        
+                    </div>';
+                        }
                     }
                     ?>
 
 
-
                 </div>
-               
 
-         
+
+
 
 
                 <!-- Featured Product End-->
@@ -157,11 +190,11 @@
 
                 <!-- Categories Product Slider End -->
                 <!-- Banner Start -->
-                <div class="marketshop-banner">
-                    <div class="row">
-                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"> <a href="#"><img title="1 Block Banner" alt="1 Block Banner" src="image/banner/1blockbanner-1140x75.jpg"></a></div>
-                    </div>
-                </div>
+                <!--                <div class="marketshop-banner">
+                                    <div class="row">
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"> <a href="#"><img title="1 Block Banner" alt="1 Block Banner" src="image/banner/1blockbanner-1140x75.jpg"></a></div>
+                                    </div>
+                                </div>-->
                 <!-- Banner End -->
 
             </div>

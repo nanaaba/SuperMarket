@@ -108,17 +108,178 @@
 <script type="text/javascript" src="{{ asset('js/custom.js')}}"></script>
 <script type="text/javascript" src="{{ asset('js/jquery.redirect.js')}}"></script>
 <script type="text/javascript" src="{{ asset('js/sweetalert.min.js')}}"></script>
+<script type="text/javascript" src="{{ asset('js/mdb.min.js')}}"></script>
+<script type="text/javascript" src="{{ asset('js/mdb.js')}}"></script>
+<script type="text/javascript" src="{{ asset('js/popper.min.js')}}"></script>
 
 <script type="text/javascript">
 
 //add product to cart
+//checkoutloginForm
+//checkoutregisterForm
 
+     $('#checkoutloginForm').on('submit', function (e) {
+
+            e.preventDefault();
+            var formdata = $(this).serialize();
+            console.log('dat' + formdata);
+            $('#loaderModal').modal('show');
+
+
+
+
+            $.ajax({
+                url: "{{url('authenticateuser')}}",
+                type: "POST",
+                data: formdata,
+                dataType: "json",
+                success: function (data) {
+                    console.log(data.status);
+                    $('#loaderModal').modal('hide');
+
+                    if (data.status == 1) {
+                        swal({
+                            title: "Error",
+                            text: data.message,
+                            type: "error",
+                            confirmButtonClass: "btn-danger",
+                            confirmButtonText: "Ok",
+                            closeOnConfirm: true
+                        });
+                    }
+
+
+                    if (data.status == 0) {
+                        var url = window.location.href;     // Returns full URL
+
+                        swal({
+                            title: "Success",
+                            text: "You have logged in successfuly.",
+                            type: "success",
+                            confirmButtonClass: "btn-success",
+                            confirmButtonText: "OK",
+                            closeOnConfirm: false,
+                        },
+                                function () {
+                                    window.location = url;
+                                });
+
+
+                    }
+
+                },
+                error: function (jXHR, textStatus, errorThrown) {
+                    $('#loaderModal').modal('hide');
+
+                    alert(errorThrown);
+                }
+            });
+
+
+
+
+        });
+
+
+        function confirmCheckout() {
+
+            var addressid = $('#addresses').val();
+            var totalamount = $('#addresses').val();
+            var paymentmode = $('#paymentmodes').val();
+
+            if (addressid == "") {
+
+            } else {
+                $.ajax({
+                    url: "{{url('confirmcheckout')}}",
+                    type: "POST",
+                    data: {_token: "{{ csrf_token() }}", addressid: addressid, totalamount: totalamount, paymentmode: paymentmode},
+                    dataType: 'json',
+                    success: function (data) {
+                        console.log(data);
+                        $('#loaderModal').modal('hide');
+
+                        swal({
+                            title: "Success",
+                            text: data.message,
+                            type: "success",
+                            confirmButtonClass: "btn-success",
+                            confirmButtonText: "OK",
+                            closeOnConfirm: true
+                        });
+                        
+//                        function () {
+//                            var currenturl = window.location.href;
+//                            window.location = currenturl;
+//                        }
+                    }
+                });
+            }
+
+        }
+
+        $('#checkoutregisterForm').on('submit', function (e) {
+
+            e.preventDefault();
+            var formData = $(this).serialize();
+            console.log(formData);
+            $('#loaderModal').modal('show');
+
+            $.ajax({
+                url: "{{url('checkoutregister')}}",
+                type: "POST",
+                data: formData,
+                dataType: 'json',
+                success: function (data) {
+                    console.log(data);
+                    $('#loaderModal').modal('hide');
+
+                    $('#wishlistModal').modal('hide');
+                    if (data.status == 0) {
+//                        swal({
+//                            title: "Success",
+//                            text: data.message,
+//                            type: "success",
+//                            confirmButtonClass: "btn-success",
+//                            confirmButtonText: "OK",
+//                            closeOnConfirm: true
+//                        });
+                        window.location = "checkout";
+
+                    } else {
+                        swal({
+                            title: "Error",
+                            text: data.message,
+                            type: "error",
+                            confirmButtonClass: "btn-danger",
+                            confirmButtonText: "OK",
+                            closeOnConfirm: true
+                        });
+                    }
+
+                }
+
+            });
+
+        });
+
+        function checkOut(userid) {
+            if (userid == "") {
+
+            } else {
+                window.location = "checkout";
+            }
+
+
+        }
         function addCart(productcode) {
             alert(productcode);
 
         }
 
         function removeItem(productcode) {
+            $('#loaderModal').modal('show');
+
             $.ajax({
                 url: "cart/delete/" + productcode,
                 type: "DELETE",
@@ -126,6 +287,7 @@
                 dataType: 'json',
                 success: function (data) {
                     console.log(data);
+                    $('#loaderModal').modal('hide');
 
                     swal({
                         title: "Success",
@@ -149,6 +311,8 @@
             e.preventDefault();
             var formData = $(this).serialize();
             console.log(formData);
+            $('#loaderModal').modal('show');
+
             $.ajax({
                 url: "{{url('cart/add')}}",
                 type: "POST",
@@ -156,6 +320,8 @@
                 dataType: 'json',
                 success: function (data) {
                     console.log(data);
+                    $('#loaderModal').modal('hide');
+
                     swal({
                         title: "Success",
                         text: data.message + ' .You have ' + data.totalitems + ' items in your cart',
@@ -170,6 +336,109 @@
 
             });
         });
+
+
+//        /addwishlist
+//        
+//        
+
+        $('.addwishlist').on('submit', function (e) {
+
+            e.preventDefault();
+
+            var formData = $(this).serializeArray();
+            //Serialize the Form
+            var values = {};
+            $.each(formData, function (i, field) {
+                values[field.name] = field.value;
+            });
+
+//Value Retrieval Function
+            var getValue = function (valueName) {
+                return values[valueName];
+            };
+
+//Retrieve the Values
+            var productname = getValue("productname");
+            var productid = getValue("productid");
+            var userid = getValue("userid");
+
+            console.log('product name is :' + userid);
+
+            if (userid == "") {
+//display modal to login then add item to wishlist
+                swal({
+                    title: "Error",
+                    text: "Kindly login to add to wishlist if you have account or register .",
+                    type: "error",
+                    confirmButtonClass: "btn-danger",
+                    confirmButtonText: "Ok",
+                    closeOnConfirm: true
+                });
+            } else {
+
+                var shoopingbagsize = $('#shoppingbagsize').val();
+                if (shoopingbagsize == 0) {
+                    $("#newbagdiv").show('slow');
+                }
+                //display modal
+                $('#itemid').val(productid);
+                $('#productname').html(productname);
+                $('#productname2').val(productname);
+                $('#wishlistModal').modal('show');
+                //wishlistModal
+                $('#wishlistModal').modal('show');
+            }
+            console.log('userid' + userid);
+
+        });
+
+
+        //wishlistForm
+
+
+        $('#wishlistForm').on('submit', function (e) {
+
+            e.preventDefault();
+            var formData = $(this).serialize();
+            console.log(formData);
+            $('#loaderModal').modal('show');
+
+            $.ajax({
+                url: "{{url('wishlist/add')}}",
+                type: "POST",
+                data: formData,
+                dataType: 'json',
+                success: function (data) {
+                    console.log(data);
+                    $('#loaderModal').modal('hide');
+
+                    $('#wishlistModal').modal('hide');
+                    if (data.status == 0) {
+                        swal({
+                            title: "Success",
+                            text: data.message,
+                            type: "success",
+                            confirmButtonClass: "btn-success",
+                            confirmButtonText: "OK",
+                            closeOnConfirm: true
+                        });
+                    } else {
+                        swal({
+                            title: "Error",
+                            text: data.message,
+                            type: "error",
+                            confirmButtonClass: "btn-danger",
+                            confirmButtonText: "OK",
+                            closeOnConfirm: true
+                        });
+                    }
+
+                }
+
+            });
+
+        });
         //updatecart  updatecart  
 
 
@@ -178,6 +447,8 @@
             e.preventDefault();
             var formData = $(this).serialize();
             console.log(formData);
+            $('#loaderModal').modal('show');
+
             $.ajax({
                 url: "{{url('cart/update')}}",
                 type: "PUT",
@@ -185,6 +456,8 @@
                 dataType: 'json',
                 success: function (data) {
                     console.log(data);
+                    $('#loaderModal').modal('hide');
+
                     swal({
                         title: "Success",
                         text: data.message,
@@ -227,21 +500,18 @@
             e.preventDefault();
             var formData = $(this).serialize();
             console.log(formData);
-            $('.loader').addClass('be-loading-active');
-            $.ajax({
-                url: "{{url('category/items')}}",
-                type: "POST",
-                data: formData,
-                dataType: 'json',
-                success: function (data) {
-                    $('.loader').removeClass('be-loading-active');
-                    var jsondata = JSON.stringify(data);
-                    console.log('server data :' + jsondata);
-                    var redirect = 'shoppingroom';
-                    $.redirect('shoppingroom', jsondata, 'GET');
-                }
 
-            });
+            var searchIDs = $(" input:checkbox:checked").map(function () {
+                return $(this).val();
+            }).get()
+                    .join(", ");
+
+            console.log(searchIDs);
+
+            var pathname = window.location.pathname; // Returns path only
+            console.log(pathname);
+            //window.location = 'category/'+searchIDs;
+            window.location.replace("http://localhost/KoalaSuperMarket/public/category/" + searchIDs);
         });
 //register user
 
@@ -249,8 +519,9 @@
 
             e.preventDefault();
             var formdata = $(this).serialize();
-            console.log('dat' + formdata);
-            $("#loader").show();
+            console.log('data: ' + formdata);
+            $('#loaderModal').modal('show');
+
             var password = $('#password').val();
             var cpassword = $('#confirmpassword').val();
             if (password !== cpassword) {
@@ -264,7 +535,8 @@
                 });
                 $('#password').val('');
                 $('#confirmpassword').val('');
-                $("#loader").hide();
+                $('#loaderModal').modal('hide');
+
             } else {
 
 
@@ -275,7 +547,8 @@
                     dataType: "json",
                     success: function (data) {
                         console.log(data);
-                        $("#loader").hide();
+                        $('#loaderModal').modal('hide');
+
                         if (data.status == 1) {
                             swal({
                                 title: "Error",
@@ -304,6 +577,81 @@
 
                     },
                     error: function (jXHR, textStatus, errorThrown) {
+                        $('#loaderModal').modal('hide');
+
+                        alert(errorThrown);
+                    }
+                });
+            }
+
+
+
+        });
+
+//reviewForm
+
+        $('#reviewForm').on('submit', function (e) {
+
+            e.preventDefault();
+            var formdata = $(this).serialize();
+            console.log('dat' + formdata);
+            $('#loaderModal').modal('show');
+
+            var userid = $('#userid').val();
+            console.log('userd' + userid);
+            if (userid == "") {
+                swal({
+                    title: "Error",
+                    text: "Kindly login to review this product or register and login .Thank you.",
+                    type: "error",
+                    confirmButtonClass: "btn-danger",
+                    confirmButtonText: "OK",
+                    closeOnConfirm: true
+                });
+
+                $('#loaderModal').modal('hide');
+
+            } else {
+                $('#loaderModal').modal('show');
+
+
+                $.ajax({
+                    url: "{{url('reviewproduct')}}",
+                    type: "POST",
+                    data: formdata,
+                    dataType: "json",
+                    success: function (data) {
+                        console.log(data);
+                        $('#loaderModal').modal('hide');
+                        document.getElementById("reviewForm").reset();
+
+                        if (data.status == 1) {
+                            swal({
+                                title: "Error",
+                                text: data.message,
+                                type: "error",
+                                confirmButtonClass: "btn-danger",
+                                confirmButtonText: "Ok",
+                                closeOnConfirm: true
+                            });
+                        }
+
+
+                        if (data.status == 0) {
+                            swal({
+                                title: "Success",
+                                text: data.message,
+                                type: "success",
+                                confirmButtonClass: "btn-success",
+                                confirmButtonText: "OK",
+                                closeOnConfirm: true
+                            });
+                        }
+
+                    },
+                    error: function (jXHR, textStatus, errorThrown) {
+                        $('#loaderModal').modal('hide');
+
                         alert(errorThrown);
                     }
                 });
@@ -314,5 +662,111 @@
         });
 
 
+//loginForm
 
+        $('#loginForm').on('submit', function (e) {
+
+            e.preventDefault();
+            var formdata = $(this).serialize();
+            console.log('dat' + formdata);
+            $('#loaderModal').modal('show');
+
+
+
+
+            $.ajax({
+                url: "{{url('authenticateuser')}}",
+                type: "POST",
+                data: formdata,
+                dataType: "json",
+                success: function (data) {
+                    console.log(data.status);
+                    $('#loaderModal').modal('hide');
+
+                    if (data.status == 1) {
+                        swal({
+                            title: "Error",
+                            text: data.message,
+                            type: "error",
+                            confirmButtonClass: "btn-danger",
+                            confirmButtonText: "Ok",
+                            closeOnConfirm: true
+                        });
+                    }
+
+
+                    if (data.status == 0) {
+                        var url = window.location.href;     // Returns full URL
+
+                        swal({
+                            title: "Success",
+                            text: "You have logged in successfuly.",
+                            type: "success",
+                            confirmButtonClass: "btn-success",
+                            confirmButtonText: "OK",
+                            closeOnConfirm: false,
+                        },
+                                function () {
+                                    window.location = url;
+                                });
+
+
+                    }
+
+                },
+                error: function (jXHR, textStatus, errorThrown) {
+                    $('#loaderModal').modal('hide');
+
+                    alert(errorThrown);
+                }
+            });
+
+
+
+
+        });
+
+
+        $('input[name=shoppingbag]').click(function () {
+            if (this.id == "newbag") {
+                $("#newbagdiv").show('slow');
+                console.log('dddddddddddddddddddddddddddddddd');
+                $("#newbaginput").prop('required', true);
+            } else {
+                $("#newbagdiv").hide('slow');
+                $("#newbaginput").prop('required', false);
+            }
+        });
+
+
+        function removeItemWishlist(itemid, bagid) {
+            $('#loaderModal').modal('show');
+
+            $.ajax({
+                url: "remove/" + bagid + "/" + itemid,
+                type: "DELETE",
+                data: {"_token": "{{ csrf_token() }}", },
+                dataType: 'json',
+                success: function (data) {
+                    $('#loaderModal').modal('hide');
+
+                    console.log(data);
+                    swal({
+                        title: "Success",
+                        text: data.message,
+                        type: "success",
+                        confirmButtonClass: "btn-success",
+                        confirmButtonText: "OK",
+                        closeOnConfirm: false,
+                    },
+                            function () {
+                                var redirecturl = window.location.href;     // Returns full URL
+
+                                window.location = redirecturl;
+                            });
+                }
+
+            });
+
+        }
 </script>

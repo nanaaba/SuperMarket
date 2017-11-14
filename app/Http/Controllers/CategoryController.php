@@ -9,12 +9,13 @@ use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 
 class CategoryController extends Controller {
-    
-    
+
     public function showcategoryitems($categorycode) {
-        
+
         $catitems = $this->retreiveCategoryItems($categorycode);
-          return redirect('category')->with('items', $catitems);
+        $catdetails = $this->retreiveCategoriesDetails($categorycode);
+
+        return view('category')->with('items', $catitems)->with('details', $catdetails);
     }
 
     public function getCategoriesItems(Request $request) {
@@ -47,48 +48,10 @@ class CategoryController extends Controller {
             $response = $client->request('GET', $baseurl);
 
             $body = $response->getBody();
-            $bodyObj = json_decode($body,true);
+            $bodyObj = json_decode($body, true);
 
             if ($response->getStatusCode() == 200) {
                 $categories = $bodyObj['data'];
-              
-                return $body;
-            } else {
-                return $body;
-            }
-        } catch (RequestException $e) {
-            return 'Http Exception : ' . $e->getMessage();
-        } catch (Exception $e) {
-            return 'Internal Server Error:' . $e->getMessage();
-        }
-    }
-
-    public function retreiveCategoryProducts($catids) {
-
-        /* function to retrieve all products  
-         * under a category       
-         */
-        $ids = implode(',', $catids);
-
-
-        $url = config('constants.TEST_URL');
-
-        $baseurl = $url . '/categories/' . $ids . '/items';
-
-        $client = new Client([
-            'headers' => [
-                'Accept' => 'application/json'
-            ],
-            'http_errors' => false
-        ]);
-        try {
-
-            $response = $client->request('GET', $baseurl);
-
-            $body = $response->getBody();
-            $bodyObj = json_decode($body);
-
-            if ($response->getStatusCode() == 200) {
 
                 return $body;
             } else {
@@ -101,13 +64,12 @@ class CategoryController extends Controller {
         }
     }
 
-    
-     public function retreiveCategoryItems($catid) {
+    public function retreiveCategoryItems($catid) {
 
         /* function to retrieve all products  
          * under a category       
          */
-      
+
 
         $url = config('constants.TEST_URL');
 
@@ -124,14 +86,42 @@ class CategoryController extends Controller {
             $response = $client->request('GET', $baseurl);
 
             $body = $response->getBody();
-            $bodyObj = json_decode($body);
+            $bodyObj = json_decode($body, true);
 
-            if ($response->getStatusCode() == 200) {
+            return $bodyObj['data'];
+        } catch (RequestException $e) {
+            return 'Http Exception : ' . $e->getMessage();
+        } catch (Exception $e) {
+            return 'Internal Server Error:' . $e->getMessage();
+        }
+    }
 
-                return $body;
-            } else {
-                return $body;
-            }
+    public function retreiveCategoriesDetails($catids) {
+
+        /* function to retrieve all products  
+         * under a category       
+         */
+        // $ids = implode(',', $catids);
+
+
+        $url = config('constants.TEST_URL');
+
+        $baseurl = $url . '/categories/' . $catids;
+
+        $client = new Client([
+            'headers' => [
+                'Accept' => 'application/json'
+            ],
+            'http_errors' => false
+        ]);
+        try {
+
+            $response = $client->request('GET', $baseurl);
+
+            $body = $response->getBody();
+            $bodyObj = json_decode($body, true);
+
+            return $bodyObj['data'];
         } catch (RequestException $e) {
             return 'Http Exception : ' . $e->getMessage();
         } catch (Exception $e) {

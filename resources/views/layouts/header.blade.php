@@ -1,5 +1,6 @@
 <div id="header">
     <!-- Top Bar Start-->
+
     <nav id="top" class="htop">
 
 
@@ -17,10 +18,36 @@
 
                 </div>
                 <div id="top-links" class="nav pull-right flip">
-                    <ul>
-                        <li><a href="login">Login</a></li>
-                        <li><a href='{{url('registeruser')}}'>Register</a></li>
-                    </ul>
+
+                    <?php
+                    if (empty(session('koalauser'))) {
+                        ?>
+                        <ul>
+                            <li><a href="{{url('login')}}">Login</a></li>
+                            <li><a href='{{url('register')}}'>Register</a></li>
+                        </ul>
+                        <?php
+                    }
+
+                    if (!empty(session('koalauser'))) {
+                        ?>
+                        <ul>
+                            <li><a href="#">Welcome,{{session('fullname')}}</a></li>
+                            <li class="dropdown" id="my_account"><a href="#">My Account <i class="fa fa-caret-down"></i></a>
+                                <ul class="dropdown-menu dropdown-menu-right" style="display: none;">
+                                    <li><a href="{{url('myaccount')}}">My Account</a></li>
+                                    <li><a href="{{url('myorders')}}">My Orders</a></li>
+                                    <li><a href="{{url('addressbooks')}}">Address Books</a></li>
+                                    <li><a href="{{url('wishlist')}}">My Wishlist</a></li>
+                                    <li><a href="{{url('changepassword')}}">Change Password</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="{{url('logout')}}">Logout</a></li>
+                        </ul>
+                        <?php
+                    }
+                    ?>
+
                 </div>
             </div>
         </div>
@@ -58,9 +85,6 @@
                 $totalprice = $items['totalprice'];
                 $allitems = $items['items'];
                 $response = json_decode($allitems, true);
-
-
-                
                 ?>
                 <div class="col-table-cell col-lg-3 col-md-3 col-md-pull-0 col-sm-6 col-sm-pull-6 col-xs-12 inner">
                     <div id="cart">
@@ -91,13 +115,13 @@
                                 <table class="table">
                                     <tbody>';
                                 foreach ($response as $value) {
-                                    
+
                                     $total = $value['quantity'] * $value['price'];
 
                                     echo ' <tr>
                                             <td class="text-center"><a href="#">
                                             <img class="img-thumbnail" style="height:50px;width:50px;"  
-                                            src="http://tfs.knust.edu.gh/ecommerce/images/'.$value['url'] .'" ></a></td>
+                                            src="http://tfs.knust.edu.gh/ecommerce/images/' . $value['url'] . '" ></a></td>
                                             <td class="text-left"><a href="#">' . $value['name'] . '</a></td>
                                             <td class="text-right"> ' . $value['quantity'] . '</td>
                                           
@@ -121,10 +145,11 @@
                                     </table>
                                     ';
                                 ?>
-                                    <p class="checkout"><a href="{{url('cart')}}" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> View Cart</a>
-                                        &nbsp;&nbsp;&nbsp;<a href= "{{url('checkout')}}" class="btn btn-primary"><i class="fa fa-share"></i> Checkout</a></p>
-                               <?php
-                                            '</div>
+                                <p class="checkout"><a href="{{url('cart')}}" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> View Cart</a>
+                                    &nbsp;&nbsp;&nbsp;<a href= "{{url('checkout')}}"  class="btn btn-primary"><i class="fa fa-share"></i> Checkout</a></p>
+<!--                                onclick="checkOut({{session('koalauser')}})"-->
+                                        <?php
+                                '</div>
                             </li>';
                                 echo '</form>';
                             }
@@ -155,6 +180,7 @@
 
                                     <?php
                                     $setupObj = session('setupdata');
+
                                     $categories = $setupObj['categories'];
 
                                     foreach ($categories as $value) {
@@ -176,9 +202,9 @@
 
                                 <div class="row" id="creatediv" >
                                     <div class="col-lg-12">
-                                        <div class="pull-right">
+                                        <div class="">
 
-                                            <input type="submit"  class="btn btn-primary btn-lg" value="Go Shopping"/>
+                                            <input type="submit"  class="btn btn-primary  btn-block" value="Go Shopping"/>
 
                                         </div>
 
@@ -195,5 +221,10 @@
             </div>
         </div>
     </nav>
+    <?php
+
+   
+
+    ?>
     <!-- Main Menu End-->
 </div>

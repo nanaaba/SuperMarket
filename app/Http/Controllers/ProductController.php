@@ -17,6 +17,45 @@ class ProductController extends Controller {
         return view('product_detail')->with('productinfo', $productinfo);
     }
 
+    public function showpromotionitems($promotioncode) {
+        
+        $promodata = $this->retreivePromotionDeatil($promotioncode);
+         return view('promotiondetail')->with('promodata', $promodata);
+    }
+    
+    
+    
+     public function retreivePromotionDeatil($promotioncode) {
+
+        /* function to retreive all products 
+         */
+
+        $url = config('constants.TEST_URL');
+
+        $baseurl = $url . 'promotions/'.$promotioncode;
+
+        $client = new Client([
+            'headers' => [
+                'Accept' => 'application/json',
+            ],
+            'http_errors' => false
+        ]);
+        try {
+
+            $response = $client->request('GET', $baseurl);
+
+            $body = $response->getBody();
+            $bodyObj = json_decode($body,true);
+
+            return $bodyObj['data'];
+        } catch (RequestException $e) {
+            return 'Http Exception : ' . $e->getMessage();
+        } catch (Exception $e) {
+            return 'Internal Server Error:' . $e->getMessage();
+        }
+    }
+
+
     public function retreiveProducts() {
 
         /* function to retreive all products 
@@ -113,7 +152,7 @@ class ProductController extends Controller {
             $response = $client->request('GET', $baseurl);
 
             $body = $response->getBody();
-            $bodyObj = json_decode($body,true);
+            $bodyObj = json_decode($body, true);
 
             if ($response->getStatusCode() == 200) {
 

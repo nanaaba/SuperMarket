@@ -18,39 +18,34 @@
                 <form>
                     <div class="row">
 
-                        <fieldset id="personal-details">
-                            <legend>Personal Details</legend>
-                            <div class="col-sm-6">
-                                <div class="form-group required">
-                                    <label for="input-firstname" class="control-label">Full Name</label>
-                                    <input type="text" class="form-control" value="{{session('fullname')}}" name="name">
-                                </div>
-                                <div class="form-group required">
-                                    <label for="input-telephone" class="control-label">Telephone</label>
-                                    <input type="tel" class="form-control" value="{{session('phone')}}" name="telephone">
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
+                    <fieldset id="personal-details">
+                                            <legend>Change Password</legend>
+                                        <div class="col-sm-6">
+                                            <div class="form-group required">
+                                                <label for="input-firstname" class="control-label">New Password</label>
+                                                <input type="password" class="form-control" value="" name="password">
+                                            </div>
+                                           
+                                        </div>
+                                        <div class="col-sm-6">
 
 
-                                <div class="form-group required">
-                                    <label for="input-email" class="control-label">E-Mail</label>
-                                    <input type="email" class="form-control" value="{{session('email')}}" name="email">
-                                </div>
+                                            <div class="form-group required">
+                                                <label for="input-email" class="control-label">Confirm Password</label>
+                                                <input type="password" class="form-control" name="confirm_password">
+                                            </div>
+                                           
 
+                                        </div>
 
-
-                            </div>
-
-                        </fieldset>
-
+                                    </fieldset>
                     </div>
 
-                    <div class="buttons">
-                        <div class="pull-right">
-                            <input type="submit" class="btn btn-lg btn-primary" value="Save Changes">
-                        </div>
-                    </div>
+                   <div class="buttons">
+                                    <div class="pull-right">
+                                        <input type="submit" name="submit" class="btn btn-lg btn-primary" value="Update">
+                                    </div>
+                                </div>
                 </form>
             </div>
             <!--Middle Part End -->

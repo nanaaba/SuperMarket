@@ -18,38 +18,132 @@
         <link rel="stylesheet" type="text/css" href="{{ asset('css/owl.transitions.css')}}" />
         <link rel="stylesheet" type="text/css" href="{{ asset('css/responsive.css')}}" />
         <link rel="stylesheet" type="text/css" href="{{ asset('css/stylesheet-skin3.css')}}" />
-                <link rel="stylesheet" type="text/css" href="{{ asset('css/sweetalert.css')}}" />
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/sweetalert.css')}}" />
+        <!--        <link rel="stylesheet" type="text/css" href="{{ asset('css/mdb.css')}}" />-->
+        <!--        <link rel="stylesheet" type="text/css" href="{{ asset('css/mdb.min.css')}}" />-->
+        <!--        <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css')}}" />-->
 
         <link href='http://fonts.googleapis.com/css?family=Droid+Sans' rel='stylesheet' type='text/css'>
-        
+
         <!-- CSS Part End-->
-    
+
 
     </head>
     <div class="wrapper-wide">
 
         @include('layouts.header')
-
-        <div class="be-loading loader ">
-                @yield('content')
+        @yield('content')
 
 
 
-                <!-- Here goes your content -->
+        <!-- Here goes your content -->
 
-                <div class="be-spinner ">
-                    <svg width="40px" height="40px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
-                    <circle fill="none" stroke-width="4" stroke-linecap="round" cx="33" cy="33" r="30" class="circle"></circle>
-                    </svg>
+
+
+
+
+        <!--        <div class="modal fade " id="wishlistModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="false">
+                    <div class="modal-dialog modal-info " role="document">-->
+
+        <div id="wishlistModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <!--Header-->
+
+                    <div class="modal-header modal-header-primary">
+                        <button type="button" class="close" data-dismiss="modal" style="color: white">&times;</button>
+                        <h4 class="modal-title">WishList</h4>
+                    </div>
+
+                    <form id="wishlistForm">
+                        <input type="hidden" name="_token" value="{{csrf_token() }} "/>
+
+                        <input type="hidden" name="itemid" id="itemid" class="form-control">
+                        <input type="hidden" name="productname" id="productname2" class="form-control">
+
+                        <!--Body-->
+                        <div class="modal-body">
+                            <div class="text-center">
+                                <i class="fa fa-cart-arrow-down fa-4x mb-3 animated rotateIn"></i>
+                                <p><strong>Product Name : <span id="productname"></span></strong></p>
+                                <p>Shopping Bags helps users to group their wishlist items .
+                                </p>
+                            </div>
+
+                            <hr>
+
+                            <!-- Radio -->
+                            <p class="text-center"><strong>Shopping Bag</strong></p>
+
+                            <?php
+                            $shoppingbags = session('shoppingBags');
+
+                            $shoppingbagsize = sizeof($shoppingbags);
+                            if ($shoppingbagsize > 0) {
+
+                                foreach ($shoppingbags as $value) {
+                                    echo '<div class="form-group">
+                                <input name="shoppingbag" type="radio" required value="' . $value['bagID'] . '" >
+                                <label for="radio-4">' . $value['name'] . '</label>
+                            </div>';
+                                }
+                                ?>
+                                <div class="form-group">
+                                    <input name="shoppingbag" required type="radio" value="new" id="newbag">
+                                    <label for="radio-4">New Shopping Bag</label>
+                                </div>
+
+                                <?php
+                            }
+                            ?>
+                            <input type="hidden" id="shoppingbagsize" value="<?php echo $shoppingbagsize?>" class="form-control">
+
+                            <div class="md-form" style="display: none" id="newbagdiv">
+                                 <label for="form7">New Shopping Bag</label>
+                                <input type="text" name="newbag" id="newbaginput" class="form-control">
+
+                               
+                            </div>
+
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary" >ADD TO WISHLIST</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">CANCEL</button>
+                        </div>
+                        <!--Footer-->
+                        <!--                        <div class="modal-footer ">
+                                                    <input type="submit" class="btn btn-primary-modal waves-effect waves-light"/>
+                        
+                                                    <a type="button" class="btn btn-outline-secondary-modal waves-effect" data-dismiss="modal">Cancel</a>
+                                                </div>-->
+                    </form>
                 </div>
-           
             </div>
+        </div>
+
+
+        <div class="modal fade" id="loaderModal" data-keyboard="false" data-backdrop="static" role="dialog" >
+            <div class="modal-dialog" role="document">
+
+
+                <div  id="loader" style="margin-top:30% ;text-align: center">
+<!--                    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>-->
+
+                    <img src="{{('image/load.gif')}}" />
+
+                    <span class="loader-text" style="font-size: 20px;color: white;">Wait...</span>
+                </div>
+
+
+            </div>
+        </div>
 
         @include('layouts.footer')
 
 
     </div>
-    
-    
-    
+
+
+
 </html>
