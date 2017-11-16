@@ -12,7 +12,7 @@
  */
 
 Route::group(['middleware' => 'usersession'], function () {
-    Route::get('category/{categorycode}', 'CategoryController@showcategoryitems');
+    Route::get('/category/{categorycode}', 'CategoryController@showcategoryitems');
     Route::get('product/{productcode}', 'ProductController@showproductdetail');
     Route::get('/home', 'HomeController@index');
     Route::get('/wishlist', 'UserAccountController@showwishlist');
@@ -21,6 +21,7 @@ Route::group(['middleware' => 'usersession'], function () {
     Route::get('addressbooks', 'UserAccountController@showuseraddresses');
     Route::get('promotion/{promotioncode}', 'ProductController@showpromotionitems');
     Route::get('/checkout', 'UserAccountController@showcheckout');
+    Route::get('banner/{bannerid}', 'ProductController@showbannerdetail');
 
 
     Route::get('/cart', function () {
@@ -84,6 +85,7 @@ Route::group(['middleware' => 'usersession'], function () {
     Route::post('useraddresses', 'UserAccountController@addUserAddress');
     Route::post('checkoutregister', 'UserAccountController@checkoutregisterUser');
     Route::post('confirmcheckout', 'UserAccountController@orderItems');
+    Route::get('myorders/{orderno}', 'UserAccountController@showorderdetail');
 
     //confirmcheckout
 //category

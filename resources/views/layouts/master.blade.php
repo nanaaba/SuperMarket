@@ -96,13 +96,13 @@
                                 <?php
                             }
                             ?>
-                            <input type="hidden" id="shoppingbagsize" value="<?php echo $shoppingbagsize?>" class="form-control">
+                            <input type="hidden" id="shoppingbagsize" value="<?php echo $shoppingbagsize ?>" class="form-control">
 
                             <div class="md-form" style="display: none" id="newbagdiv">
-                                 <label for="form7">New Shopping Bag</label>
+                                <label for="form7">New Shopping Bag</label>
                                 <input type="text" name="newbag" id="newbaginput" class="form-control">
 
-                               
+
                             </div>
 
 
@@ -121,6 +121,144 @@
                 </div>
             </div>
         </div>
+
+        <div id="addressModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <!--Header-->
+
+                    <div class="modal-header modal-header-primary">
+                        <button type="button" class="close" data-dismiss="modal" style="color: white">&times;</button>
+                        <h4 class="modal-title">New Address</h4>
+                    </div>
+                    <form id="addressbookForm">
+                         <input type="hidden" name="_token" value="{{csrf_token() }} "/>
+
+                        <div class="modal-body">
+
+
+
+
+                            <div class="form-group required">
+                                <label for="input-firstname" class="control-label"> Name</label>
+                                            <span>NB.Name can be ur work place or house</span>
+                                <input type="text" class="form-control" name="addressName"required >
+                            </div>
+
+
+                            <div class="form-group required">
+                                <label for="input-telephone" class="control-label">Location</label>
+                                <input type="text" class="form-control"  name="location"required >
+                            </div>
+
+
+                            <div class="form-group required">
+                                <label for="input-telephone" class="control-label">Description</label>
+                                <input type="text" class="form-control" name="description" required>
+                            </div>
+
+
+
+
+
+                            <div class="form-group ">
+                                <label for="input-email" class="control-label">Digital Code</label>
+                                <input type="text" class="form-control"  name="digitalCode">
+                            </div>
+
+
+                           
+                                <div class="form-group ">
+                                    <label for="input-telephone" class="control-label">X Coordinates</label>
+                                    <input type="text" class="form-control" name="xcor">
+                                </div>
+                          
+                                <div class="form-group ">
+                                    <label for="input-telephone" class="control-label">Y Coordinates</label>
+                                    <input type="text" class="form-control" name="ycor">
+                                </div>
+                        
+
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary" >SUBMIT</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">CANCEL</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+  <div id="editaddressModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <!--Header-->
+
+                    <div class="modal-header modal-header-primary">
+                        <button type="button" class="close" data-dismiss="modal" style="color: white">&times;</button>
+                        <h4 class="modal-title">New Address</h4>
+                    </div>
+                    <form id="addressbookForm">
+                         <input type="hidden" name="_token" value="{{csrf_token() }} "/>
+
+                        <div class="modal-body">
+
+
+
+
+                            <div class="form-group required">
+                                <label for="input-firstname" class="control-label"> Name</label>
+                                            <span>NB.Name can be ur work place or house</span>
+                                <input type="text" class="form-control" name="addressName"required >
+                            </div>
+
+
+                            <div class="form-group required">
+                                <label for="input-telephone" class="control-label">Location</label>
+                                <input type="text" class="form-control"  name="location"required >
+                            </div>
+
+
+                            <div class="form-group required">
+                                <label for="input-telephone" class="control-label">Description</label>
+                                <input type="text" class="form-control" name="description" required>
+                            </div>
+
+
+
+
+
+                            <div class="form-group ">
+                                <label for="input-email" class="control-label">Digital Code</label>
+                                <input type="text" class="form-control"  name="digitalCode">
+                            </div>
+
+
+                           
+                                <div class="form-group ">
+                                    <label for="input-telephone" class="control-label">X Coordinates</label>
+                                    <input type="text" class="form-control" name="xcor">
+                                </div>
+                          
+                                <div class="form-group ">
+                                    <label for="input-telephone" class="control-label">Y Coordinates</label>
+                                    <input type="text" class="form-control" name="ycor">
+                                </div>
+                        
+
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary" >SUBMIT</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">CANCEL</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
 
 
         <div class="modal fade" id="loaderModal" data-keyboard="false" data-backdrop="static" role="dialog" >

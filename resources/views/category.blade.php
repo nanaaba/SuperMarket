@@ -2,13 +2,21 @@
 
 @section('content')
 
+<?php
+$detailsize = sizeof($details);
+$data = array();
 
+foreach ($details as $value) {
+    $data[] = $value['name'];
+}
+?>
 <div id="container">
     <div class="container">
         <!-- Breadcrumb Start-->
         <ul class="breadcrumb">
-            <li><a href="index.html"><i class="fa fa-home"></i></a></li>
-            <li><a href="category.html">Electronics</a></li>
+            <li><a href="{{url('/')}}"><i class="fa fa-home"></i></a></li>
+            <li><a href="#">Category</a></li>
+            <li><a href="#">{{implode($data, ',')}}</a></li>
         </ul>
         <!-- Breadcrumb End-->
         <div class="row">
@@ -23,7 +31,7 @@
                         $categories = $setupObj['categories'];
 
                         foreach ($categories as $value) {
-                            echo '  <li><a href="'.$value['categoryID'].'">' . $value['name'] . '</a> </li>';
+                            echo '  <li><a href="' . $value['categoryID'] . '">' . $value['name'] . '</a> </li>';
                         }
                         ?>
 
@@ -60,7 +68,7 @@
                     $promotions = $setupObj['promotions'];
 
                     foreach ($promotions as $value) {
-                        echo '<div class="item"> <a href="../promotion/'.$value['promotionID'].'"><img src="http://tfs.knust.edu.gh/ecommerce/images/' . $value['bannerUrl'] . '"" alt="small banner1" class="img-responsive" /></a> </div>';
+                        echo '<div class="item"> <a href="../promotion/' . $value['promotionID'] . '"><img src="http://tfs.knust.edu.gh/ecommerce/images/' . $value['bannerUrl'] . '"" alt="small banner1" class="img-responsive" /></a> </div>';
                     }
                     ?>
 
@@ -70,22 +78,19 @@
             <!--Left Part End -->
             <!--Middle Part Start-->
             <div id="content" class="col-sm-9">
-               
+
                 <?php
-               
-               $detailsize = sizeof($details);
-               $data=array();
-               if($detailsize == 1){
-                   $name = $details[0]['name'];
-                   echo ' <h3 class="title"><strong>'.$name.'</strong><i> (items)</i></h3>';
-               }
-               if($detailsize > 1){
-                   foreach ($details as $value) {
-                      $data[]=$value['name']; 
-                   }
-                   
-                   echo ' <h3 class="title"><strong>'.  implode($data, ',').'</strong><i> (items)</i></h3>';
-               }
+                if ($detailsize == 1) {
+                    $name = $details[0]['name'];
+                    echo ' <h3 class="title"><strong>' . $name . '</strong><i> (items)</i></h3>';
+                }
+                if ($detailsize > 1) {
+                    foreach ($details as $value) {
+                        $data[] = $value['name'];
+                    }
+
+                    echo ' <h3 class="title"><strong>' . implode($data, ',') . '</strong><i> (items)</i></h3>';
+                }
                 ?>
                 <div class="product-filter">
                     <div class="row">
@@ -94,24 +99,20 @@
                                 <button type="button" id="list-view" class="btn btn-default" data-toggle="tooltip" title="List"><i class="fa fa-th-list"></i></button>
                                 <button type="button" id="grid-view" class="btn btn-default" data-toggle="tooltip" title="Grid"><i class="fa fa-th"></i></button>
                             </div>
-                            </div>
+                        </div>
                         <div class="col-sm-2 text-right">
                             <label class="control-label" for="input-sort">Sort By:</label>
                         </div>
                         <div class="col-md-3 col-sm-2 text-right">
                             <select id="input-sort" class="form-control col-sm-3">
                                 <option value="" selected="selected">Default</option>
-                                <option value="">Name (A - Z)</option>
-                                <option value="">Name (Z - A)</option>
+
                                 <option value="">Price (Low &gt; High)</option>
                                 <option value="">Price (High &gt; Low)</option>
-                                <option value="">Rating (Highest)</option>
-                                <option value="">Rating (Lowest)</option>
-                                <option value="">Model (A - Z)</option>
-                                <option value="">Model (Z - A)</option>
+
                             </select>
                         </div>
-                        <div class="col-sm-1 text-right">
+<!--                        <div class="col-sm-1 text-right">
                             <label class="control-label" for="input-limit">Show:</label>
                         </div>
                         <div class="col-sm-2 text-right">
@@ -122,7 +123,7 @@
                                 <option value="">75</option>
                                 <option value="">100</option>
                             </select>
-                        </div>
+                        </div>-->
                     </div>
                 </div>
                 <br />
@@ -132,12 +133,17 @@
                     $itemssize = sizeof($items);
                     if ($itemssize > 0) {
                         foreach ($items as $value) {
+                            $price = $value['price'];
+                            $promoprice = $value['promoPrice'];
+                            $diff = $price - $promoprice;
+
 
                             echo '  <div class="product-layout product-list col-xs-12">
                             <div class="product-thumb ">
                             <form class="addproduct">
                               
                                 <input type="hidden" name="_token" value="' . csrf_token() . '"/>
+                                    <input type="hidden" name="instock" id="instock" value="' .$value['inStock'] . '"/>
                             <input type="hidden" name="productid" value="' . $value['itemID'] . '"/>
                                 <input type="hidden" name="price" value="' . $value['promoPrice'] . '"/>
                                     <input type="hidden" name="url" value="' . $value['iconUrl'] . '"/>
@@ -147,8 +153,14 @@
                             <img src="http://tfs.knust.edu.gh/ecommerce/images/' . $value['iconUrl'] . '" height="200" width="200" alt="' . $value['name'] . '" title="' . $value['name'] . '" class="img-responsive" /></a></div>
                         <div class="caption">
                             <h4><a href="../product/' . $value['itemID'] . '">' . $value['name'] . '</a></h4>
-                            <p class="price"><span class="price-new"> GHS ' . $value['price'] . '</span>
-                                 <span class="saving">-26%</span></p>
+                            <p class="price"><span class="price-new"> GHS ' . $value['promoPrice'] . '</span>';
+                            if ($diff > 0) {
+                                $percentage = ($diff / $price) * 100;
+                                echo '<span class="saving">-' . round($percentage, 2)  . '%</span>';
+                                
+                            }
+
+                        echo    ' </p>
                         </div>
                         <div class="button-group">
                             <button class="btn-primary" type="submit" ><span>Add to Cart</span></button>
@@ -170,19 +182,20 @@
                        
                     </div></div>';
                         }
-                    }else{
+                    } else {
                         echo '<div class="alert alert-info"><i class="fa fa-check-circle"></i>No items found in this category</div>';
                     }
                     ?>
-                    
+
                 </div>
                 <div class="row">
                     <div class="col-sm-6 text-left">
                         <ul class="pagination">
-                            <li class="active"><span>1</span></li>
+                            {!! $items->render() !!}
+<!--                            <li class="active"><span>1</span></li>
                             <li><a href="#">2</a></li>
                             <li><a href="#">&gt;</a></li>
-                            <li><a href="#">&gt;|</a></li>
+                            <li><a href="#">&gt;|</a></li>-->
                         </ul>
                     </div>
                     <div class="col-sm-6 text-right">Showing 1 to 12 of 15 (2 Pages)</div>

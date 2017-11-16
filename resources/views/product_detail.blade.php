@@ -29,7 +29,7 @@
                             <div class="image"><a href="<?php echo $value['itemID'] ?>"><img src="http://tfs.knust.edu.gh/ecommerce/images/<?php echo $value['iconUrl'] ?>" alt=" <?php echo $value['name'] ?> " title=" <?php echo $value['name'] ?>" height="50" width="50" class="img-responsive" /></a></div>
                             <div class="caption">
                                 <h4><a href="<?php echo $value['itemID'] ?>"><?php echo $value['name'] ?></a></h4>
-                                <p class="price"> <span class="price-new">GHS <?php echo $value['price'] ?></span> 
+                                <p class="price"> <span class="price-new">GHS <?php echo $value['promoPrice'] ?></span> 
                                 </p>
                             </div>
                         </div>
@@ -123,7 +123,7 @@
                                     ?>
 
 <!--                                    <span itemprop="availability" content="In Stock"></span>
-                                -->
+                                    -->
                                 </li>
                                 <li></li>
                             </ul>
@@ -137,6 +137,7 @@
                                         <input type="hidden" name="price" value="{{$productinfo['price']}}"/>
                                         <input type="hidden" name="url" value="{{$productinfo['iconUrl']}}"/>
                                         <input type="hidden" name="productname" value="{{$productinfo['name']}}"/>
+                                        <input type="hidden" name="instock" id="instock" value="{{$productinfo['inStock']}}"/>
 
                                         <div>
                                             <div class="qty">
@@ -148,11 +149,18 @@
                                             </div>
                                             <button type="submit" id="button-cart" class="btn btn-primary btn-lg">Add to Cart</button>
                                         </div>
-                                        <div>
-                                            <button type="button" class="wishlist" onClick=""><i class="fa fa-heart"></i> Add to Wish List</button>
-                                            <br />
-                                        </div>
                                     </form>
+                                    <div>
+                                        <form class="addwishlist">
+                                            <input type="hidden" name="productid" value="{{$productinfo['itemID']}}"/>
+                                            <input type="hidden" name="productname" value="{{$productinfo['name']}}"/>
+                                            <input type="hidden" name="userid" value="{{ session('koalauser')}}"/>
+
+                                            <button type="submit" class="wishlist" onClick=""><i class="fa fa-heart"></i> Add to Wish List</button>
+                                        </form> 
+                                        <br />
+                                    </div>
+
                                 </div>
                             </div>
                             <div class="rating" itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
@@ -498,30 +506,51 @@
                         $relateditems = $productinfo['relatedItems'];
 
                         foreach ($relateditems as $value) {
+                            $price = $value['price'];
+                            $promoprice = $value['promoPrice'];
+                            $diff = $price - $promoprice;
+
 
                             echo '<div class="product-thumb clearfix">
                             <form class="addproduct">
                               
                                 <input type="hidden" name="_token" value="' . csrf_token() . '"/>
                             <input type="hidden" name="productid" value="' . $value['itemID'] . '"/>
-                                <input type="hidden" name="price" value="' . $value['price'] . '"/>
+                                <input type="hidden" name="price" value="' . $value['promoPrice'] . '"/>
                                     <input type="hidden" name="url" value="' . $value['iconUrl'] . '"/>
-                                    <input type="hidden" name="productname" value="' . $value['name'] . '"/>
+                                    <input type="hidden" name="instock" id="instock" value="' . $value['inStock'] . '"/>
+                                   
+<input type="hidden" name="productname" value="' . $value['name'] . '"/>
                                         <input type="hidden" name="quantity" value="1"/>
-                        <div class="image"><a href="' . $value['itemID'] . '">
+                        <div class="image"><a href="product/' . $value['itemID'] . '">
                             <img src="http://tfs.knust.edu.gh/ecommerce/images/' . $value['iconUrl'] . '" alt="' . $value['name'] . '" title="' . $value['name'] . '" class="img-responsive" /></a></div>
                         <div class="caption">
-                            <h4><a href="' . $value['itemID'] . '">' . $value['name'] . '</a></h4>
-                            <p class="price"><span class="price-new"> GHS ' . $value['price'] . '</span></p>
+                            <h4><a href="product/' . $value['itemID'] . '">' . $value['name'] . '</a></h4>
+                            <p class="price"><span class="price-new"> GHS ' . $value['price'] . '</span>';
+                            if ($diff > 0) {
+                                $percentage = ($diff / $price) * 100;
+                                echo '<span class="saving">-' . round($percentage, 2) . '%</span>';
+                            }
+                            echo'    </p>
                         </div>
                         <div class="button-group">
                             <button class="btn-primary" type="submit" ><span>Add to Cart</span></button>
-                            <div class="add-to-links">
-                                <button type="button" data-toggle="tooltip" title="Add to Wish List" onClick=""><i class="fa fa-heart"></i></button>
-                                <button type="button" data-toggle="tooltip" title="Compare this Product" onClick=""><i class="fa fa-exchange"></i></button>
+                           
+                            </div>
+                             </form>
+                            <div class="button-group">
+                              <div class="add-to-links">
+                               <form class="addwishlist">
+                                    <input type="hidden" name="productid" value="' . $value['itemID'] . '"/>
+                                    <input type="hidden" name="productname" value="' . $value['name'] . '"/>
+  <input type="hidden" name="userid" value="' . session('koalauser') . '"/>
+
+                                <button type="submit" data-toggle="tooltip" title="Add to Wish List" onClick=""><i class="fa fa-heart"></i></button>
+                            </form>                              
+        <button type="button" data-toggle="tooltip" title="Compare this Product" onClick=""><i class="fa fa-exchange"></i></button>
                             </div>
                         </div>
-                        </form>
+                       
                     </div>';
                         }
                         ?>

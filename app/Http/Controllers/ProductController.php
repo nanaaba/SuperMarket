@@ -18,21 +18,43 @@ class ProductController extends Controller {
     }
 
     public function showpromotionitems($promotioncode) {
-        
+
         $promodata = $this->retreivePromotionDeatil($promotioncode);
-         return view('promotiondetail')->with('promodata', $promodata);
+        return view('promotiondetail')->with('promodata', $promodata);
     }
-    
-    
-    
-     public function retreivePromotionDeatil($promotioncode) {
+
+    public function showbannerdetail($bannerid) {
+
+
+        $info = $this->retreiveBannerDeatil($bannerid);
+
+        if (empty($info)) {
+            return redirect('/');
+        }
+        $type = $info['type'];
+        $id = $info['identifier'];
+       // echo $type;
+        if ($type == "Category") {
+            return redirect('category/' . $id);
+        }
+        
+        if ($type == "Promotion") {
+            return redirect('promotion/' . $id);
+        }
+        if ($type == "Item") {
+            return redirect('product/' . $id);
+        }
+    }
+
+    public function retreiveBannerDeatil($bannerid) {
 
         /* function to retreive all products 
          */
 
         $url = config('constants.TEST_URL');
 
-        $baseurl = $url . 'promotions/'.$promotioncode;
+        $baseurl = $url . '/banners/' . $bannerid;
+
 
         $client = new Client([
             'headers' => [
@@ -45,7 +67,7 @@ class ProductController extends Controller {
             $response = $client->request('GET', $baseurl);
 
             $body = $response->getBody();
-            $bodyObj = json_decode($body,true);
+            $bodyObj = json_decode($body, true);
 
             return $bodyObj['data'];
         } catch (RequestException $e) {
@@ -55,6 +77,35 @@ class ProductController extends Controller {
         }
     }
 
+    public function retreivePromotionDeatil($promotioncode) {
+
+        /* function to retreive all products 
+         */
+
+        $url = config('constants.TEST_URL');
+
+        $baseurl = $url . 'promotions/' . $promotioncode;
+
+        $client = new Client([
+            'headers' => [
+                'Accept' => 'application/json',
+            ],
+            'http_errors' => false
+        ]);
+        try {
+
+            $response = $client->request('GET', $baseurl);
+
+            $body = $response->getBody();
+            $bodyObj = json_decode($body, true);
+
+            return $bodyObj['data'];
+        } catch (RequestException $e) {
+            return 'Http Exception : ' . $e->getMessage();
+        } catch (Exception $e) {
+            return 'Internal Server Error:' . $e->getMessage();
+        }
+    }
 
     public function retreiveProducts() {
 

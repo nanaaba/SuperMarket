@@ -27,6 +27,15 @@ class UserAccountController extends Controller {
         return view('checkoutregister');
     }
 
+    
+    public function showorderdetail($orderno) {
+        
+        $orders = $this->getorderdetail($orderno);
+        
+        return view('orderinformation')->with('orders',$orders);
+    }
+    
+    
     public function showwishlist() {
 
         $bags = $this->getUserShoppingBags();
@@ -817,6 +826,37 @@ class UserAccountController extends Controller {
             $body = $response->getBody();
 
             return $body;
+        } catch (RequestException $e) {
+            return 'Http Exception : ' . $e->getMessage();
+        } catch (Exception $e) {
+            return 'Internal Server Error:' . $e->getMessage();
+        }
+    }
+    
+    
+    function getorderdetail($orderno) {
+        
+        
+        $url = config('constants.TEST_URL');
+
+        $baseurl = $url . '/orders/'.$orderno;
+
+        $client = new Client([
+            'headers' => [
+                'Accept' => 'application/json',
+                'platform' => 'Web'
+            ],
+            'http_errors' => false
+        ]);
+        try {
+
+            $response = $client->request('GET', $baseurl);
+
+            $body = $response->getBody();
+            $bodyObj = json_decode($body, true);
+
+
+            return $bodyObj['data'];
         } catch (RequestException $e) {
             return 'Http Exception : ' . $e->getMessage();
         } catch (Exception $e) {

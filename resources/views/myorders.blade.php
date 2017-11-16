@@ -48,7 +48,7 @@
                                   <td class="text-right"> GHS ' . $value['totalAmt'] . '</td>
                                
                             
-      <td class="text-center"><a class="btn btn-info" title="" data-toggle="tooltip" href="' . $value['orderID'] . '" data-original-title="View"><i class="fa fa-eye"></i></a></td>
+      <td class="text-center"><a class="btn btn-info" title="" data-toggle="tooltip" href="myorders/' . $value['orderID'] . '" data-original-title="View"><i class="fa fa-eye"></i></a></td>
                           
                             </tr>';
                                 }

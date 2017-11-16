@@ -49,9 +49,9 @@
 
        <tr>
                                             <td class="text-center">
-                                            <a href="#"><img class="img-thumbnail" style="height:50px;width:50px;" 
+                                            <a href="product/'.$value['id'].'"><img class="img-thumbnail" style="height:50px;width:50px;" 
                                             src="http://tfs.knust.edu.gh/ecommerce/images/' . $value['url'] . '"></a></td>
-                                            <td class="text-left"><a href="#">' . $value['name'] . '</a></td>
+                                            <td class="text-left"><a href="product/'.$value['id'].'">' . $value['name'] . '</a></td>
                                               <td class="text-center"><a href="#"></a></td>
                                               <td class="text-left">
                                               <div class="input-group btn-block quantity">

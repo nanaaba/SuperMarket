@@ -118,7 +118,74 @@
 //checkoutloginForm
 //checkoutregisterForm
 
-     $('#checkoutloginForm').on('submit', function (e) {
+//addressbookForm
+
+
+        $('#addressbookForm').on('submit', function (e) {
+
+            e.preventDefault();
+            var formdata = $(this).serialize();
+            console.log('dat' + formdata);
+            $('#loaderModal').modal('show');
+
+
+
+
+            $.ajax({
+                url: "{{url('useraddresses')}}",
+                type: "POST",
+                data: formdata,
+                dataType: "json",
+                success: function (data) {
+                    console.log(data.status);
+                    $('#loaderModal').modal('hide');
+                    $('#addressModal').modal('hide');
+                    //addressModal
+
+                    if (data.status == 1) {
+                        swal({
+                            title: "Error",
+                            text: data.message,
+                            type: "error",
+                            confirmButtonClass: "btn-danger",
+                            confirmButtonText: "Ok",
+                            closeOnConfirm: true
+                        });
+                    }
+
+
+                    if (data.status == 0) {
+                        var url = window.location.href;     // Returns full URL
+
+                        swal({
+                            title: "Success",
+                            text: data.message,
+                            type: "success",
+                            confirmButtonClass: "btn-success",
+                            confirmButtonText: "OK",
+                            closeOnConfirm: false,
+                        },
+                                function () {
+                                    window.location = url;
+                                });
+
+
+                    }
+
+                },
+                error: function (jXHR, textStatus, errorThrown) {
+                    $('#loaderModal').modal('hide');
+
+                    alert(errorThrown);
+                }
+            });
+
+
+
+
+        });
+
+        $('#checkoutloginForm').on('submit', function (e) {
 
             e.preventDefault();
             var formdata = $(this).serialize();
@@ -207,7 +274,7 @@
                             confirmButtonText: "OK",
                             closeOnConfirm: true
                         });
-                        
+
 //                        function () {
 //                            var currenturl = window.location.href;
 //                            window.location = currenturl;
@@ -313,28 +380,41 @@
             console.log(formData);
             $('#loaderModal').modal('show');
 
-            $.ajax({
-                url: "{{url('cart/add')}}",
-                type: "POST",
-                data: formData,
-                dataType: 'json',
-                success: function (data) {
-                    console.log(data);
-                    $('#loaderModal').modal('hide');
+            var stock = $('#instock').val();
+            console.log('stock ' + stock);
+            if (stock == false) {
+                $('#loaderModal').modal('hide');
+                swal({
+                    title: "Information",
+                    text: 'Item has run out of stock',
+                    type: "info",
+                    closeOnConfirm: true
+                });
+            } else {
+                $.ajax({
+                    url: "{{url('cart/add')}}",
+                    type: "POST",
+                    data: formData,
+                    dataType: 'json',
+                    success: function (data) {
+                        console.log(data);
+                        $('#loaderModal').modal('hide');
 
-                    swal({
-                        title: "Success",
-                        text: data.message + ' .You have ' + data.totalitems + ' items in your cart',
-                        type: "success",
-                        closeOnConfirm: false
-                    },
-                    function () {
-                        var currenturl = window.location.href;
-                        window.location = currenturl;
-                    });
-                }
+                        swal({
+                            title: "Success",
+                            text: data.message + ' .You have ' + data.totalitems + ' items in your cart',
+                            type: "success",
+                            closeOnConfirm: false
+                        },
+                        function () {
+                            var currenturl = window.location.href;
+                            window.location = currenturl;
+                        });
+                    }
 
-            });
+                });
+            }
+
         });
 
 
@@ -387,7 +467,7 @@
                 $('#productname2').val(productname);
                 $('#wishlistModal').modal('show');
                 //wishlistModal
-                $('#wishlistModal').modal('show');
+                // $('#wishlistModal').modal('show');
             }
             console.log('userid' + userid);
 
@@ -402,6 +482,7 @@
             e.preventDefault();
             var formData = $(this).serialize();
             console.log(formData);
+            $('#wishlistModal').modal('hide');
             $('#loaderModal').modal('show');
 
             $.ajax({
@@ -511,7 +592,7 @@
             var pathname = window.location.pathname; // Returns path only
             console.log(pathname);
             //window.location = 'category/'+searchIDs;
-            window.location.replace("http://localhost/KoalaSuperMarket/public/category/" + searchIDs);
+            window.location.replace("http://localhost/KoalaSuperMarket/category/" + searchIDs);
         });
 //register user
 
@@ -768,5 +849,13 @@
 
             });
 
+        }
+
+        function editAddress(addressid) {
+           // alert(addressid);
+            $('#editaddressModal').modal('show');
+        }
+        function deleteAddress(addressid) {
+            alert(addressid);
         }
 </script>

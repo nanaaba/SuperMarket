@@ -65,7 +65,7 @@
                         <li><a href="{{url('addressbooks')}}">Address Books</a></li>
                         <li><a href="{{url('wishlist')}}">Wish List</a></li>
                         <li><a href="{{url('myorders')}}">Order History</a></li>
-                        <li><a href="{{url('newsletters')}}">Newsletter</a></li>
+                        <li><a href="#">Newsletter</a></li>
 
                     </ul>
                 </div>

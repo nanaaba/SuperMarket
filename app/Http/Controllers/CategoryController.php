@@ -3,10 +3,14 @@
 namespace App\Http\Controllers;
 
 use Session;
+use Illuminate\Support\Facades\Input;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
+use App\Http\Controllers\PaginationController;
+
+//use Illuminate\Support\Facades\Paginator;
 
 class CategoryController extends Controller {
 
@@ -15,7 +19,12 @@ class CategoryController extends Controller {
         $catitems = $this->retreiveCategoryItems($categorycode);
         $catdetails = $this->retreiveCategoriesDetails($categorycode);
 
-        return view('category')->with('items', $catitems)->with('details', $catdetails);
+        $paginate = new PaginationController();
+        $items = $paginate->paginate($catitems,3);
+
+
+
+        return view('category')->with('items', $items)->with('details', $catdetails);
     }
 
     public function getCategoriesItems(Request $request) {

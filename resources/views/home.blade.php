@@ -16,7 +16,7 @@
                         $categories = $setupObj['categories'];
 
                         foreach ($categories as $value) {
-                            echo '  <li><a href="category/'.$value['categoryID'].'">' . $value['name'] . '</a> </li>';
+                            echo '  <li><a href="category/' . $value['categoryID'] . '">' . $value['name'] . '</a> </li>';
                         }
                         ?>
 
@@ -53,7 +53,7 @@
                     $promotions = $setupObj['promotions'];
 
                     foreach ($promotions as $value) {
-                        echo '<div class="item"> <a href="promotion/'.$value['promotionID'].'"><img src="http://tfs.knust.edu.gh/ecommerce/images/' . $value['bannerUrl'] . '"" alt="small banner1" class="img-responsive" /></a> </div>';
+                        echo '<div class="item"> <a href="promotion/' . $value['promotionID'] . '"><img src="http://tfs.knust.edu.gh/ecommerce/images/' . $value['bannerUrl'] . '"" alt="small banner1" class="img-responsive" /></a> </div>';
                     }
                     ?>
 
@@ -90,6 +90,10 @@
                     $featureditems = $setupObj['featured'];
 
                     foreach ($featureditems as $value) {
+                         $price = $value['price'];
+                        $promoprice = $value['promoPrice'];
+                        $diff = $price - $promoprice;
+
 
                         echo '<div class="product-thumb clearfix">
                             <form class="addproduct">
@@ -98,13 +102,21 @@
                             <input type="hidden" name="productid" value="' . $value['itemID'] . '"/>
                                 <input type="hidden" name="price" value="' . $value['promoPrice'] . '"/>
                                     <input type="hidden" name="url" value="' . $value['iconUrl'] . '"/>
-                                    <input type="hidden" name="productname" value="' . $value['name'] . '"/>
+                                    <input type="hidden" name="instock" id="instock" value="' . $value['inStock'] . '"/>
+                                   
+<input type="hidden" name="productname" value="' . $value['name'] . '"/>
                                         <input type="hidden" name="quantity" value="1"/>
                         <div class="image"><a href="product/' . $value['itemID'] . '">
                             <img src="http://tfs.knust.edu.gh/ecommerce/images/' . $value['iconUrl'] . '" alt="' . $value['name'] . '" title="' . $value['name'] . '" class="img-responsive" /></a></div>
                         <div class="caption">
                             <h4><a href="product/' . $value['itemID'] . '">' . $value['name'] . '</a></h4>
-                            <p class="price"><span class="price-new"> GHS ' . $value['price'] . '</span></p>
+                            <p class="price"><span class="price-new"> GHS ' . $value['price'] . '</span>';
+                         if ($diff > 0) {
+                                $percentage = ($diff / $price) * 100;
+                                echo '<span class="saving">-' . round($percentage, 2)  . '%</span>';
+                                
+                            }
+                        echo'    </p>
                         </div>
                         <div class="button-group">
                             <button class="btn-primary" type="submit" ><span>Add to Cart</span></button>
@@ -149,10 +161,10 @@
                         foreach ($favourites as $value) {
 
                             echo '<div class="product-thumb clearfix">
-                              <div class="image"><a href="category/'.$value['categoryID'].'">
+                              <div class="image"><a href="category/' . $value['categoryID'] . '">
                             <img src="http://tfs.knust.edu.gh/ecommerce/images/' . $value['iconUrl'] . '" height="100" width="100" alt="' . $value['name'] . '" title="' . $value['name'] . '" class="img-responsive" /></a></div>
                         <div class="caption">
-                            <h4><a href="category/'.$value['categoryID'].'">' . $value['name'] . '</a></h4>
+                            <h4><a href="category/' . $value['categoryID'] . '">' . $value['name'] . '</a></h4>
                            </div>
                         
                     </div>';
@@ -163,10 +175,10 @@
                         foreach ($usercategories as $value) {
 
                             echo '<div class="product-thumb clearfix">
-                              <div class="image"><a href="category/'.$value['categoryID'].'">
+                              <div class="image"><a href="category/' . $value['categoryID'] . '">
                             <img src="http://tfs.knust.edu.gh/ecommerce/images/' . $value['iconUrl'] . '" height="100" width="100" alt="' . $value['name'] . '" title="' . $value['name'] . '" class="img-responsive" /></a></div>
                         <div class="caption">
-                            <h4><a href="category/'.$value['categoryID'].'">' . $value['name'] . '</a></h4>
+                            <h4><a href="category/' . $value['categoryID'] . '">' . $value['name'] . '</a></h4>
                            </div>
                         
                     </div>';

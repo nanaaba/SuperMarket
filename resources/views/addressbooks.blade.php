@@ -15,141 +15,75 @@
             <div class="col-sm-9" id="content">
                 <h1 class="title">My Address Books</h1>
                 <p class="lead">Hello, <strong>{{session('fullname')}}!</strong> - To update your account information.</p>
+
+
+
+
+
+
+               
                 <div class="row">
-                    <?php
-                    $addressArr = $addresses['addresses'];
-                    $addressArrsize = sizeof($addressArr);
-
-                    if ($addressArrsize > 0) {
-                        $count = 1;
-                        foreach ($addressArr as $value) {
-
-
-                            echo '  
-                    
-                        <div class="col-md-4">
-
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <h4 class="panel-title"><i class="fa fa-truck"></i> Address ' . $count . '</h4>
-                                </div>
-                                <div class="panel-body">
-                                    ' . $value['location'] . '<br>' . $value['description'] . '<br>' . $value['digitalCode'] . '<br>                                                    </div>
-                         <div class="buttons">
-                                <div class="pull-right">
-                               
-<button class="btn btn-primary waves-effect waves-light" title="" data-toggle="tooltip" type="submit" data-original-title="Add to Cart"><i class="fa fa-pencil"></i></button>
-                                    <button class="btn btn-danger waves-effect waves-light" onclick="removeItemWishlist(5,4004)" data-toggle="tooltip" type="button" data-original-title="Remove"><i class="fa fa-times"></i></button>
-</div>
-                            </div>                            
-                                    </div> 
-                            
-                        </div>
-
-                    ';
-                            $count++;
-                        }
-                    }
-                    ?>
-
-
-
-                </div>
-
-
-
-                <form>
-                    <div class="row">
-
-                        <fieldset id="personal-details">
-                            <legend>New Address</legend>
-                            <div class="col-sm-6">
-                                <div class="form-group required">
-                                    <label for="input-firstname" class="control-label"> Name</label>
-                                    <span>NB.Name can be ur work place or house</span>
-                                    <input type="text" class="form-control" name="name">
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="form-group required">
-                                    <label for="input-telephone" class="control-label">Location</label>
-                                    <input type="tel" class="form-control"  name="telephone">
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="form-group required">
-                                    <label for="input-telephone" class="control-label">Street Name</label>
-                                    <input type="tel" class="form-control" name="telephone">
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="form-group required">
-                                    <label for="input-telephone" class="control-label">LandMark</label>
-                                    <input type="tel" class="form-control" name="telephone">
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-
-
-                                <div class="form-group required">
-                                    <label for="input-email" class="control-label">Digital Code</label>
-                                    <input type="email" class="form-control"  name="email">
-                                </div>
-
-
-
-                            </div>
-
-                            <div class="col-sm-6">
-
-
-                                <div class="form-group required">
-                                    <label for="input-email" class="control-label">House Address</label>
-                                    <textarea rows="6" class="form-control"  name="email">
-                                    </textarea>
-                                </div>
-
-
-
-                            </div>
-
-
-                            <div class="col-sm-6">
-
-
-                                <div class="form-group required">
-                                    <label for="input-email" class="control-label">Region</label>
-                                    <select class="form-control" id="region" name="region">
-                                        <option value="">Choose region..</option>
-                                        <option value="Greater Accra">Greater Accra</option>
-
-                                        <option value="Western Region">Western Region</option>
-                                        <option value="Central Region">Central Region</option>
-                                        <option value="Eastern Region">Eastern Region</option>
-                                        <option value="Ashanti Region">Ashanti Region</option>
-                                        <option value="Northern Region">Northern Region</option>
-                                        <option value="Brong Ahafo Region">Brong Ahafo Region</option>
-                                        <option value="Upper East Region">Upper East Region</option>
-                                        <option value="Upper West Region">Upper West Region</option>
-                                        <option value="Volta Region">Volta Region</option>
-
-                                    </select>
-                                </div>
-
-
-
-                            </div>
-
-                        </fieldset>
-
-                    </div>
-
                     <div class="buttons">
                         <div class="pull-right">
-                            <input type="submit" class="btn btn-lg btn-primary" value="Save">
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addressModal" data-whatever="@mdo">New Address</button>
+
+
                         </div>
                     </div>
-                </form>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+
+                                <td class="text-center">Name</td>
+
+                                <td class="text-center">Location</td>
+                                <td class="text-center">Description</td>
+                                <td class="text-center">X,Y Coordinates</td>
+                                <td class="text-center">Digital Code</td>
+                                <td>Action</td>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            $addressArr = $addresses['addresses'];
+                            $addressArrsize = sizeof($addressArr);
+
+                            if ($addressArrsize > 0) {
+                                $count = 1;
+                                foreach ($addressArr as $value) {
+
+                                    echo ' <tr>
+
+                                <td class="text-center">' . $value['name'] . '</td>
+
+                                <td class="text-center">' . $value['location'] . '</td>
+
+                                <td class="text-center">' . $value['description'] . '</td>
+                                  <td class="text-center"> ' . $value['xcor'] . ',' . $value['xcor'] . '</td>
+                               
+                                 <td class="text-center">' . $value['digitalCode'] . '</td>
+
+      <td class="text-center">
+      <button class="btn btn-info" title="" data-toggle="tooltip" onclick="editAddress(' . $value['addressID'] . ')" data-original-title="View"><i class="fa fa-pencil"></i></button>
+    <button class="btn btn-info" title="" data-toggle="tooltip" onclick="deleteAddress(' . $value['addressID'] . ')" data-original-title="View"><i class="fa fa-trash"></i></button>  
+</td>
+                          
+                            </tr>';
+
+                                    $count++;
+                                }
+                            }
+                            ?>
+
+
+
+                        </tbody>
+                    </table>
+                </div>
+
             </div>
             <!--Middle Part End -->
             <!--Right Part Start -->
