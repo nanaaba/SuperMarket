@@ -22,13 +22,14 @@ Route::group(['middleware' => 'usersession'], function () {
     Route::get('promotion/{promotioncode}', 'ProductController@showpromotionitems');
     Route::get('/checkout', 'UserAccountController@showcheckout');
     Route::get('banner/{bannerid}', 'ProductController@showbannerdetail');
+    Route::get('promotions', 'ProductController@showpromotions');
 
 
     Route::get('/cart', function () {
         return view('shoppingcart');
     });
 
-   
+
     Route::get('/myaccount', function () {
         return view('myaccount');
     });
@@ -66,6 +67,8 @@ Route::group(['middleware' => 'usersession'], function () {
         return view('shoppingroom');
     });
 //apis
+    Route::get('searchquery', 'SearchController@searchQuery');
+
     Route::get('cart/cartitems', 'CartController@retreiveCartList');
     Route::post('cart/add', 'CartController@addProductToCart');
     Route::put('cart/update', 'CartController@updateCartList');
@@ -73,11 +76,13 @@ Route::group(['middleware' => 'usersession'], function () {
     Route::delete('cart/clear', 'CartController@clearCart');
     Route::post('cart/checkout', 'CartController@checkoutitems');
 
-    
-    
+
+
     //checkout
     Route::post('wishlist/add', 'UserAccountController@addWishlistItem');
     Route::delete('wishlist/items/remove/{bagid}/{itemid}', 'UserAccountController@removeShoppingBagItem');
+    Route::delete('wishlist/bag/{bagids}', 'UserAccountController@removeUserShoppingBags');
+    Route::post('wishlist/newbag', 'UserAccountController@newShoppingBag');
 
     Route::post('registeruser', 'UserAccountController@registerUser');
     Route::post('reviewproduct', 'UserAccountController@addUserReview');
@@ -86,6 +91,9 @@ Route::group(['middleware' => 'usersession'], function () {
     Route::post('checkoutregister', 'UserAccountController@checkoutregisterUser');
     Route::post('confirmcheckout', 'UserAccountController@orderItems');
     Route::get('myorders/{orderno}', 'UserAccountController@showorderdetail');
+    Route::delete('address/{addressid}', 'UserAccountController@removeUserAddress');
+    Route::get('address/{addressid}', 'UserAccountController@getaddressdetail');
+    Route::put('address/update', 'UserAccountController@updateAddress');
 
     //confirmcheckout
 //category

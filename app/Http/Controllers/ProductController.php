@@ -17,9 +17,15 @@ class ProductController extends Controller {
         return view('product_detail')->with('productinfo', $productinfo);
     }
 
+    public function showpromotions() {
+        $promotions  = $this->retreivePromotions();
+        return view('promotions')->with('promotions',$promotions);
+    }
+
     public function showpromotionitems($promotioncode) {
 
         $promodata = $this->retreivePromotionDeatil($promotioncode);
+
         return view('promotiondetail')->with('promodata', $promodata);
     }
 
@@ -33,11 +39,11 @@ class ProductController extends Controller {
         }
         $type = $info['type'];
         $id = $info['identifier'];
-       // echo $type;
+        // echo $type;
         if ($type == "Category") {
             return redirect('category/' . $id);
         }
-        
+
         if ($type == "Promotion") {
             return redirect('promotion/' . $id);
         }
@@ -84,7 +90,7 @@ class ProductController extends Controller {
 
         $url = config('constants.TEST_URL');
 
-        $baseurl = $url . 'promotions/' . $promotioncode;
+        $baseurl = $url . '/promotions/' . $promotioncode;
 
         $client = new Client([
             'headers' => [
@@ -209,6 +215,37 @@ class ProductController extends Controller {
 
                 return $bodyObj['data'];
             }
+        } catch (RequestException $e) {
+            return 'Http Exception : ' . $e->getMessage();
+        } catch (Exception $e) {
+            return 'Internal Server Error:' . $e->getMessage();
+        }
+    }
+
+    public function retreivePromotions() {
+
+        /* function to retreive all products 
+         */
+
+        $url = config('constants.TEST_URL');
+
+        $baseurl = $url . '/promotions';
+
+        $client = new Client([
+            'headers' => [
+                'Accept' => 'application/json',
+            ],
+            'http_errors' => false
+        ]);
+        try {
+
+            $response = $client->request('GET', $baseurl);
+
+            $body = $response->getBody();
+            $bodyObj = json_decode($body,true);
+
+
+            return $bodyObj['data'];
         } catch (RequestException $e) {
             return 'Http Exception : ' . $e->getMessage();
         } catch (Exception $e) {

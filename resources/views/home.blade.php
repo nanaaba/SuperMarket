@@ -73,7 +73,7 @@
                             $banners = $setupObj['banners'];
 
                             foreach ($banners as $value) {
-                                echo '   <div class="item"> <a href="#"><img class="img-responsive" src="http://tfs.knust.edu.gh/ecommerce/images/' . $value['bannerUrl'] . '" alt="banner 1" /></a></div>
+                                echo '   <div class="item"> <a href="banner/'.$value['bannerID'].'"><img class="img-responsive" src="http://tfs.knust.edu.gh/ecommerce/images/' . $value['bannerUrl'] . '" alt="banner 1" /></a></div>
                         ';
                             }
                             ?>

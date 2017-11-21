@@ -83,14 +83,16 @@
 
                                 foreach ($shoppingbags as $value) {
                                     echo '<div class="form-group">
+                                        <label>
                                 <input name="shoppingbag" type="radio" required value="' . $value['bagID'] . '" >
-                                <label for="radio-4">' . $value['name'] . '</label>
+                                ' . $value['name'] . '</label>
                             </div>';
                                 }
                                 ?>
                                 <div class="form-group">
+                                        <label>
                                     <input name="shoppingbag" required type="radio" value="new" id="newbag">
-                                    <label for="radio-4">New Shopping Bag</label>
+                                New Shopping Bag</label>
                                 </div>
 
                                 <?php
@@ -99,9 +101,9 @@
                             <input type="hidden" id="shoppingbagsize" value="<?php echo $shoppingbagsize ?>" class="form-control">
 
                             <div class="md-form" style="display: none" id="newbagdiv">
-                                <label for="form7">New Shopping Bag</label>
-                                <input type="text" name="newbag" id="newbaginput" class="form-control">
-
+                                <label >New Shopping Bag</label>
+                                    <input type="text" name="newbag" id="newbaginput" class="form-control">
+                                
 
                             </div>
 
@@ -132,7 +134,7 @@
                         <h4 class="modal-title">New Address</h4>
                     </div>
                     <form id="addressbookForm">
-                         <input type="hidden" name="_token" value="{{csrf_token() }} "/>
+                        <input type="hidden" name="_token" value="{{csrf_token() }} "/>
 
                         <div class="modal-body">
 
@@ -141,7 +143,7 @@
 
                             <div class="form-group required">
                                 <label for="input-firstname" class="control-label"> Name</label>
-                                            <span>NB.Name can be ur work place or house</span>
+                                <span>NB.Name can be ur work place or house</span>
                                 <input type="text" class="form-control" name="addressName"required >
                             </div>
 
@@ -167,17 +169,17 @@
                             </div>
 
 
-                           
-                                <div class="form-group ">
-                                    <label for="input-telephone" class="control-label">X Coordinates</label>
-                                    <input type="text" class="form-control" name="xcor">
-                                </div>
-                          
-                                <div class="form-group ">
-                                    <label for="input-telephone" class="control-label">Y Coordinates</label>
-                                    <input type="text" class="form-control" name="ycor">
-                                </div>
-                        
+
+                            <div class="form-group ">
+                                <label for="input-telephone" class="control-label">X Coordinates</label>
+                                <input type="text" class="form-control" name="xcor">
+                            </div>
+
+                            <div class="form-group ">
+                                <label for="input-telephone" class="control-label">Y Coordinates</label>
+                                <input type="text" class="form-control" name="ycor">
+                            </div>
+
 
                         </div>
 
@@ -190,17 +192,19 @@
             </div>
         </div>
 
-  <div id="editaddressModal" class="modal fade" role="dialog">
+        <!--        shoppingbagModal-->
+
+        <div id="shoppingbagModal" class="modal fade" role="dialog">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <!--Header-->
 
                     <div class="modal-header modal-header-primary">
                         <button type="button" class="close" data-dismiss="modal" style="color: white">&times;</button>
-                        <h4 class="modal-title">New Address</h4>
+                        <h4 class="modal-title">New Shopping Bag</h4>
                     </div>
-                    <form id="addressbookForm">
-                         <input type="hidden" name="_token" value="{{csrf_token() }} "/>
+                    <form id="shoppingBagForm">
+                        <input type="hidden" name="_token" value="{{csrf_token() }} "/>
 
                         <div class="modal-body">
 
@@ -209,43 +213,10 @@
 
                             <div class="form-group required">
                                 <label for="input-firstname" class="control-label"> Name</label>
-                                            <span>NB.Name can be ur work place or house</span>
-                                <input type="text" class="form-control" name="addressName"required >
+
+                                <input type="text" class="form-control" name="name" required >
                             </div>
 
-
-                            <div class="form-group required">
-                                <label for="input-telephone" class="control-label">Location</label>
-                                <input type="text" class="form-control"  name="location"required >
-                            </div>
-
-
-                            <div class="form-group required">
-                                <label for="input-telephone" class="control-label">Description</label>
-                                <input type="text" class="form-control" name="description" required>
-                            </div>
-
-
-
-
-
-                            <div class="form-group ">
-                                <label for="input-email" class="control-label">Digital Code</label>
-                                <input type="text" class="form-control"  name="digitalCode">
-                            </div>
-
-
-                           
-                                <div class="form-group ">
-                                    <label for="input-telephone" class="control-label">X Coordinates</label>
-                                    <input type="text" class="form-control" name="xcor">
-                                </div>
-                          
-                                <div class="form-group ">
-                                    <label for="input-telephone" class="control-label">Y Coordinates</label>
-                                    <input type="text" class="form-control" name="ycor">
-                                </div>
-                        
 
                         </div>
 
@@ -258,6 +229,148 @@
             </div>
         </div>
 
+        <div id="editaddressModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <!--Header-->
+
+                    <div class="modal-header modal-header-primary">
+                        <button type="button" class="close" data-dismiss="modal" style="color: white">&times;</button>
+                        <h4 class="modal-title">Edit Address</h4>
+                    </div>
+                    <form id="updateaddressbookForm">
+                        <input type="hidden" name="_token" value="{{csrf_token() }} "/>
+    <input type="hidden" name="addressid" id="addressid"/>
+                        <div class="modal-body">
+
+
+
+
+                            <div class="form-group required">
+                                <label for="input-firstname" class="control-label"> Name</label>
+                                <span>NB.Name can be ur work place or house</span>
+                                <input type="text" class="form-control" id="editaddressName" name="addressName"required >
+                            </div>
+
+
+                            <div class="form-group required">
+                                <label for="input-telephone" class="control-label">Location</label>
+                                <input type="text" class="form-control" id="editlocation" name="location"required >
+                            </div>
+
+
+                            <div class="form-group required">
+                                <label for="input-telephone" class="control-label">Description</label>
+                                <input type="text" class="form-control" id="editdescription" name="description" required>
+                            </div>
+
+
+
+
+
+                            <div class="form-group ">
+                                <label for="input-email" class="control-label">Digital Code</label>
+                                <input type="text" class="form-control" id="editdigitalCode"  name="digitalCode">
+                            </div>
+
+
+
+                            <div class="form-group ">
+                                <label for="input-telephone" class="control-label">X Coordinates</label>
+                                <input type="text" class="form-control" id="editxcor" name="xcor">
+                            </div>
+
+                            <div class="form-group ">
+                                <label for="input-telephone" class="control-label">Y Coordinates</label>
+                                <input type="text" class="form-control" id="editycor" name="ycor">
+                            </div>
+
+
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary" >SUBMIT</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">CANCEL</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div id="wishbagconfirm" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <!--Header-->
+
+                    <div class="modal-header ">
+                        <button type="button" class="close" data-dismiss="modal" style="color: white">&times;</button>
+                        <h4 class="modal-title">Delete Shopping Bag</h4>
+                    </div>
+                    <form id="deleteShoppingBagForm">
+                        <input type="hidden" name="_token" value="{{csrf_token() }} "/>
+                        <input type="hidden" id="baggid" />
+
+                        <div class="modal-body">
+
+
+
+
+                            <div class="modal-header-primary">
+                                <div class="form-group"
+                                     <p>Are you sure you want to delete shopping bag?Deleting shopping bag means deleting all items in your shopping bag.</p>
+                                </div>
+                            </div>
+
+
+
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary" >SUBMIT</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">CANCEL</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+        <div id="deleteaddressmodal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <!--Header-->
+
+                    <div class="modal-header ">
+                        <button type="button" class="close" data-dismiss="modal" style="color: white">&times;</button>
+                        <h4 class="modal-title">Delete Address</h4>
+                    </div>
+                    <form id="deleteAddressForm">
+                        <input type="hidden" name="_token" value="{{csrf_token() }} "/>
+                        <input type="hidden" id="address_id" />
+
+                        <div class="modal-body">
+
+
+
+
+                            <div class="modal-header-primary">
+                                <div class="form-group"
+                                     <p>Are you sure you want to delete this address?</p>
+                                </div>
+                            </div>
+
+
+
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary" >SUBMIT</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">CANCEL</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
 
 
 

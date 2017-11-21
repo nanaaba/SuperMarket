@@ -316,6 +316,42 @@ class UserAccountController extends Controller {
         }
     }
 
+    
+    public function newShoppingBag(Request $request) {
+
+
+        $url = config('constants.TEST_URL');
+
+        $baseurl = $url . '/bag/user';
+
+        $client = new Client([
+            'headers' => [
+                'Accept' => 'application/json',
+                'userid' => session('koalauser')
+            ],
+            'http_errors' => false
+        ]);
+
+        try {
+
+
+            $arr = array(
+                "name" => $request['name']
+            );
+            $response = $client->request('POST', $baseurl, ['json' => $arr]);
+
+            $body = $response->getBody();
+
+
+            return $body;
+        } catch (RequestException $e) {
+            return 'Http Exception : ' . $e->getMessage();
+        } catch (Exception $e) {
+            return 'Internal Server Error:' . $e->getMessage();
+        }
+    }
+
+    
     public function additemtoBag($bagid, $itemid) {
 
         $url = config('constants.TEST_URL');
@@ -410,7 +446,6 @@ class UserAccountController extends Controller {
     }
 
     public function removeUserShoppingBags($bagids) {
-
 
         $url = config('constants.TEST_URL');
 
@@ -864,6 +899,120 @@ class UserAccountController extends Controller {
         }
     }
 
+    
+   
+    
+    
+    public function removeUserAddress($addressid) {
+        
+        $url = config('constants.TEST_URL');
+
+        $baseurl = $url . '/customers/address/' . $addressid;
+
+        $client = new Client([
+            'headers' => [
+                'Accept' => 'application/json',
+                'userid' => session('koalauser')
+            ],
+            'http_errors' => false
+        ]);
+        try {
+
+            $response = $client->request('DELETE', $baseurl);
+
+            $body = $response->getBody();
+
+
+            return $body;
+        } catch (RequestException $e) {
+            return 'Http Exception : ' . $e->getMessage();
+        } catch (Exception $e) {
+            return 'Internal Server Error:' . $e->getMessage();
+        }
+    }
+    
+    
+    public function getaddressdetail($addressid) {
+           
+        $url = config('constants.TEST_URL');
+
+        $baseurl = $url . '/customers/address/' . $addressid;
+
+        $client = new Client([
+            'headers' => [
+                'Accept' => 'application/json',
+                'userid' => session('koalauser')
+            ],
+            'http_errors' => false
+        ]);
+        try {
+
+            $response = $client->request('GET', $baseurl);
+
+            $body = $response->getBody();
+
+
+            return $body;
+        } catch (RequestException $e) {
+            return 'Http Exception : ' . $e->getMessage();
+        } catch (Exception $e) {
+            return 'Internal Server Error:' . $e->getMessage();
+        }
+    }
+    
+    public function updateAddress(Request $request) {
+        
+          $data = $request->all();
+
+        $digitalCode = $data['digitalCode'];
+        $name = $data['addressName'];
+        $location = $data['location'];
+        $xcor = $data['xcor'];
+        $ycor = $data['ycor'];
+        $description = $data['description'];
+        $addressid = $data['addressid'];
+
+        $url = config('constants.TEST_URL');
+
+        $baseurl = $url . '/customers/address';
+
+
+        $client = new Client([
+            'headers' => [
+                'Accept' => 'application/json',
+                'userid' => session('koalauser')
+            ],
+            'http_errors' => false
+        ]);
+
+        try {
+
+
+
+            $arr = array(
+                "digitalCode" => $digitalCode,
+                "name" => $name,
+                "location" => $location,
+                "xcor" => $xcor,
+                "ycor" => $ycor,
+                "description" => $description,
+                "addressID"=>$addressid
+            );
+            $response = $client->request('PUT', $baseurl, ['json' => $arr]);
+
+
+            $body = $response->getBody();
+
+            return $body;
+        } catch (RequestException $e) {
+            return 'Http Exception : ' . $e->getMessage();
+        } catch (Exception $e) {
+            return 'Internal Server Error:' . $e->getMessage();
+        }
+    }
+    
+    
+    
     public function logoutUser() {
 
         Session::forget('koalauser');

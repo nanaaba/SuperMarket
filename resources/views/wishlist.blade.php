@@ -19,6 +19,15 @@
                     <?php
                    
                     ?>
+                     <div class="row">
+                    <div class="buttons">
+                        <div class="pull-right">
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#shoppingbagModal" data-whatever="@mdo">New Shopping Bag</button>
+
+
+                        </div>
+                    </div>
+                </div>
                 <div class="table-responsive">
                     <table class="table table-bordered table-hover">
                         <thead>
@@ -26,9 +35,11 @@
 
                                 <td class="text-center">Bag Name</td>
 
+                                <td class="text-center">Items</td>
+
                               
                                 <td class="text-center">Date Created</td>
-                                <td>View Items</td>
+                                <td>Action</td>
                            
                             </tr>
                         </thead>
@@ -38,10 +49,13 @@
                                 echo ' <tr>
 
                                 <td class="text-center">'.$value['name'].'</td>
-
+ <td class="text-center">'.$value['itemCount'].'</td>
                                 <td class="text-center">'.$value['dateCreated'].'</td>
                                 
-                                <td class="text-center"><a class="btn btn-info" title="" data-toggle="tooltip" href="wishlist/items/'.$value['bagID'].'" data-original-title="View"><i class="fa fa-eye"></i></a></td>
+                                <td class="text-center"><a class="btn btn-info" title="" data-toggle="tooltip" href="wishlist/items/'.$value['bagID'].'" data-original-title="View"><i class="fa fa-eye"></i></a>
+                                      <button class="btn btn-danger" onclick="removeWishBag(' . $value['bagID'] . ')" data-toggle="tooltip" type="button"  data-original-title="Remove"><i class="fa fa-times"></i></button></td>
+                           
+</td>
                
 
                             </tr>';

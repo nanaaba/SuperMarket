@@ -129,7 +129,7 @@
             $('#loaderModal').modal('show');
 
 
-
+            $('#addressModal').modal('hide');
 
             $.ajax({
                 url: "{{url('useraddresses')}}",
@@ -248,11 +248,13 @@
         });
 
 
-        function confirmCheckout() {
 
+
+        $("#buttonconfirm").click(function () {
             var addressid = $('#addresses').val();
             var totalamount = $('#addresses').val();
             var paymentmode = $('#paymentmodes').val();
+            $('#loaderModal').modal('show');
 
             if (addressid == "") {
 
@@ -266,14 +268,32 @@
                         console.log(data);
                         $('#loaderModal').modal('hide');
 
-                        swal({
-                            title: "Success",
-                            text: data.message,
-                            type: "success",
-                            confirmButtonClass: "btn-success",
-                            confirmButtonText: "OK",
-                            closeOnConfirm: true
-                        });
+                        var status = data.status;
+                        if (status == 0) {
+                            var paymenturl = data.data.paymentUrl;
+                            console.log(paymenturl);
+                            swal({
+                                title: "Success",
+                                text: data.message,
+                                type: "success",
+                                confirmButtonClass: "btn-success",
+                                confirmButtonText: "Proceed to Payment",
+                                closeOnConfirm: false
+                            }, function () {
+                                window.location = paymenturl;
+
+                            });
+                        } else {
+                            swal({
+                                title: "Error",
+                                text: data.message,
+                                type: "error",
+                                confirmButtonClass: "btn-danger",
+                                confirmButtonText: "OK",
+                                closeOnConfirm: true
+                            });
+                        }
+
 
 //                        function () {
 //                            var currenturl = window.location.href;
@@ -282,8 +302,10 @@
                     }
                 });
             }
+        });
 
-        }
+
+
 
         $('#checkoutregisterForm').on('submit', function (e) {
 
@@ -852,10 +874,275 @@
         }
 
         function editAddress(addressid) {
-           // alert(addressid);
+            // alert(addressid);
+            $.ajax({
+                url: "address/" + addressid,
+                type: "GET",
+                dataType: "json",
+                success: function (data) {
+                    console.log(data);
+                    var dataSet = data.data;
+                    var nama = dataSet.name;
+                    console.log('name' + nama);
+                    $('#editaddressName').val(dataSet.name);
+                    $('#editlocation').val(dataSet.location);
+                    $('#editdescription').val(dataSet.description);
+                    $('#editdigitalCode').val(dataSet.digitalCode);
+                    $('#editxcor').val(dataSet.xcor);
+                    $('#editycor').val(dataSet.ycor);
+                    $('#addressid').val(dataSet.addressID);
+                    //addressid
+                }
+            });
             $('#editaddressModal').modal('show');
         }
         function deleteAddress(addressid) {
-            alert(addressid);
+
+            $('#address_id').val(addressid);
+            $('#deleteaddressmodal').modal('show');
         }
+
+
+//deleteAddressForm
+
+        $('#deleteAddressForm').on('submit', function (e) {
+
+            e.preventDefault();
+            var formdata = $(this).serialize();
+            console.log('data: ' + formdata);
+            $('#deleteaddressmodal').modal('hide');
+            $('#loaderModal').modal('show');
+
+
+            var address_id = $('#address_id').val();
+
+            console.log(address_id);
+
+            $.ajax({
+                url: "address/" + address_id,
+                type: "DELETE",
+                data: formdata,
+                dataType: "json",
+                success: function (data) {
+                    console.log(data);
+                    $('#loaderModal').modal('hide');
+
+                    if (data.status == 1) {
+                        swal({
+                            title: "Error",
+                            text: data.message,
+                            type: "error",
+                            confirmButtonClass: "btn-danger",
+                            confirmButtonText: "Ok",
+                            closeOnConfirm: true
+                        });
+                    }
+
+
+                    if (data.status == 0) {
+                        swal({
+                            title: "Success",
+                            text: data.message,
+                            type: "success",
+                            confirmButtonClass: "btn-success",
+                            confirmButtonText: "OK",
+                            closeOnConfirm: true
+                        });
+                    }
+
+                },
+                error: function (jXHR, textStatus, errorThrown) {
+                    $('#loaderModal').modal('hide');
+
+                    alert(errorThrown);
+                }
+            });
+
+
+
+        });
+
+
+        function removeWishBag(id) {
+            $('#baggid').val(id);
+            $('#wishbagconfirm').modal('show');
+        }
+
+
+        $('#deleteShoppingBagForm').on('submit', function (e) {
+
+            e.preventDefault();
+            var formdata = $(this).serialize();
+            console.log('data: ' + formdata);
+            $('#wishbagconfirm').modal('hide');
+            $('#loaderModal').modal('show');
+
+
+            var bagid = $('#baggid').val();
+
+            console.log(bagid);
+
+            $.ajax({
+                url: "wishlist/bag/" + bagid,
+                type: "DELETE",
+                data: formdata,
+                dataType: "json",
+                success: function (data) {
+                    console.log(data);
+                    $('#loaderModal').modal('hide');
+
+                    if (data.status == 1) {
+                        swal({
+                            title: "Error",
+                            text: data.message,
+                            type: "error",
+                            confirmButtonClass: "btn-danger",
+                            confirmButtonText: "Ok",
+                            closeOnConfirm: true
+                        });
+                    }
+
+
+                    if (data.status == 0) {
+                        swal({
+                            title: "Success",
+                            text: data.message,
+                            type: "success",
+                            confirmButtonClass: "btn-success",
+                            confirmButtonText: "OK",
+                            closeOnConfirm: true
+                        });
+                    }
+
+                },
+                error: function (jXHR, textStatus, errorThrown) {
+                    $('#loaderModal').modal('hide');
+
+                    alert(errorThrown);
+                }
+            });
+
+
+
+        });
+
+
+
+        $('#shoppingBagForm').on('submit', function (e) {
+
+            e.preventDefault();
+            var formdata = $(this).serialize();
+            console.log('data: ' + formdata);
+            $('#wishbagconfirm').modal('hide');
+            $('#loaderModal').modal('show');
+
+
+            $.ajax({
+                url: "{{url('wishlist/newbag')}}",
+                type: "POST",
+                data: formdata,
+                dataType: "json",
+                success: function (data) {
+                    console.log(data);
+                    $('#loaderModal').modal('hide');
+
+                    if (data.status == 1) {
+                        swal({
+                            title: "Error",
+                            text: data.message,
+                            type: "error",
+                            confirmButtonClass: "btn-danger",
+                            confirmButtonText: "Ok",
+                            closeOnConfirm: true
+                        });
+                    }
+
+
+                    if (data.status == 0) {
+                        swal({
+                            title: "Success",
+                            text: data.message,
+                            type: "success",
+                            confirmButtonClass: "btn-success",
+                            confirmButtonText: "OK",
+                            closeOnConfirm: true
+                        });
+                    }
+
+                },
+                error: function (jXHR, textStatus, errorThrown) {
+                    $('#loaderModal').modal('hide');
+
+                    alert(errorThrown);
+                }
+            });
+
+
+
+
+        });
+
+        //updateaddressbookForm
+        $('#updateaddressbookForm').on('submit', function (e) {
+
+            e.preventDefault();
+            var formdata = $(this).serialize();
+            console.log('dat' + formdata);
+            $('#loaderModal').modal('show');
+
+
+
+
+            $.ajax({
+                url: "{{url('address/update')}}",
+                type: "PUT",
+                data: formdata,
+                dataType: "json",
+                success: function (data) {
+                    console.log(data.status);
+                    $('#loaderModal').modal('hide');
+
+                    if (data.status == 1) {
+                        swal({
+                            title: "Error",
+                            text: data.message,
+                            type: "error",
+                            confirmButtonClass: "btn-danger",
+                            confirmButtonText: "Ok",
+                            closeOnConfirm: true
+                        });
+                    }
+
+
+                    if (data.status == 0) {
+                        var url = window.location.href;     // Returns full URL
+
+                        swal({
+                            title: "Success",
+                            text: data.message,
+                            type: "success",
+                            confirmButtonClass: "btn-success",
+                            confirmButtonText: "OK",
+                            closeOnConfirm: false,
+                        },
+                                function () {
+                                    window.location = url;
+                                });
+
+
+                    }
+
+                },
+                error: function (jXHR, textStatus, errorThrown) {
+                    $('#loaderModal').modal('hide');
+
+                    alert(errorThrown);
+                }
+            });
+
+
+
+
+        });
+
 </script>

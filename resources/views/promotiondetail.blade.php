@@ -67,43 +67,53 @@
                 </div>
 
             </aside>
-            <?php
-            if (sizeof($promodata) > 0) {
+            <div id="content" class="col-sm-9">
+                <?php
+                if (sizeof($promodata) > 0) {
 
 
-                $categories = $promodata[0]['categories'];
-                $categoriessize = sizeof($categories);
+                    $categories = $promodata[0]['categories'];
+                    $categoriessize = sizeof($categories);
 
-                $items = $promodata[0]['items'];
-                $itemssize = sizeof($items);
-                ?>
-                <!--Left Part End -->
-                <!--Middle Part Start-->
-                <div id="content" class="col-sm-9">
+                    $items = $promodata[0]['items'];
+                    $itemssize = sizeof($items);
+                    ?>
+                    <!--Left Part End -->
+                    <!--Middle Part Start-->
+
                     <h1> {{$promodata[0]['name']}} </h1>
 
                     <h5 >Promotion runs from <strong> {{$promodata[0]['startDate']}}  to {{$promodata[0]['expiryDate']}} </strong> </h5>
-                 
+
                     <?php
                     if ($promodata[0]['bannerUrl'] != null) {
                         echo '   <div class="item"> <a href="#"><img class="img-responsive" src="http://tfs.knust.edu.gh/ecommerce/images/' . $value['bannerUrl'] . '" alt="banner 1" style="width:100%" height="170" /></a></div>
                         ';
                     }
                     ?>
-                       <br><br>
+                    <br><br>
                     <?php
                     if ($categoriessize > 0) {
-                        echo '<h3 class="subtitle">Categories On Promo</h3>'
-                        . '<div class="row">';
+                        echo '<h3 class="subtitle">Categories On Promo</h3>
+                      
+                        
+                        <div class="owl-carousel product_carousel">';
                         foreach ($categories as $value) {
-                            echo'  
-              <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12"><a href="#"><img src="image/banner/sample-banner-3-400x200.jpg" alt="Sample Banner 3" title="Sample Banner 3"></a></div>
-              ';
+
+                            echo '<div class="product-thumb clearfix">
+                              <div class="image"><a href="../category/' . $value['categoryID'] . '">
+                            <img src="http://tfs.knust.edu.gh/ecommerce/images/' . $value['iconUrl'] . '" height="100" width="100" alt="' . $value['name'] . '" title="' . $value['name'] . '" class="img-responsive" /></a></div>
+                        <div class="caption">
+                            <h4><a href="../category/' . $value['categoryID'] . '">' . $value['name'] . '</a></h4>
+                           </div>
+                        
+                    </div>';
                         }
                         echo '</div>';
                     }
                     ?>
-
+                    <br>
+                    <br>
                     <?php
                     if ($itemssize > 0) {
                         echo '<h3 class="subtitle">Items on Promo</h3>'
@@ -157,7 +167,10 @@
 
                 </div>
                 <!-- Bestsellers Product Start-->
-            <?php }
+                <?php
+            } else {
+                echo '<div class="alert alert-info"><i class="fa fa-check-circle"></i>No items found in this promotion</div>';
+            }
             ?>
         </div>
 

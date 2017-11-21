@@ -16,7 +16,7 @@
             <div id="content" class="col-sm-9">
                 <h1 class="title">Order Information</h1>
                 <?php
-               // print_r($orders);
+                // print_r($orders);
                 $shipping_Address = $orders['shippingAddress'];
                 $items = $orders['items'];
                 ?>
@@ -30,10 +30,12 @@
                     <tbody>
                         <tr>
 
-                            <td style="width: 50%;" class="text-left">       
+                                <td style="width: 50%;" class="text-left">       
                                 <b>Order ID:</b> #{{$orders['orderID']}}<br>
-                                <b>Date Added:</b> {{$orders['orderDate']}}</td>
-                            <td style="width: 50%;" class="text-left">  
+                                <b>Order Status:</b> {{$orders['status']}}<br>
+                                <b>Date Added:</b> {{$orders['orderDate']}}
+                                </td>
+                               <td style="width: 50%;" class="text-left">  
                                 <b>Payment Method:</b> {{$orders['paymentMode']}}<br>
                                 <b>Shipping Method:</b> Flat Shipping Rate              </td>
                         </tr>
@@ -83,7 +85,7 @@
                                             <td class="text-center">
                                             <a href="#"><img class="img-thumbnail" style="height:50px;width:50px;" 
                                             src="http://tfs.knust.edu.gh/ecommerce/images/' . $value['iconUrl'] . '"></a></td>
-                                            <td class="text-center"><a href="#">' . $value['name'] . '</a></td>
+                                            <td class="text-center"><a href="../product/' . $value['itemID'] . '">' . $value['name'] . '</a></td>
                                            
                                                   <td class="text-center">' . $value['quantity'] . '</td>
                                           
@@ -91,7 +93,7 @@
                                                 <td class="text-center"><div class="price"> GHS ' . $value['itemTotal'] . '</div></td>
                                                 <td class="text-right">
                                                 <button class="btn btn-primary" title="" data-toggle="tooltip" type="submit" data-original-title="Add to Cart"><i class="fa fa-shopping-cart"></i></button>   
-                                                <a class="btn btn-danger" title="" data-toggle="tooltip" href="return.html" data-original-title="Return"><i class="fa fa-reply"></i></a> </td>
+                                                </td>
                                    
                                          </tr></form>';
                             }
@@ -104,31 +106,20 @@
                             <tr>
                                 <td colspan="3"></td>
                                 <td class="text-right"><b>Sub-Total</b></td>
-                                <td class="text-right">$101.00</td>
+                                <td class="text-right">GHS {{round($orders['totalAmt'],2)}}</td>
                                 <td></td>
                             </tr>
+
                             <tr>
                                 <td colspan="3"></td>
-                                <td class="text-right"><b>Flat Shipping Rate</b></td>
-                                <td class="text-right">$5.00</td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td colspan="3"></td>
-                                <td class="text-right"><b>Eco Tax (-2.00)</b></td>
-                                <td class="text-right">$6.00</td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td colspan="3"></td>
-                                <td class="text-right"><b>VAT (20%)</b></td>
-                                <td class="text-right">$21.20</td>
+                                <td class="text-right"><b>Charges</b></td>
+                                <td class="text-right">GHS {{round($orders['charges'],2)}}</td>
                                 <td></td>
                             </tr>
                             <tr>
                                 <td colspan="3"></td>
                                 <td class="text-right"><b>Total</b></td>
-                                <td class="text-right">$133.20</td>
+                                <td class="text-right">GHS {{round($orders['totalAmt'],2)}}</td>
                                 <td></td>
                             </tr>
                         </tfoot>
@@ -157,16 +148,16 @@
                         </tr>
                     </tbody>
                 </table>
-                <div class="buttons clearfix">
+<!--                <div class="buttons clearfix">
                     <div class="pull-right"><a class="btn btn-primary" href="#">Continue</a></div>
-                </div>
+                </div>-->
 
 
 
             </div>
             <!--Middle Part End -->
             <!--Right Part Start -->
-          <aside id="column-right" class="col-sm-3 hidden-xs">
+            <aside id="column-right" class="col-sm-3 hidden-xs">
                 <h3 class="subtitle">Account</h3>
                 <div class="list-group">
                     <ul class="list-item">

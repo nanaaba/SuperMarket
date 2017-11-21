@@ -73,8 +73,10 @@
                 <!-- Search Start-->
                 <div class="col-table-cell col-lg-5 col-md-5 col-md-push-0 col-sm-6 col-sm-push-6 col-xs-12">
                     <div id="search" class="input-group">
+                        <form method="get" action="searchquery">
                         <input id="filter_name" type="text" name="search" value="" placeholder="Search" class="form-control input-lg" />
-                        <button type="button" class="button-search"><i class="fa fa-search"></i></button>
+                        <button type="submit" class="button-search"><i class="fa fa-search"></i></button>
+                        </form>
                     </div>
                 </div>
                 <!-- Search End-->
@@ -216,7 +218,7 @@
                     </li>
                     <li class="contact-link"><a href="{{ url('aboutus') }}">About Us</a></li>
                     <li class="contact-link "><a href="{{ url('contact') }}">Contact Us</a></li>
-                    <li class="custom-link-right"><a href="#" target="_blank">Special Offers</a></li>
+                    <li class="custom-link-right"><a href="{{ url('promotions') }}" target="_blank">Promotions</a></li>
                 </ul>
             </div>
         </div>

@@ -176,7 +176,7 @@
                                             <span>I have read and agree to the <a class="agree" href="#"><b>Terms &amp; Conditions</b></a></span> </label>
                                         <div class="buttons">
                                             <div class="pull-right">
-                                                <input type="button" onclick="confirmCheckout()" class="btn btn-primary" id="button-confirm" value="Confirm Order">
+                                                <input type="button"  class="btn btn-primary" id="buttonconfirm" value="Confirm Order"/>
                                             </div>
                                         </div>
                                     </div>
