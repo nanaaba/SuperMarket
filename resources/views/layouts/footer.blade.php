@@ -617,7 +617,7 @@
 
                 console.log(searchIDs);
                 var searchIDs = $.trim(searchIDs);
-                window.location.replace("http://localhost/KoalaSuperMarket/category/" + searchIDs);
+                window.location.replace("http://34.239.122.97/SuperMarket/category/" + searchIDs);
 //       
             }
 
