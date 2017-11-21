@@ -522,7 +522,7 @@
                                    
 <input type="hidden" name="productname" value="' . $value['name'] . '"/>
                                         <input type="hidden" name="quantity" value="1"/>
-                        <div class="image"><a href="product/' . $value['itemID'] . '">
+                        <div class="image"><a href="' . $value['itemID'] . '">
                             <img src="http://tfs.knust.edu.gh/ecommerce/images/' . $value['iconUrl'] . '" alt="' . $value['name'] . '" title="' . $value['name'] . '" class="img-responsive" /></a></div>
                         <div class="caption">
                             <h4><a href="product/' . $value['itemID'] . '">' . $value['name'] . '</a></h4>

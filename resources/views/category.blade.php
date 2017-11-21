@@ -31,7 +31,7 @@ foreach ($details as $value) {
                         $categories = $setupObj['categories'];
 
                         foreach ($categories as $value) {
-                            echo '  <li><a href="category/' . $value['categoryID'] . '">' . $value['name'] . '</a> </li>';
+                            echo '  <li><a href="' . $value['categoryID'] . '">' . $value['name'] . '</a> </li>';
                         }
                         ?>
 

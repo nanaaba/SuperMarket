@@ -16,10 +16,10 @@
                 <div class="column col-lg-2 col-md-2 col-sm-3 col-xs-12">
                     <h5>Information</h5>
                     <ul>
-                        <li><a href="about-us.html">About Us</a></li>
-                        <li><a href="about-us.html">Delivery Information</a></li>
-                        <li><a href="about-us.html">Privacy Policy</a></li>
-                        <li><a href="about-us.html">Terms &amp; Conditions</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Delivery Information</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms &amp; Conditions</a></li>
                     </ul>
                 </div>
                 <div class="column col-lg-2 col-md-2 col-sm-3 col-xs-12">
@@ -54,15 +54,16 @@
         <div class="container">
             <div id="powered" class="clearfix">
                 <div class="powered_text pull-left flip">
-                    <p>Marketshop Ecommerce Template © 2016 | Template By <a href="http://harnishdesign.net" target="_blank">Harnish Design</a></p>
+                    <p>Designed By U&I company,contact us on 0266504723</p>
                 </div>
                 <div class="social pull-right flip"> <a href="#" target="_blank"> <img data-toggle="tooltip" src="image/socialicons/facebook.png" alt="Facebook" title="Facebook"></a> <a href="#" target="_blank"> <img data-toggle="tooltip" src="image/socialicons/twitter.png" alt="Twitter" title="Twitter"> </a> <a href="#" target="_blank"> <img data-toggle="tooltip" src="image/socialicons/google_plus.png" alt="Google+" title="Google+"> </a> <a href="#" target="_blank"> <img data-toggle="tooltip" src="image/socialicons/pinterest.png" alt="Pinterest" title="Pinterest"> </a> <a href="#" target="_blank"> <img data-toggle="tooltip" src="image/socialicons/rss.png" alt="RSS" title="RSS"> </a> </div>
             </div>
             <div class="bottom-row">
-                <div class="custom-text text-center"> <img alt="" src="image/logo-small.png">
-                    <p>This is a CMS block. You can insert any content (HTML, Text, Images) Here. Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                </div>
-                <div class="payments_types"> <a href="#" target="_blank"> <img data-toggle="tooltip" src="image/payment/payment_paypal.png" alt="paypal" title="PayPal"></a> <a href="#" target="_blank"> <img data-toggle="tooltip" src="image/payment/payment_american.png" alt="american-express" title="American Express"></a> <a href="#" target="_blank"> <img data-toggle="tooltip" src="image/payment/payment_2checkout.png" alt="2checkout" title="2checkout"></a> <a href="#" target="_blank"> <img data-toggle="tooltip" src="image/payment/payment_maestro.png" alt="maestro" title="Maestro"></a> <a href="#" target="_blank"> <img data-toggle="tooltip" src="image/payment/payment_discover.png" alt="discover" title="Discover"></a> <a href="#" target="_blank"> <img data-toggle="tooltip" src="image/payment/payment_mastercard.png" alt="mastercard" title="MasterCard"></a> </div>
+                
+                <div class="payments_types"> 
+                    <a href="#" target="_blank"> 
+                        <img data-toggle="tooltip" src="image/payment/payment_paypal.png" alt="paypal" title="PayPal"></a> 
+                    <a href="#" target="_blank"> <img data-toggle="tooltip" src="image/payment/payment_american.png" alt="american-express" title="American Express"></a> <a href="#" target="_blank"> <img data-toggle="tooltip" src="image/payment/payment_2checkout.png" alt="2checkout" title="2checkout"></a> <a href="#" target="_blank"> <img data-toggle="tooltip" src="image/payment/payment_maestro.png" alt="maestro" title="Maestro"></a> <a href="#" target="_blank"> <img data-toggle="tooltip" src="image/payment/payment_discover.png" alt="discover" title="Discover"></a> <a href="#" target="_blank"> <img data-toggle="tooltip" src="image/payment/payment_mastercard.png" alt="mastercard" title="MasterCard"></a> </div>
             </div>
         </div>
     </div>
@@ -604,17 +605,23 @@
             var formData = $(this).serialize();
             console.log(formData);
 
-            var searchIDs = $(" input:checkbox:checked").map(function () {
-                return $(this).val();
-            }).get()
-                    .join(", ");
+            var catidlength = $('input[name="catids[]"]:checked').length;
+            console.log('catid' + catidlength);
+            if (catidlength == 0) {
+                alert('Select at one category');
+            } else {
+                var searchIDs = $(" input:checkbox:checked").map(function () {
+                    return $(this).val();
+                }).get()
+                        .join(", ");
 
-            console.log(searchIDs);
+                console.log(searchIDs);
+                var searchIDs = $.trim(searchIDs);
+                window.location.replace("http://localhost/KoalaSuperMarket/category/" + searchIDs);
+//       
+            }
 
-            var pathname = window.location.pathname; // Returns path only
-            console.log(pathname);
-            //window.location = 'category/'+searchIDs;
-            window.location.replace("http://localhost/KoalaSuperMarket/category/" + searchIDs);
+
         });
 //register user
 
