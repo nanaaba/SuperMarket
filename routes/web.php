@@ -75,6 +75,7 @@ Route::group(['middleware' => 'usersession'], function () {
     Route::delete('cart/delete/{itemkey}', 'CartController@removeProductFromCart');
     Route::delete('cart/clear', 'CartController@clearCart');
     Route::post('cart/checkout', 'CartController@checkoutitems');
+    Route::get('cart/itemexist/{itemid}', 'CartController@itemexist');
 
 
 

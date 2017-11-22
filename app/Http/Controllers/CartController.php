@@ -12,6 +12,16 @@ use Illuminate\Http\RedirectResponse;
 
 class CartController extends Controller {
 
+    public function itemexist($itemid) {
+
+        $cart = new Cart();
+        $result = $cart->has($itemid);
+        if (empty($result)) {
+            return 0;
+        }
+        return 1;
+    }
+
     public function addProductToCart(Request $request) {
 
         /* function to add to add product to cart

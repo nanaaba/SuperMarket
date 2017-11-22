@@ -112,18 +112,18 @@ foreach ($details as $value) {
 
                             </select>
                         </div>
-<!--                        <div class="col-sm-1 text-right">
-                            <label class="control-label" for="input-limit">Show:</label>
-                        </div>
-                        <div class="col-sm-2 text-right">
-                            <select id="input-limit" class="form-control">
-                                <option value="" selected="selected">20</option>
-                                <option value="">25</option>
-                                <option value="">50</option>
-                                <option value="">75</option>
-                                <option value="">100</option>
-                            </select>
-                        </div>-->
+                        <!--                        <div class="col-sm-1 text-right">
+                                                    <label class="control-label" for="input-limit">Show:</label>
+                                                </div>
+                                                <div class="col-sm-2 text-right">
+                                                    <select id="input-limit" class="form-control">
+                                                        <option value="" selected="selected">20</option>
+                                                        <option value="">25</option>
+                                                        <option value="">50</option>
+                                                        <option value="">75</option>
+                                                        <option value="">100</option>
+                                                    </select>
+                                                </div>-->
                     </div>
                 </div>
                 <br />
@@ -132,10 +132,18 @@ foreach ($details as $value) {
                     <?php
                     $itemssize = sizeof($items);
                     if ($itemssize > 0) {
+
+                        $cartitems = session('cartitems');
+
+                        $allitems = $cartitems['items'];
+                        $response = json_decode($allitems, true);
+                        $ids = array_column($response, 'id');
+
                         foreach ($items as $value) {
                             $price = $value['price'];
                             $promoprice = $value['promoPrice'];
                             $diff = $price - $promoprice;
+                            $itemexist = in_array($value['itemID'], $ids);
 
 
                             echo '  <div class="product-layout product-list col-xs-12">
@@ -143,7 +151,7 @@ foreach ($details as $value) {
                             <form class="addproduct">
                               
                                 <input type="hidden" name="_token" value="' . csrf_token() . '"/>
-                                    <input type="hidden" name="instock" id="instock" value="' .$value['inStock'] . '"/>
+                                    <input type="hidden" name="instock" id="instock" value="' . $value['inStock'] . '"/>
                             <input type="hidden" name="productid" value="' . $value['itemID'] . '"/>
                                 <input type="hidden" name="price" value="' . $value['promoPrice'] . '"/>
                                     <input type="hidden" name="url" value="' . $value['iconUrl'] . '"/>
@@ -156,15 +164,20 @@ foreach ($details as $value) {
                             <p class="price"><span class="price-new"> GHS ' . $value['promoPrice'] . '</span>';
                             if ($diff > 0) {
                                 $percentage = ($diff / $price) * 100;
-                                echo '<span class="saving">-' . round($percentage, 2)  . '%</span>';
-                                
+                                echo '<span class="saving">-' . round($percentage, 2) . '%</span>';
                             }
 
-                        echo    ' </p>
+                            echo ' </p>
                         </div>
-                        <div class="button-group">
-                            <button class="btn-primary" type="submit" ><span>Add to Cart</span></button>
-                           
+                        <div class="button-group">';
+                        if($itemexist ==1){
+                            echo' <button class="btn-primary " type="button" onclick="removeItem('.$value['itemID'].',\''. $value['name'].'\')" ><span>Remove From Cart</span></button>';
+                          
+                        }else{
+                            echo' <button class="btn-primary" type="submit" ><span>Add to Cart</span></button>';
+                          
+                        }
+                        echo'
                             </div>
                              </form>
                             <div class="button-group">

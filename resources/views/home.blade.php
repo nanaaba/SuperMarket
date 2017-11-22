@@ -73,7 +73,7 @@
                             $banners = $setupObj['banners'];
 
                             foreach ($banners as $value) {
-                                echo '   <div class="item"> <a href="banner/'.$value['bannerID'].'"><img class="img-responsive" src="http://tfs.knust.edu.gh/ecommerce/images/' . $value['bannerUrl'] . '" alt="banner 1" /></a></div>
+                                echo '   <div class="item"> <a href="banner/' . $value['bannerID'] . '"><img class="img-responsive" src="http://tfs.knust.edu.gh/ecommerce/images/' . $value['bannerUrl'] . '" alt="banner 1" /></a></div>
                         ';
                             }
                             ?>
@@ -88,11 +88,19 @@
                 <div class="owl-carousel product_carousel">
                     <?php
                     $featureditems = $setupObj['featured'];
+                    $items = session('cartitems');
+
+                    $allitems = $items['items'];
+                    $response = json_decode($allitems, true);
+                    $ids = array_column($response, 'id');
+                    
+
 
                     foreach ($featureditems as $value) {
-                         $price = $value['price'];
+                        $price = $value['price'];
                         $promoprice = $value['promoPrice'];
                         $diff = $price - $promoprice;
+                        $itemexist = in_array($value['itemID'], $ids);
 
 
                         echo '<div class="product-thumb clearfix">
@@ -103,25 +111,31 @@
                                 <input type="hidden" name="price" value="' . $value['promoPrice'] . '"/>
                                     <input type="hidden" name="url" value="' . $value['iconUrl'] . '"/>
                                     <input type="hidden" name="instock" id="instock" value="' . $value['inStock'] . '"/>
-                                   
-<input type="hidden" name="productname" value="' . $value['name'] . '"/>
+                                   <input type="hidden" name="itemexist" id="itemexist" value="' . $itemexist . '"/>
+                            
+                                 <input type="hidden" name="productname" value="' . $value['name'] . '"/>
                                         <input type="hidden" name="quantity" value="1"/>
                         <div class="image"><a href="product/' . $value['itemID'] . '">
                             <img src="http://tfs.knust.edu.gh/ecommerce/images/' . $value['iconUrl'] . '" alt="' . $value['name'] . '" title="' . $value['name'] . '" class="img-responsive" /></a></div>
                         <div class="caption">
                             <h4><a href="product/' . $value['itemID'] . '">' . $value['name'] . '</a></h4>
                             <p class="price"><span class="price-new"> GHS ' . $value['price'] . '</span>';
-                         if ($diff > 0) {
-                                $percentage = ($diff / $price) * 100;
-                                echo '<span class="saving">-' . round($percentage, 2)  . '%</span>';
-                                
-                            }
+                        if ($diff > 0) {
+                            $percentage = ($diff / $price) * 100;
+                            echo '<span class="saving">-' . round($percentage, 2) . '%</span>';
+                        }
                         echo'    </p>
                         </div>
-                        <div class="button-group">
-                            <button class="btn-primary" type="submit" ><span>Add to Cart</span></button>
-                           
-                            </div>
+                        <div class="button-group">';
+                        if($itemexist ==1){
+                            echo' <button class="btn-primary " type="button" onclick="removeItem('.$value['itemID'].',\''. $value['name'].'\')" ><span>Remove From Cart</span></button>';
+                          
+                        }else{
+                            echo' <button class="btn-primary" type="submit" ><span>Add to Cart</span></button>';
+                          
+                        }
+                            
+                         echo'   </div>
                              </form>
                             <div class="button-group">
                               <div class="add-to-links">

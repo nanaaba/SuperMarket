@@ -61,7 +61,7 @@
                                                              <input type="hidden" name="price" value="' . $value['price'] . '" />
                                                         <span class="input-group-btn">
                                                         <button type="submit" data-toggle="tooltip" name="update" title="Update" class="btn btn-primary"><i class="fa fa-refresh"></i></button>
-                                                        <button type="button" onclick="removeItem('.$value['id'].')" data-toggle="tooltip" name="remove_code" title="Remove" class="btn btn-danger"><i class="fa fa-times-circle"></i></button>
+                                                        <button type="button" onclick="removeItem('.$value['id'].',\''. $value['name'].'\')" data-toggle="tooltip" name="remove_code" title="Remove" class="btn btn-danger"><i class="fa fa-times-circle"></i></button>
                                                          </span></div>
                                                          </td>
                                             <td class="text-right">GHS &nbsp;' . $value['price'] . '</td>

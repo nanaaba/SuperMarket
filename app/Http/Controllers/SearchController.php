@@ -9,22 +9,21 @@ use App\Http\Controllers\CartController;
 
 class SearchController extends Controller {
 
-   
     public function searchQuery(Request $request) {
 
         /* function to retreive all categories 
          */
-            $key = $request->query('search');
+        $key = $request->query('search');
+        
 
         $url = config('constants.TEST_URL');
 
-        $baseurl = $url . '/items/search?searchterm='.$key;
+        $baseurl = $url . '/items/search?searchterm='. $key;
 
         $client = new Client([
             'headers' => [
                 'Accept' => 'application/json'
-            ],
-            'http_errors' => false
+            ]
         ]);
         try {
 

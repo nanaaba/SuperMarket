@@ -120,6 +120,15 @@
                                     } else {
                                         echo '  <span itemprop="price">GHS ' . $productinfo['promoPrice'] . '</span>';
                                     }
+
+
+
+                                    $cartitems = session('cartitems');
+
+                                    $allitems = $cartitems['items'];
+                                    $response = json_decode($allitems, true);
+                                    $ids = array_column($response, 'id');
+                                    $itemexist = in_array($productinfo['itemID'], $ids);
                                     ?>
 
 <!--                                    <span itemprop="availability" content="In Stock"></span>
@@ -147,24 +156,33 @@
                                                 <a class="qtyBtn mines" href="javascript:void(0);">-</a>
                                                 <div class="clear"></div>
                                             </div>
-                                            <button type="submit" id="button-cart" class="btn btn-primary btn-lg">Add to Cart</button>
+                                            <?php
+                                            if ($itemexist == 1) {
+                                                echo' <button class="btn btn-primary btn-lg " type="button" onclick="removeItem(' . $productinfo['itemID'] . ',\'' . $productinfo['name'] . '\')" ><span>Remove From Cart</span></button>';
+                                            } else {
+                                                ?>
+                                                <button type = "submit" id = "button-cart" class = "btn btn-primary btn-lg">Add to Cart</button>
+
+                                                <?php
+                                            }
+                                            ?>
                                         </div>
                                     </form>
                                     <div>
-                                        <form class="addwishlist">
-                                            <input type="hidden" name="productid" value="{{$productinfo['itemID']}}"/>
-                                            <input type="hidden" name="productname" value="{{$productinfo['name']}}"/>
-                                            <input type="hidden" name="userid" value="{{ session('koalauser')}}"/>
+                                        <form class = "addwishlist">
+                                            <input type = "hidden" name = "productid" value = "{{$productinfo['itemID']}}"/>
+                                            <input type = "hidden" name = "productname" value = "{{$productinfo['name']}}"/>
+                                            <input type = "hidden" name = "userid" value = "{{ session('koalauser')}}"/>
 
-                                            <button type="submit" class="wishlist" onClick=""><i class="fa fa-heart"></i> Add to Wish List</button>
-                                        </form> 
+                                            <button type = "submit" class = "wishlist" onClick = ""><i class = "fa fa-heart"></i> Add to Wish List</button>
+                                        </form>
                                         <br />
                                     </div>
 
                                 </div>
                             </div>
-                            <div class="rating" itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
-                                <meta itemprop="ratingValue" content="0" />
+                            <div class = "rating" itemprop = "aggregateRating" itemscope itemtype = "http://schema.org/AggregateRating">
+                                <meta itemprop = "ratingValue" content = "0" />
                                 <p>
                                     <?php
                                     if ($productinfo['reviews']['averageRating'] == 5) {
@@ -509,6 +527,7 @@
                             $price = $value['price'];
                             $promoprice = $value['promoPrice'];
                             $diff = $price - $promoprice;
+  $itemexist = in_array($value['itemID'], $ids);
 
 
                             echo '<div class="product-thumb clearfix">
@@ -533,10 +552,16 @@
                             }
                             echo'    </p>
                         </div>
-                        <div class="button-group">
-                            <button class="btn-primary" type="submit" ><span>Add to Cart</span></button>
-                           
-                            </div>
+                        <div class="button-group">';
+                        if($itemexist ==1){
+                            echo' <button class="btn-primary " type="button" onclick="removeItem('.$value['itemID'].',\''. $value['name'].'\')" ><span>Remove From Cart</span></button>';
+                          
+                        }else{
+                            echo' <button class="btn-primary" type="submit" ><span>Add to Cart</span></button>';
+                          
+                        }
+                            
+                         echo'  </div>
                              </form>
                             <div class="button-group">
                               <div class="add-to-links">

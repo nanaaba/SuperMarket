@@ -73,7 +73,7 @@
                 <!-- Search Start-->
                 <div class="col-table-cell col-lg-5 col-md-5 col-md-push-0 col-sm-6 col-sm-push-6 col-xs-12">
                     <div id="search" class="input-group">
-                        <form method="get" action="searchquery">
+                        <form method="get" action="{{url('searchquery')}}">
                         <input id="filter_name" type="text" name="search" value="" placeholder="Search" class="form-control input-lg" />
                         <button type="submit" class="button-search"><i class="fa fa-search"></i></button>
                         </form>

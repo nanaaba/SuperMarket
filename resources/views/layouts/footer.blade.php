@@ -58,17 +58,17 @@
                 </div>
                 <div class="social pull-right flip"> <a href="#" target="_blank"> <img data-toggle="tooltip" src="image/socialicons/facebook.png" alt="Facebook" title="Facebook"></a> <a href="#" target="_blank"> <img data-toggle="tooltip" src="image/socialicons/twitter.png" alt="Twitter" title="Twitter"> </a> <a href="#" target="_blank"> <img data-toggle="tooltip" src="image/socialicons/google_plus.png" alt="Google+" title="Google+"> </a> <a href="#" target="_blank"> <img data-toggle="tooltip" src="image/socialicons/pinterest.png" alt="Pinterest" title="Pinterest"> </a> <a href="#" target="_blank"> <img data-toggle="tooltip" src="image/socialicons/rss.png" alt="RSS" title="RSS"> </a> </div>
             </div>
-<!--            <div class="bottom-row">
-                
-                <div class="payments_types"> 
-                    <a href="#" target="_blank"> 
-                        <img data-toggle="tooltip" src="{{ asset('image/payment/payment_paypal.png')}}" alt="paypal" title="PayPal"></a> 
-                    <a href="#" target="_blank"> 
-                        <img data-toggle="tooltip" src="image/payment/payment_american.png" alt="american-express" title="American Express"></a> 
-                    <a href="#" target="_blank"> 
-                        <img data-toggle="tooltip" src="image/payment/payment_2checkout.png" alt="2checkout" title="2checkout"></a> 
-                    <a href="#" target="_blank"> <img data-toggle="tooltip" src="image/payment/payment_maestro.png" alt="maestro" title="Maestro"></a> <a href="#" target="_blank"> <img data-toggle="tooltip" src="image/payment/payment_discover.png" alt="discover" title="Discover"></a> <a href="#" target="_blank"> <img data-toggle="tooltip" src="image/payment/payment_mastercard.png" alt="mastercard" title="MasterCard"></a> </div>
-            </div>-->
+            <!--            <div class="bottom-row">
+                            
+                            <div class="payments_types"> 
+                                <a href="#" target="_blank"> 
+                                    <img data-toggle="tooltip" src="{{ asset('image/payment/payment_paypal.png')}}" alt="paypal" title="PayPal"></a> 
+                                <a href="#" target="_blank"> 
+                                    <img data-toggle="tooltip" src="image/payment/payment_american.png" alt="american-express" title="American Express"></a> 
+                                <a href="#" target="_blank"> 
+                                    <img data-toggle="tooltip" src="image/payment/payment_2checkout.png" alt="2checkout" title="2checkout"></a> 
+                                <a href="#" target="_blank"> <img data-toggle="tooltip" src="image/payment/payment_maestro.png" alt="maestro" title="Maestro"></a> <a href="#" target="_blank"> <img data-toggle="tooltip" src="image/payment/payment_discover.png" alt="discover" title="Discover"></a> <a href="#" target="_blank"> <img data-toggle="tooltip" src="image/payment/payment_mastercard.png" alt="mastercard" title="MasterCard"></a> </div>
+                        </div>-->
         </div>
     </div>
     <div id="back-top"><a data-toggle="tooltip" title="Back to Top" href="javascript:void(0)" class="backtotop"><i class="fa fa-chevron-up"></i></a></div>
@@ -371,36 +371,57 @@
 
         }
 
-        function removeItem(productcode) {
-            $('#loaderModal').modal('show');
+        function removeItem(productcode,productname) {
+              var hostname = window.location.origin;
+                // console.log('bb'+hostname);
+              var redirecturl =hostname+"/KoalaSuperMarket/cart/delete/" + productcode;
+              
+            swal({
+                html:true,
+                title: "Are you sure?",
+                text: "You want to remove <b>" + productname + "</b> from your cart",
+                type: "info",
+                showCancelButton: true,
+                closeOnConfirm: false,
+                showLoaderOnConfirm: true
+            }, function () {
+                    $('#loaderModal').modal('show');
+                setTimeout(function () {
+                 
+                    $.ajax({
+                        url: redirecturl,
+                        type: "DELETE",
+                        data: {_token: "{{ csrf_token() }}"},
+                        dataType: 'json',
+                        success: function (data) {
+                            console.log(data);
+                            $('#loaderModal').modal('hide');
 
-            $.ajax({
-                url: "cart/delete/" + productcode,
-                type: "DELETE",
-                data: {_token: "{{ csrf_token() }}"},
-                dataType: 'json',
-                success: function (data) {
-                    console.log(data);
-                    $('#loaderModal').modal('hide');
-
-                    swal({
-                        title: "Success",
-                        text: data.message,
-                        type: "success",
-                        confirmButtonClass: "btn-success",
-                        confirmButtonText: "OK",
-                        closeOnConfirm: false
-                    },
-                    function () {
-                        var currenturl = window.location.href;
-                        window.location = currenturl;
+                            swal({
+                                title: "Success",
+                                text: data.message,
+                                type: "success",
+                                confirmButtonClass: "btn-success",
+                                confirmButtonText: "OK",
+                                closeOnConfirm: false
+                            },
+                            function () {
+                                var currenturl = window.location.href;
+                                window.location = currenturl;
+                            });
+                        }
                     });
-                }
+                }, 2000);
             });
+
+
         }
 //addproduct
 
         $('.addproduct').on('submit', function (e) {
+
+
+
 
             e.preventDefault();
             var formData = $(this).serialize();
@@ -621,7 +642,7 @@
 
                 console.log(searchIDs);
                 var searchIDs = $.trim(searchIDs);
-                window.location.replace("http://34.239.122.97/SuperMarket/category/" + searchIDs);
+                window.location.replace("http://34.239.122.97/KoalaSuperMarket/category/" + searchIDs);
 //       
             }
 
@@ -821,7 +842,7 @@
                             closeOnConfirm: false,
                         },
                                 function () {
-                                 window.history.back();
+                                    window.history.back();
                                 });
 
 
