@@ -381,7 +381,7 @@
                 <div  id="loader" style="margin-top:30% ;text-align: center">
 <!--                    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>-->
 
-                    <img src="{{('image/load.gif')}}" />
+                    <img src="{{asset('image/load.gif')}}" />
 
                     <span class="loader-text" style="font-size: 20px;color: white;">Wait...</span>
                 </div>

@@ -9,9 +9,9 @@
                 <div class="pull-left flip left-top">
                     <div class="links">
                         <ul>
-                            <li class="mobile"><i class="fa fa-phone"></i>+233 20399292982</li>
-                            <li class="email"><a href="mailto:info@marketshop.com"><i class="fa fa-envelope"></i>info@marketshop.com</a></li>
-
+                            <li class="mobile"><i class="fa fa-phone"></i> 0261512300 </li>
+                            <li class="email"><a href="mailto:info@koala.com.gh"><i class="fa fa-envelope"></i>info@koala.com.gh</a></li>
+                            <li class="open">&nbsp;<i class="fa fa-clock-o"></i> Open Now 7:30AM - 9:00PM &nbsp;</li>
 
                         </ul>
                     </div>
@@ -74,8 +74,8 @@
                 <div class="col-table-cell col-lg-5 col-md-5 col-md-push-0 col-sm-6 col-sm-push-6 col-xs-12">
                     <div id="search" class="input-group">
                         <form method="get" action="{{url('searchquery')}}">
-                        <input id="filter_name" type="text" name="search" value="" placeholder="Search" class="form-control input-lg" />
-                        <button type="submit" class="button-search"><i class="fa fa-search"></i></button>
+                            <input id="filter_name" type="text" name="search" value="" placeholder="Search" class="form-control input-lg" />
+                            <button type="submit" class="button-search"><i class="fa fa-search"></i></button>
                         </form>
                     </div>
                 </div>
@@ -149,8 +149,8 @@
                                 ?>
                                 <p class="checkout"><a href="{{url('cart')}}" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> View Cart</a>
                                     &nbsp;&nbsp;&nbsp;<a href= "{{url('checkout')}}"  class="btn btn-primary"><i class="fa fa-share"></i> Checkout</a></p>
-<!--                                onclick="checkOut({{session('koalauser')}})"-->
-                                        <?php
+                                <!--                                onclick="checkOut({{session('koalauser')}})"-->
+                                <?php
                                 '</div>
                             </li>';
                                 echo '</form>';
@@ -224,9 +224,6 @@
         </div>
     </nav>
     <?php
-
-   
-
     ?>
     <!-- Main Menu End-->
 </div>

@@ -7,36 +7,43 @@
             <div class="row">
                 <div class="contact col-lg-3 col-md-3 col-sm-12 col-xs-12">
                     <h5>Contact Details</h5>
-                    <ul>
-                        <li class="address"><i class="fa fa-map-marker"></i>Frafraha,Adenta</li>
-                        <li class="mobile"><i class="fa fa-phone"></i>+233 266504723</li>
-                        <li class="email"><i class="fa fa-envelope"></i>Send email via our <a href="{{url('contact')}}">Contact Us</a>
-                    </ul>
+                    <ul> 
+                        <li class="address"><i class="fa fa-map-marker"></i>
+                            Patrice Lumumba Rd, <br>
+                            Airport Residential Area<br>
+                            Accra, Ghana</li>
+                        <li class="mobile"><i class="fa fa-phone"></i>+0261512300</li>
+                        <li class="email"><i class="fa fa-envelope"></i>Send email via our <a href="contact-us">Contact Us</a>
+                        </li></ul>
                 </div>
                 <div class="column col-lg-2 col-md-2 col-sm-3 col-xs-12">
                     <h5>Information</h5>
                     <ul>
-                        <li><a href="{{url('aboutus')}}">About Us</a></li>
+                        <li><a href="about-us">About Us</a></li>
                         <li><a href="#">Delivery Information</a></li>
                         <li><a href="#">Privacy Policy</a></li>
-                        <li><a href="#">Terms &amp; Conditions</a></li>
+
                     </ul>
                 </div>
                 <div class="column col-lg-2 col-md-2 col-sm-3 col-xs-12">
-                    <h5>Customer Service</h5>
+                    <h5>Account Information</h5>
                     <ul>
-                        <li><a href="{{url('contact')}}">Contact Us</a></li>
-                        <li><a href="#">Returns</a></li>
-                        <li><a href="#">Site Map</a></li>
+                        <li><a href="{{url('register')}}">Register</a></li>
+                        <li><a href="{{url('login')}}">Login</a></li>
+
                     </ul>
                 </div>
                 <div class="column col-lg-2 col-md-2 col-sm-3 col-xs-12">
-                    <h5>Extras</h5>
+                    <h5>Social media</h5>
                     <ul>
-                        <li><a href="#">Brands</a></li>
-                        <li><a href="#">Gift Vouchers</a></li>
-                        <li><a href="#">Affiliates</a></li>
-                        <li><a href="{{url('promotions')}}">Promotions</a></li>
+                        <li><a href="https://www.facebook.com/KoalaGhana/?ref=bookmarks" target="_blank">
+
+                                <img src="{{ asset('image/socialicons/facebook.png')}}"></a></li>
+                        <li><a href="https://twitter.com/KoalaGhana" target="_blank"><img src="{{ asset('image/socialicons/twitter.png')}}"></a></li>
+
+
+
+
                     </ul>
                 </div>
                 <div class="column col-lg-3 col-md-3 col-sm-3 col-xs-12">
@@ -46,6 +53,7 @@
                         <input id="signup" type="email" required="" placeholder="Email address" name="email" class="form-control">
                     </div>
                     <input type="submit" value="Subscribe" class="btn btn-primary">
+
                 </div>
             </div>
         </div>
@@ -255,59 +263,6 @@
 
 
 
-        $("#buttonconfirm").click(function () {
-            var addressid = $('#addresses').val();
-            var totalamount = $('#addresses').val();
-            var paymentmode = $('#paymentmodes').val();
-            $('#loaderModal').modal('show');
-
-            if (addressid == "") {
-
-            } else {
-                $.ajax({
-                    url: "{{url('confirmcheckout')}}",
-                    type: "POST",
-                    data: {_token: "{{ csrf_token() }}", addressid: addressid, totalamount: totalamount, paymentmode: paymentmode},
-                    dataType: 'json',
-                    success: function (data) {
-                        console.log(data);
-                        $('#loaderModal').modal('hide');
-
-                        var status = data.status;
-                        if (status == 0) {
-                            var paymenturl = data.data.paymentUrl;
-                            console.log(paymenturl);
-                            swal({
-                                title: "Success",
-                                text: data.message,
-                                type: "success",
-                                confirmButtonClass: "btn-success",
-                                confirmButtonText: "Proceed to Payment",
-                                closeOnConfirm: false
-                            }, function () {
-                                window.location = paymenturl;
-
-                            });
-                        } else {
-                            swal({
-                                title: "Error",
-                                text: data.message,
-                                type: "error",
-                                confirmButtonClass: "btn-danger",
-                                confirmButtonText: "OK",
-                                closeOnConfirm: true
-                            });
-                        }
-
-
-//                        function () {
-//                            var currenturl = window.location.href;
-//                            window.location = currenturl;
-//                        }
-                    }
-                });
-            }
-        });
 
 
 
@@ -371,13 +326,13 @@
 
         }
 
-        function removeItem(productcode,productname) {
-              var hostname = window.location.origin;
-                // console.log('bb'+hostname);
-              var redirecturl =hostname+"/KoalaSuperMarket/cart/delete/" + productcode;
-              
+        function removeItem(productcode, productname) {
+            var hostname = window.location.origin;
+            // console.log('bb'+hostname);
+            var redirecturl = hostname + "/KoalaSuperMarket/cart/delete/" + productcode;
+
             swal({
-                html:true,
+                html: true,
                 title: "Are you sure?",
                 text: "You want to remove <b>" + productname + "</b> from your cart",
                 type: "info",
@@ -385,9 +340,9 @@
                 closeOnConfirm: false,
                 showLoaderOnConfirm: true
             }, function () {
-                    $('#loaderModal').modal('show');
+                $('#loaderModal').modal('show');
                 setTimeout(function () {
-                 
+
                     $.ajax({
                         url: redirecturl,
                         type: "DELETE",
@@ -831,8 +786,8 @@
 
 
                     if (data.status == 0) {
-                        var url = window.location.href;     // Returns full URL
-
+                        var url = document.referrer;     // Returns full URL
+                        console.log('rrrr' + url);
                         swal({
                             title: "Success",
                             text: "You have logged in successfuly.",
@@ -842,7 +797,8 @@
                             closeOnConfirm: false,
                         },
                                 function () {
-                                    window.history.back();
+                                    //window.history.back();
+                                    window.location = url;
                                 });
 
 
@@ -1176,5 +1132,135 @@
 
 
         });
+
+
+        $("#buttonconfirm").click(function () {
+            var addressid = $('input[name=addresses]:checked').val();
+            var totalamount = $('#totalamount').val();
+            var paymentmode = $('input[name=paymentmodes]:checked').val();
+            var paymenttext = $('input[name=paymentmodes]:checked').parent('label').text();
+            var addressestext = $('input[name=addresses]:checked').parent('label').text();
+
+            //panel-body
+          //  $('#loaderModal').modal('show');
+            console.log('payment text : ' + addressestext);
+            if (addressid == undefined || paymentmode == undefined) {
+                console.log('hhhhhe');
+                swal({
+                    title: "Error",
+                    text: "Please make sure you choose destination location and payment mode",
+                    type: "error",
+                    confirmButtonClass: "btn-danger",
+                    confirmButtonText: "Ok",
+                    closeOnConfirm: true
+                });
+            } else {
+
+                swal({
+                    html: true,
+                    title: "Are you sure?",
+                    text: "You are procedding to pay with "+paymenttext,
+                    type: "info",
+                    showCancelButton: true,
+                    closeOnConfirm: false,
+                    showLoaderOnConfirm: true
+                }, function () {
+                    $('#loaderModal').modal('show');
+                    setTimeout(function () {
+
+                        
+                $.ajax({
+                    url: "{{url('confirmcheckout')}}",
+                    type: "POST",
+                    data: {_token: "{{ csrf_token() }}", addressid: addressid, totalamount: totalamount, paymentmode: paymentmode},
+                    dataType: 'json',
+                    success: function (data) {
+                        console.log(data);
+                        $('#loaderModal').modal('hide');
+
+                        var status = data.status;
+                        if (status == 0) {
+                            var paymenturl = data.data.paymentUrl;
+                            console.log(paymenturl);
+                            swal({
+                                title: "Success",
+                                text: data.message,
+                                type: "success",
+                                confirmButtonClass: "btn-success",
+                                confirmButtonText: "Proceed to Payment",
+                                closeOnConfirm: false
+                            }, function () {
+                                window.location = paymenturl;
+
+                            });
+                        } else {
+                            swal({
+                                title: "Error",
+                                text: data.message,
+                                type: "error",
+                                confirmButtonClass: "btn-danger",
+                                confirmButtonText: "OK",
+                                closeOnConfirm: true
+                            });
+                        }
+
+
+//                        function () {
+//                            var currenturl = window.location.href;
+//                            window.location = currenturl;
+//                        }
+                    }
+                });
+                    }, 2000);
+                });
+
+
+
+
+//                $.ajax({
+//                    url: "{{url('confirmcheckout')}}",
+//                    type: "POST",
+//                    data: {_token: "{{ csrf_token() }}", addressid: addressid, totalamount: totalamount, paymentmode: paymentmode},
+//                    dataType: 'json',
+//                    success: function (data) {
+//                        console.log(data);
+//                        $('#loaderModal').modal('hide');
+//
+//                        var status = data.status;
+//                        if (status == 0) {
+//                            var paymenturl = data.data.paymentUrl;
+//                            console.log(paymenturl);
+//                            swal({
+//                                title: "Success",
+//                                text: data.message,
+//                                type: "success",
+//                                confirmButtonClass: "btn-success",
+//                                confirmButtonText: "Proceed to Payment",
+//                                closeOnConfirm: false
+//                            }, function () {
+//                                window.location = paymenturl;
+//
+//                            });
+//                        } else {
+//                            swal({
+//                                title: "Error",
+//                                text: data.message,
+//                                type: "error",
+//                                confirmButtonClass: "btn-danger",
+//                                confirmButtonText: "OK",
+//                                closeOnConfirm: true
+//                            });
+//                        }
+//
+//
+////                        function () {
+////                            var currenturl = window.location.href;
+////                            window.location = currenturl;
+////                        }
+//                    }
+//                });
+            }
+        });
+
 
 </script>
