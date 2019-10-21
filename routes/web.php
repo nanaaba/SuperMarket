@@ -75,7 +75,7 @@ Route::group(['middleware' => 'usersession'], function () {
     Route::get('cart/cartitems', 'CartController@retreiveCartList');
     Route::post('cart/add', 'CartController@addProductToCart');
     Route::put('cart/update', 'CartController@updateCartList');
-    Route::delete('cart/delete/{itemkey}', 'CartController@removeProductFromCart');
+    Route::delete('cart/remove/{itemkey}', 'CartController@removeProductFromCart');
     Route::delete('cart/clear', 'CartController@clearCart');
     Route::post('cart/checkout', 'CartController@checkoutitems');
     Route::get('cart/itemexist/{itemid}', 'CartController@itemexist');

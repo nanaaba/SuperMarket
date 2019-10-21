@@ -53,7 +53,7 @@
        <tr>
                                             <td class="text-center">
                                             <a href="#"><img class="img-thumbnail" style="height:50px;width:50px;" 
-                                            src="http://tfs.knust.edu.gh/ecommerce/images/' . $value['iconUrl'] . '"></a></td>
+                                            src="http://18.217.149.24/ecommerce/images/' . $value['iconUrl'] . '"></a></td>
                                             <td class="text-center"><a href="#">' . $value['name'] . '</a></td>
                                               <td class="text-center">' . $value['category'] . '</td>
                                     <td class="text-center">' . $stock . '</td>

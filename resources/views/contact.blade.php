@@ -96,7 +96,7 @@
                     $promotions = $setupObj['promotions'];
 
                     foreach ($promotions as $value) {
-                        echo '<div class="item"> <a href="../promotion/' . $value['promotionID'] . '"><img src="http://tfs.knust.edu.gh/ecommerce/images/' . $value['bannerUrl'] . '"" alt="small banner1" class="img-responsive" /></a> </div>';
+                        echo '<div class="item"> <a href="../promotion/' . $value['promotionID'] . '"><img src="http://18.217.149.24/ecommerce/images/' . $value['bannerUrl'] . '"" alt="small banner1" class="img-responsive" /></a> </div>';
                     }
                     ?> </div>
 

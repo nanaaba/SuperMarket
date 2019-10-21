@@ -50,7 +50,7 @@
        <tr>
                                             <td class="text-center">
                                             <a href="product/'.$value['id'].'"><img class="img-thumbnail" style="height:50px;width:50px;" 
-                                            src="http://tfs.knust.edu.gh/ecommerce/images/' . $value['url'] . '"></a></td>
+                                            src="http://18.217.149.24/ecommerce/images/' . $value['url'] . '"></a></td>
                                             <td class="text-left"><a href="product/'.$value['id'].'">' . $value['name'] . '</a></td>
                                               <td class="text-center"><a href="#"></a></td>
                                               <td class="text-left">

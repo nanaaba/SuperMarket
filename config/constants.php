@@ -8,6 +8,7 @@
 
 return [
 	
-	'TEST_URL' => 'tfs.knust.edu.gh/ecommerce'
+	'TEST_URL' => '18.217.149.24/ecommerce/'
+
 	
 ];

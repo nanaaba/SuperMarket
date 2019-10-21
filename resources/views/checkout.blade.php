@@ -133,7 +133,7 @@
                                                     foreach ($itemsData as $value) {
 
                                                         echo '  <tr>
-                                                        <td class="text-center"><a href="#"><img style="height:50px;width:50px;"  src="http://tfs.knust.edu.gh/ecommerce/images/' . $value['iconUrl'] . '" alt="' . $value['name'] . '" title="' . $value['name'] . '" class="img-thumbnail"></a></td>
+                                                        <td class="text-center"><a href="#"><img style="height:50px;width:50px;"  src="http://18.217.149.24/ecommerce/images/' . $value['iconUrl'] . '" alt="' . $value['name'] . '" title="' . $value['name'] . '" class="img-thumbnail"></a></td>
                                                         <td class="text-left"><a href="product/' . $value['itemID'] . '">' . $value['name'] . '</a></td>
                                                         <td class="text-left">' . $value['quantity'] . '</td>
                                                         <td class="text-right">GHS ' . $value['price'] . '</td>

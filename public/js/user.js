@@ -18,7 +18,7 @@ $(document).ready(function () {
                         '<a href="#">' +
                         '<input type="checkbox" value="' + item.id + '" name="catids[]" id="myCheckbox' + item.id + '" />' +
                         '<label for="myCheckbox' + item.id + '">' +
-                        ' <img src="http://tfs.knust.edu.gh/ecommerce/images/' + item.iconUrl + '"  height="40" width="40"  title="' + item.name + '"/>' +
+                        ' <img src="http://18.217.149.24/ecommerce/images/' + item.iconUrl + '"  height="40" width="40"  title="' + item.name + '"/>' +
                         '</label></a>' +
                         '<a href="#">' + item.name + '</a>\n\
                                  </div>'

@@ -26,7 +26,7 @@
                     foreach ($featured as $value) {
                         ?>
                         <div class="product-thumb clearfix">
-                            <div class="image"><a href="<?php echo $value['itemID'] ?>"><img src="http://tfs.knust.edu.gh/ecommerce/images/<?php echo $value['iconUrl'] ?>" alt=" <?php echo $value['name'] ?> " title=" <?php echo $value['name'] ?>" height="50" width="50" class="img-responsive" /></a></div>
+                            <div class="image"><a href="<?php echo $value['itemID'] ?>"><img src="http://18.217.149.24/ecommerce/images/<?php echo $value['iconUrl'] ?>" alt=" <?php echo $value['name'] ?> " title=" <?php echo $value['name'] ?>" height="50" width="50" class="img-responsive" /></a></div>
                             <div class="caption">
                                 <h4><a href="<?php echo $value['itemID'] ?>"><?php echo $value['name'] ?></a></h4>
                                 <p class="price"> <span class="price-new">GHS <?php echo $value['promoPrice'] ?></span> 
@@ -47,7 +47,7 @@
                     $promotions = $setupObj['promotions'];
 
                     foreach ($promotions as $value) {
-                        echo '<div class="item"> <a href="#"><img src="http://tfs.knust.edu.gh/ecommerce/images/' . $value['bannerUrl'] . '"" alt="small banner1" class="img-responsive" /></a> </div>';
+                        echo '<div class="item"> <a href="#"><img src="http://18.217.149.24/ecommerce/images/' . $value['bannerUrl'] . '"" alt="small banner1" class="img-responsive" /></a> </div>';
                     }
                     ?>
 
@@ -62,7 +62,7 @@
                         $price_diff = $value['price'] - $value['promoPrice'];
                         $savings = ($price_diff / $value['price']) * 100;
                         echo '  <div class="product-thumb clearfix">
-                        <div class="image"><a href="' . $value['itemID'] . '">           <img src="http://tfs.knust.edu.gh/ecommerce/images/' . $value['iconUrl'] . '" alt="' . $value['name'] . '" title="' . $value['name'] . '" class="img-responsive" /></a></div>
+                        <div class="image"><a href="' . $value['itemID'] . '">           <img src="http://18.217.149.24/ecommerce/images/' . $value['iconUrl'] . '" alt="' . $value['name'] . '" title="' . $value['name'] . '" class="img-responsive" /></a></div>
                         <div class="caption">
                             <h4><a href="' . $value['itemID'] . '">' . $value['name'] . '</a></h4>
                             <p class="price"> <span class="price-new">GHS ' . $value['promoPrice'] . '</span> <span class="price-old">GHS ' . $value['price'] . '</span> <span class="saving">-' . round($savings, 2) . '%</span> </p>
@@ -88,9 +88,9 @@
                         <div class="col-sm-6">
                             <div class="image">
                                 <img class="img-responsive" itemprop="image" id="zoom_01" 
-                                     src="http://tfs.knust.edu.gh/ecommerce/images/{{$productinfo['iconUrl']}}"
+                                     src="http://18.217.149.24/ecommerce/images/{{$productinfo['iconUrl']}}"
                                      title="{{$productinfo['name']}}" alt="{{$productinfo['name']}}" 
-                                     data-zoom-image="http://tfs.knust.edu.gh/ecommerce/images/{{$productinfo['iconUrl']}}" />
+                                     data-zoom-image="http://18.217.149.24/ecommerce/images/{{$productinfo['iconUrl']}}" />
 
                             </div>
 
@@ -542,7 +542,7 @@
 <input type="hidden" name="productname" value="' . $value['name'] . '"/>
                                         <input type="hidden" name="quantity" value="1"/>
                         <div class="image"><a href="' . $value['itemID'] . '">
-                            <img src="http://tfs.knust.edu.gh/ecommerce/images/' . $value['iconUrl'] . '" alt="' . $value['name'] . '" title="' . $value['name'] . '" class="img-responsive" /></a></div>
+                            <img src="http://18.217.149.24/ecommerce/images/' . $value['iconUrl'] . '" alt="' . $value['name'] . '" title="' . $value['name'] . '" class="img-responsive" /></a></div>
                         <div class="caption">
                             <h4><a href="product/' . $value['itemID'] . '">' . $value['name'] . '</a></h4>
                             <p class="price"><span class="price-new"> GHS ' . $value['price'] . '</span>';

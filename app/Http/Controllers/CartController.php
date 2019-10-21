@@ -150,6 +150,7 @@ class CartController extends Controller {
 
         $this->retreiveCartList();
         return json_encode($dataresults);
+        
     }
 
     public function clearCart() {
@@ -165,7 +166,7 @@ class CartController extends Controller {
 
 
         // $url = Config::get('constants.TEST_URL');
-        $baseurl = 'tfs.knust.edu.gh/ecommerce/cart/user';
+        $baseurl = '18.217.149.24/ecommerce/cart/user';
 
 
 

@@ -123,7 +123,7 @@
                                     echo ' <tr>
                                             <td class="text-center"><a href="#">
                                             <img class="img-thumbnail" style="height:50px;width:50px;"  
-                                            src="http://tfs.knust.edu.gh/ecommerce/images/' . $value['url'] . '" ></a></td>
+                                            src="http://18.217.149.24/ecommerce/images/' . $value['url'] . '" ></a></td>
                                             <td class="text-left"><a href="#">' . $value['name'] . '</a></td>
                                             <td class="text-right"> ' . $value['quantity'] . '</td>
                                           
@@ -190,7 +190,7 @@
                                         '<a href = "#">' .
                                         '<input type = "checkbox" value = "' . $value['categoryID'] . '" name = "catids[]" id = "myCheckbox' . $value['categoryID'] . '" />' .
                                         '<label for = "myCheckbox' . $value['categoryID'] . '">' .
-                                        ' <img src = "http://tfs.knust.edu.gh/ecommerce/images/' . $value['iconUrl'] . '" height = "40" width = "40" title = "' . $value['name'] . '"/>' .
+                                        ' <img src = "http://18.217.149.24/ecommerce/images/' . $value['iconUrl'] . '" height = "40" width = "40" title = "' . $value['name'] . '"/>' .
                                         '</label></a>' .
                                         '<a href = "#">' . $value['name'] . '</a>' .
                                         ' </div>';

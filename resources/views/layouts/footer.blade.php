@@ -329,7 +329,7 @@
         function removeItem(productcode, productname) {
             var hostname = window.location.origin;
             // console.log('bb'+hostname);
-            var redirecturl = hostname + "/KoalaSuperMarket/cart/delete/" + productcode;
+            var redirecturl = hostname + "/SuperMarket/cart/remove/" + productcode;
 
             swal({
                 html: true,
@@ -570,7 +570,7 @@
 //                            '<a href="#">' +
 //                            '<input type="checkbox" value="' + item.id + '" name="catids[]" id="myCheckbox' + item.id + '" />' +
 //                            '<label for="myCheckbox' + item.id + '">' +
-//                            ' <img src="http://tfs.knust.edu.gh/ecommerce/images/' + item.iconUrl + '"  height="40" width="40"  title="' + item.name + '"/>' +
+//                            ' <img src="http://18.217.149.24/ecommerce/images/' + item.iconUrl + '"  height="40" width="40"  title="' + item.name + '"/>' +
 //                            '</label></a>' +
 //                            '<a href="#">' + item.name + '</a>\n\
 //                                 </div>'
@@ -597,8 +597,9 @@
 
                 console.log(searchIDs);
                 var searchIDs = $.trim(searchIDs);
-                window.location.replace("http://34.239.122.97/KoalaSuperMarket/category/" + searchIDs);
-//       
+                window.location.replace("localhost/SuperMarket/category/" + searchIDs);
+//                       window.location.replace("http://34.239.122.97/KoalaSuperMarket/category/" + searchIDs);
+
             }
 
 

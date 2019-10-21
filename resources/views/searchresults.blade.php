@@ -70,7 +70,7 @@
                                     <input type="hidden" name="productname" value="' . $value['name'] . '"/>
                                         <input type="hidden" name="quantity" value="1"/>
                         <div class="image"><a href="../product/' . $value['itemID'] . '">
-                            <img src="http://tfs.knust.edu.gh/ecommerce/images/' . $value['iconUrl'] . '" height="200" width="200" alt="' . $value['name'] . '" title="' . $value['name'] . '" class="img-responsive" /></a></div>
+                            <img src="http://18.217.149.24/ecommerce/images/' . $value['iconUrl'] . '" height="200" width="200" alt="' . $value['name'] . '" title="' . $value['name'] . '" class="img-responsive" /></a></div>
                         <div class="caption">
                             <h4><a href="../product/' . $value['itemID'] . '">' . $value['name'] . '</a></h4>
                             <p class="price"><span class="price-new"> GHS ' . $value['promoPrice'] . '</span>';

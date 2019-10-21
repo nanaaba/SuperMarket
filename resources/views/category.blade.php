@@ -49,7 +49,7 @@ foreach ($details as $value) {
                         $price_diff = $value['price'] - $value['promoPrice'];
                         $savings = ($price_diff / $value['price']) * 100;
                         echo '  <div class="product-thumb clearfix">
-                        <div class="image"><a href="../product/' . $value['itemID'] . '">           <img src="http://tfs.knust.edu.gh/ecommerce/images/' . $value['iconUrl'] . '" alt="' . $value['name'] . '" title="' . $value['name'] . '" class="img-responsive" /></a></div>
+                        <div class="image"><a href="../product/' . $value['itemID'] . '">           <img src="http://18.217.149.24/ecommerce/images/' . $value['iconUrl'] . '" alt="' . $value['name'] . '" title="' . $value['name'] . '" class="img-responsive" /></a></div>
                         <div class="caption">
                             <h4><a href="../product/' . $value['itemID'] . '">' . $value['name'] . '</a></h4>
                             <p class="price"> <span class="price-new">GHS ' . $value['promoPrice'] . '</span> <span class="price-old">GHS ' . $value['price'] . '</span> <span class="saving">-' . round($savings, 2) . '%</span> </p>
@@ -68,7 +68,7 @@ foreach ($details as $value) {
                     $promotions = $setupObj['promotions'];
 
                     foreach ($promotions as $value) {
-                        echo '<div class="item"> <a href="../promotion/' . $value['promotionID'] . '"><img src="http://tfs.knust.edu.gh/ecommerce/images/' . $value['bannerUrl'] . '"" alt="small banner1" class="img-responsive" /></a> </div>';
+                        echo '<div class="item"> <a href="../promotion/' . $value['promotionID'] . '"><img src="http://18.217.149.24/ecommerce/images/' . $value['bannerUrl'] . '"" alt="small banner1" class="img-responsive" /></a> </div>';
                     }
                     ?>
 
@@ -156,9 +156,11 @@ foreach ($details as $value) {
                                 <input type="hidden" name="price" value="' . $value['promoPrice'] . '"/>
                                     <input type="hidden" name="url" value="' . $value['iconUrl'] . '"/>
                                     <input type="hidden" name="productname" value="' . $value['name'] . '"/>
+                                                                           <input type="hidden" name="itemexist" id="itemexist" value="' . $itemexist . '"/>
+
                                         <input type="hidden" name="quantity" value="1"/>
                         <div class="image"><a href="../product/' . $value['itemID'] . '">
-                            <img src="http://tfs.knust.edu.gh/ecommerce/images/' . $value['iconUrl'] . '" height="200" width="200" alt="' . $value['name'] . '" title="' . $value['name'] . '" class="img-responsive" /></a></div>
+                            <img src="http://18.217.149.24/ecommerce/images/' . $value['iconUrl'] . '" height="200" width="200" alt="' . $value['name'] . '" title="' . $value['name'] . '" class="img-responsive" /></a></div>
                         <div class="caption">
                             <h4><a href="../product/' . $value['itemID'] . '">' . $value['name'] . '</a></h4>
                             <p class="price"><span class="price-new"> GHS ' . $value['promoPrice'] . '</span>';
@@ -170,14 +172,12 @@ foreach ($details as $value) {
                             echo ' </p>
                         </div>
                         <div class="button-group">';
-                        if($itemexist ==1){
-                            echo' <button class="btn-primary " type="button" onclick="removeItem('.$value['itemID'].',\''. $value['name'].'\')" ><span>Remove From Cart</span></button>';
-                          
-                        }else{
-                            echo' <button class="btn-primary" type="submit" ><span>Add to Cart</span></button>';
-                          
-                        }
-                        echo'
+                            if ($itemexist == 1) {
+                                echo' <button class="btn-primary " type="button" onclick="removeItem(' . $value['itemID'] . ',\'' . $value['name'] . '\')" ><span>Remove From Cart</span></button>';
+                            } else {
+                                echo' <button class="btn-primary" type="submit" ><span>Add to Cart</span></button>';
+                            }
+                            echo'
                             </div>
                              </form>
                             <div class="button-group">
