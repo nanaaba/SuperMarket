@@ -8,7 +8,7 @@
 
 return [
 	
-	'TEST_URL' => '18.217.149.24/ecommerce/'
+	'TEST_URL' => 'http://52.207.165.129/koalaapi'
 
 	
 ];

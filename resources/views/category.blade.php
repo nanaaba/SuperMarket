@@ -3,6 +3,7 @@
 @section('content')
 
 <?php
+          $url = config('constants.TEST_URL');
 $detailsize = sizeof($details);
 $data = array();
 
@@ -43,13 +44,15 @@ foreach ($details as $value) {
 
 
                     <?php
+           
+
                     $specials = $setupObj['discounted'];
 
                     foreach ($specials as $value) {
                         $price_diff = $value['price'] - $value['promoPrice'];
                         $savings = ($price_diff / $value['price']) * 100;
                         echo '  <div class="product-thumb clearfix">
-                        <div class="image"><a href="../product/' . $value['itemID'] . '">           <img src="http://18.217.149.24/ecommerce/images/' . $value['iconUrl'] . '" alt="' . $value['name'] . '" title="' . $value['name'] . '" class="img-responsive" /></a></div>
+                        <div class="image"><a href="../product/' . $value['itemID'] . '">           <img src="'.$url.'/images/' . $value['iconUrl'] . '" alt="' . $value['name'] . '" title="' . $value['name'] . '" class="img-responsive" /></a></div>
                         <div class="caption">
                             <h4><a href="../product/' . $value['itemID'] . '">' . $value['name'] . '</a></h4>
                             <p class="price"> <span class="price-new">GHS ' . $value['promoPrice'] . '</span> <span class="price-old">GHS ' . $value['price'] . '</span> <span class="saving">-' . round($savings, 2) . '%</span> </p>
@@ -68,7 +71,7 @@ foreach ($details as $value) {
                     $promotions = $setupObj['promotions'];
 
                     foreach ($promotions as $value) {
-                        echo '<div class="item"> <a href="../promotion/' . $value['promotionID'] . '"><img src="http://18.217.149.24/ecommerce/images/' . $value['bannerUrl'] . '"" alt="small banner1" class="img-responsive" /></a> </div>';
+                        echo '<div class="item"> <a href="../promotion/' . $value['promotionID'] . '"><img src="'.$url.'/images/' . $value['bannerUrl'] . '"" alt="small banner1" class="img-responsive" /></a> </div>';
                     }
                     ?>
 
@@ -160,7 +163,7 @@ foreach ($details as $value) {
 
                                         <input type="hidden" name="quantity" value="1"/>
                         <div class="image"><a href="../product/' . $value['itemID'] . '">
-                            <img src="http://18.217.149.24/ecommerce/images/' . $value['iconUrl'] . '" height="200" width="200" alt="' . $value['name'] . '" title="' . $value['name'] . '" class="img-responsive" /></a></div>
+                            <img src="'.$url.'/images/' . $value['iconUrl'] . '" height="200" width="200" alt="' . $value['name'] . '" title="' . $value['name'] . '" class="img-responsive" /></a></div>
                         <div class="caption">
                             <h4><a href="../product/' . $value['itemID'] . '">' . $value['name'] . '</a></h4>
                             <p class="price"><span class="price-new"> GHS ' . $value['promoPrice'] . '</span>';

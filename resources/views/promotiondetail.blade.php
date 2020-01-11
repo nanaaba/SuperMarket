@@ -19,6 +19,10 @@
                     <ul id="cat_accordion">
 
                         <?php
+                       echo 'uuuuuuuuuuuuu'.  $url = config('constants.TEST_URL');
+
+     //   $baseurl = $url . '/categories/' . $catid . '/items';
+
                         $setupObj = session('setupdata');
                         $categories = $setupObj['categories'];
 

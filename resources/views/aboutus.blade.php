@@ -15,25 +15,34 @@
             <div id="content" class="col-sm-12">
                 <h1 class="title">About Us</h1>
                 <div class="row">
-                    <div class="col-lg-6">
-                        <img src="{{ asset('image/koala.jpg')}}" width="550" height="350"/>
+                    <div class="col-lg-5">
+                        <img src="{{ asset('image/About-us.png')}}" width="450" height="450"/>
                     </div>
-                    <div class="col-lg-6" style="font-size: 14px;">
+                    <div class="col-lg-7" >
 
                         <p>
-                            We are a family-oriented supermarket that brings culinary adventure and diversity into the homes of our customers. 
+                            We are a dynamic team driven by our love for fashion, design and marketing of
+                            lifestyle products. Inherently projecting the image of Africa to a global audience.
+                            Established in 2018, MAVA Industries was set-up with the aim of disrupting the
+                            African garment and apparel market by providing a diverse array of quality, trendy,
+                            affordable and sustainable clothing using technology as an enabler.
                         </p>
                         <p>
-                            Visit us and enjoy high- quality products from all over world. We are widely recognized as the first retail store in Ghana to meet international standards with experienced professionals ready and committed to provide quality goods and services to meet the needs of Ghanaians and foreigners who come into the country. 
-                        </p>
-                        <p>  
-                        <blockquote>
-                            Our main Objective is to meet the needs of people living in Ghana by providing them with quality goods and services which are internationally accepted.
-                        </blockquote>
+                            Our flagship brands MAVA, and HUNTSMAN targets the modern trendy woman and
+                            man with a sense of purpose and achievement. Our primary mode of reaching our
+                            target audience is online.
                         </p>
                         <p>
-                            0263778212 (OSU), 0261512300 (AIRPORT), 0263011784 (CANTONMENTS)
-                        </p>
+                            Both brands have been influenced by the backgrounds of its founders and pay
+                            homage to different cultures within African continent, showcasing its diversity to a
+                            global audience.</p>
+                        <p>
+                            MAVA, derived from the Swahili word MAVAZI, meaning ‘Pleasant’ and ‘Clothing’. The brand phonetics 
+                            depicts a slang that pays homage to Mother, which forms the basis of all life forms and also translates to 
+                            the representation of effortless and timeless fashion designs for women. The HUNTSMAN brand is a lifestyle 
+                            representation of the modern African male infused with the alpha-male mentality of playing the domineering 
+                            role in shaping his surroundings. Our enduring purpose is to inspire to dream of a better more fulfilled life.
+                            The future for us is exciting!  </p>
                     </div>
                 </div>
 

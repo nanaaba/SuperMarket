@@ -10,7 +10,7 @@
                     <div class="links">
                         <ul>
                             <li class="mobile"><i class="fa fa-phone"></i> 0261512300 </li>
-                            <li class="email"><a href="mailto:info@koala.com.gh"><i class="fa fa-envelope"></i>info@koala.com.gh</a></li>
+                            <li class="email"><a href="mailto:info@clohing.com.gh"><i class="fa fa-envelope"></i>info@clothing.com.gh</a></li>
                             <li class="open">&nbsp;<i class="fa fa-clock-o"></i> Open Now 7:30AM - 9:00PM &nbsp;</li>
 
                         </ul>
@@ -105,6 +105,8 @@
                         <ul class="dropdown-menu">
 
                             <?php
+                                    $url = config('constants.TEST_URL');
+
                             if ($totalitems == 0) {
                                 echo '  <p><center>Your cart is empty!</center>
                               <br/>
@@ -123,7 +125,7 @@
                                     echo ' <tr>
                                             <td class="text-center"><a href="#">
                                             <img class="img-thumbnail" style="height:50px;width:50px;"  
-                                            src="http://18.217.149.24/ecommerce/images/' . $value['url'] . '" ></a></td>
+                                            src="'.$url.'/images/' . $value['url'] . '" ></a></td>
                                             <td class="text-left"><a href="#">' . $value['name'] . '</a></td>
                                             <td class="text-right"> ' . $value['quantity'] . '</td>
                                           
@@ -190,7 +192,7 @@
                                         '<a href = "#">' .
                                         '<input type = "checkbox" value = "' . $value['categoryID'] . '" name = "catids[]" id = "myCheckbox' . $value['categoryID'] . '" />' .
                                         '<label for = "myCheckbox' . $value['categoryID'] . '">' .
-                                        ' <img src = "http://18.217.149.24/ecommerce/images/' . $value['iconUrl'] . '" height = "40" width = "40" title = "' . $value['name'] . '"/>' .
+                                        ' <img src = "'.$url.'/images/' . $value['iconUrl'] . '" height = "40" width = "40" title = "' . $value['name'] . '"/>' .
                                         '</label></a>' .
                                         '<a href = "#">' . $value['name'] . '</a>' .
                                         ' </div>';

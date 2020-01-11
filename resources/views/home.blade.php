@@ -12,6 +12,7 @@
                     <ul id="cat_accordion">
 
                         <?php
+                        $url = config('constants.TEST_URL');
                         $setupObj = session('setupdata');
                         $categories = $setupObj['categories'];
 
@@ -34,7 +35,7 @@
                         $price_diff = $value['price'] - $value['promoPrice'];
                         $savings = ($price_diff / $value['price']) * 100;
                         echo '  <div class="product-thumb clearfix">
-                        <div class="image"><a href="product/' . $value['itemID'] . '">           <img src="http://18.217.149.24/ecommerce/images/' . $value['iconUrl'] . '" alt="' . $value['name'] . '" title="' . $value['name'] . '" class="img-responsive" /></a></div>
+                        <div class="image"><a href="product/' . $value['itemID'] . '">           <img src="'.$url.'/images/' . $value['iconUrl'] . '" alt="' . $value['name'] . '" title="' . $value['name'] . '" class="img-responsive" /></a></div>
                         <div class="caption">
                             <h4><a href="product/' . $value['itemID'] . '">' . $value['name'] . '</a></h4>
                             <p class="price"> <span class="price-new">GHS ' . $value['promoPrice'] . '</span> <span class="price-old">GHS ' . $value['price'] . '</span> <span class="saving">-' . round($savings, 2) . '%</span> </p>
@@ -53,7 +54,7 @@
                     $promotions = $setupObj['promotions'];
 
                     foreach ($promotions as $value) {
-                        echo '<div class="item"> <a href="promotion/' . $value['promotionID'] . '"><img src="http://18.217.149.24/ecommerce/images/' . $value['bannerUrl'] . '"" alt="small banner1" class="img-responsive" /></a> </div>';
+                        echo '<div class="item"> <a href="promotion/' . $value['promotionID'] . '"><img src="'.$url.'/images/' . $value['bannerUrl'] . '"" alt="small banner1" class="img-responsive" /></a> </div>';
                     }
                     ?>
 
@@ -73,7 +74,7 @@
                             $banners = $setupObj['banners'];
 
                             foreach ($banners as $value) {
-                                echo '   <div class="item"> <a href="banner/' . $value['bannerID'] . '"><img class="img-responsive" src="http://18.217.149.24/ecommerce/images/' . $value['bannerUrl'] . '" alt="banner 1" /></a></div>
+                                echo '   <div class="item"> <a href="banner/' . $value['bannerID'] . '"><img class="img-responsive" src="'.$url.'/images/' . $value['bannerUrl'] . '" alt="banner 1" /></a></div>
                         ';
                             }
                             ?>
@@ -87,13 +88,15 @@
                 <h3 class="subtitle">Featured</h3>
                 <div class="owl-carousel product_carousel">
                     <?php
+       
+                    
                     $featureditems = $setupObj['featured'];
                     $items = session('cartitems');
 
                     $allitems = $items['items'];
                     $response = json_decode($allitems, true);
                     $ids = array_column($response, 'id');
-                    
+
 
 
                     foreach ($featureditems as $value) {
@@ -116,7 +119,7 @@
                                  <input type="hidden" name="productname" value="' . $value['name'] . '"/>
                                         <input type="hidden" name="quantity" value="1"/>
                         <div class="image"><a href="product/' . $value['itemID'] . '">
-                            <img src="http://18.217.149.24/ecommerce/images/' . $value['iconUrl'] . '" alt="' . $value['name'] . '" title="' . $value['name'] . '" class="img-responsive" /></a></div>
+                            <img src="'.$url.'/images/' . $value['iconUrl'] . '" alt="' . $value['name'] . '" title="' . $value['name'] . '" class="img-responsive" /></a></div>
                         <div class="caption">
                             <h4><a href="product/' . $value['itemID'] . '">' . $value['name'] . '</a></h4>
                             <p class="price"><span class="price-new"> GHS ' . $value['price'] . '</span>';
@@ -127,15 +130,13 @@
                         echo'    </p>
                         </div>
                         <div class="button-group">';
-                        if($itemexist ==1){
-                            echo' <button class="btn-primary " type="button" onclick="removeItem('.$value['itemID'].',\''. $value['name'].'\')" ><span>Remove From Cart</span></button>';
-                          
-                        }else{
+                        if ($itemexist == 1) {
+                            echo' <button class="btn-primary " type="button" onclick="removeItem(' . $value['itemID'] . ',\'' . $value['name'] . '\')" ><span>Remove From Cart</span></button>';
+                        } else {
                             echo' <button class="btn-primary" type="submit" ><span>Add to Cart</span></button>';
-                          
                         }
-                            
-                         echo'   </div>
+
+                        echo'   </div>
                              </form>
                             <div class="button-group">
                               <div class="add-to-links">
@@ -161,44 +162,44 @@
 
                 <h3 class="subtitle">Favourites</h3>
 
-                <?php
-                $userid = session('koalauser');
-                $usercategories = session('usercategories');
-                $usercategories_size = sizeof($usercategories);
-                ?>
+<?php
+$userid = session('koalauser');
+$usercategories = session('usercategories');
+$usercategories_size = sizeof($usercategories);
+?>
                 <div class="owl-carousel product_carousel">
 
-                    <?php
-                    if (empty($userid) || $usercategories_size == 0) {
-                        $favourites = $setupObj['categories'];
+<?php
+if (empty($userid) || $usercategories_size == 0) {
+    $favourites = $setupObj['categories'];
 
-                        foreach ($favourites as $value) {
+    foreach ($favourites as $value) {
 
-                            echo '<div class="product-thumb clearfix">
+        echo '<div class="product-thumb clearfix">
                               <div class="image"><a href="category/' . $value['categoryID'] . '">
-                            <img src="http://18.217.149.24/ecommerce/images/' . $value['iconUrl'] . '" height="100" width="100" alt="' . $value['name'] . '" title="' . $value['name'] . '" class="img-responsive" /></a></div>
+                            <img src="'.$url.'/images/' . $value['iconUrl'] . '" height="100" width="100" alt="' . $value['name'] . '" title="' . $value['name'] . '" class="img-responsive" /></a></div>
                         <div class="caption">
                             <h4><a href="category/' . $value['categoryID'] . '">' . $value['name'] . '</a></h4>
                            </div>
                         
                     </div>';
-                        }
-                    }
+    }
+}
 
-                    if ($usercategories_size > 0) {
-                        foreach ($usercategories as $value) {
+if ($usercategories_size > 0) {
+    foreach ($usercategories as $value) {
 
-                            echo '<div class="product-thumb clearfix">
+        echo '<div class="product-thumb clearfix">
                               <div class="image"><a href="category/' . $value['categoryID'] . '">
-                            <img src="http://18.217.149.24/ecommerce/images/' . $value['iconUrl'] . '" height="100" width="100" alt="' . $value['name'] . '" title="' . $value['name'] . '" class="img-responsive" /></a></div>
+                            <img src="'.$url.'/images/' . $value['iconUrl'] . '" height="100" width="100" alt="' . $value['name'] . '" title="' . $value['name'] . '" class="img-responsive" /></a></div>
                         <div class="caption">
                             <h4><a href="category/' . $value['categoryID'] . '">' . $value['name'] . '</a></h4>
                            </div>
                         
                     </div>';
-                        }
-                    }
-                    ?>
+    }
+}
+?>
 
 
                 </div>

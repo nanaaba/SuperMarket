@@ -20,13 +20,14 @@
 
 
                     <?php
+                    $url = config('constants.TEST_URL');
                     $setupObj = session('setupdata');
                     $featured = $setupObj['featured'];
 
                     foreach ($featured as $value) {
                         ?>
                         <div class="product-thumb clearfix">
-                            <div class="image"><a href="<?php echo $value['itemID'] ?>"><img src="http://18.217.149.24/ecommerce/images/<?php echo $value['iconUrl'] ?>" alt=" <?php echo $value['name'] ?> " title=" <?php echo $value['name'] ?>" height="50" width="50" class="img-responsive" /></a></div>
+                            <div class="image"><a href="<?php echo $value['itemID'] ?>"><img src="<?php echo $url?>/images/<?php echo $value['iconUrl'] ?>" alt=" <?php echo $value['name'] ?> " title=" <?php echo $value['name'] ?>" height="50" width="50" class="img-responsive" /></a></div>
                             <div class="caption">
                                 <h4><a href="<?php echo $value['itemID'] ?>"><?php echo $value['name'] ?></a></h4>
                                 <p class="price"> <span class="price-new">GHS <?php echo $value['promoPrice'] ?></span> 
@@ -47,7 +48,7 @@
                     $promotions = $setupObj['promotions'];
 
                     foreach ($promotions as $value) {
-                        echo '<div class="item"> <a href="#"><img src="http://18.217.149.24/ecommerce/images/' . $value['bannerUrl'] . '"" alt="small banner1" class="img-responsive" /></a> </div>';
+                        echo '<div class="item"> <a href="#"><img src="'.$url.'/images/' . $value['bannerUrl'] . '"" alt="small banner1" class="img-responsive" /></a> </div>';
                     }
                     ?>
 
@@ -62,7 +63,7 @@
                         $price_diff = $value['price'] - $value['promoPrice'];
                         $savings = ($price_diff / $value['price']) * 100;
                         echo '  <div class="product-thumb clearfix">
-                        <div class="image"><a href="' . $value['itemID'] . '">           <img src="http://18.217.149.24/ecommerce/images/' . $value['iconUrl'] . '" alt="' . $value['name'] . '" title="' . $value['name'] . '" class="img-responsive" /></a></div>
+                        <div class="image"><a href="' . $value['itemID'] . '">           <img src="'.$url.'/images/' . $value['iconUrl'] . '" alt="' . $value['name'] . '" title="' . $value['name'] . '" class="img-responsive" /></a></div>
                         <div class="caption">
                             <h4><a href="' . $value['itemID'] . '">' . $value['name'] . '</a></h4>
                             <p class="price"> <span class="price-new">GHS ' . $value['promoPrice'] . '</span> <span class="price-old">GHS ' . $value['price'] . '</span> <span class="saving">-' . round($savings, 2) . '%</span> </p>
@@ -88,9 +89,9 @@
                         <div class="col-sm-6">
                             <div class="image">
                                 <img class="img-responsive" itemprop="image" id="zoom_01" 
-                                     src="http://18.217.149.24/ecommerce/images/{{$productinfo['iconUrl']}}"
+                                     src="{{$url}}/images/{{$productinfo['iconUrl']}}"
                                      title="{{$productinfo['name']}}" alt="{{$productinfo['name']}}" 
-                                     data-zoom-image="http://18.217.149.24/ecommerce/images/{{$productinfo['iconUrl']}}" />
+                                     data-zoom-image="{{$url}}/images/{{$productinfo['iconUrl']}}" />
 
                             </div>
 
@@ -314,17 +315,13 @@
                     </div>
                     <ul class="nav nav-tabs">
                         <li class="active"><a href="#tab-description" data-toggle="tab">Description</a></li>
-                        <li><a href="#tab-specification" data-toggle="tab">Ingredients</a></li>
                         <li><a href="#tab-review" data-toggle="tab">Reviews (<?php echo $productinfo['reviews']['totalReviews'] ?>)</a></li>
                     </ul>
                     <div class="tab-content">
                         <div itemprop="description" id="tab-description" class="tab-pane active">
                             {{$productinfo['description']}}
                         </div>
-                        <div id="tab-specification" class="tab-pane">
-                            {{$productinfo['ingredients']}}
-
-                        </div>
+                     
                         <div id="tab-review" class="tab-pane">
 
                             <div id="review">
@@ -527,7 +524,7 @@
                             $price = $value['price'];
                             $promoprice = $value['promoPrice'];
                             $diff = $price - $promoprice;
-  $itemexist = in_array($value['itemID'], $ids);
+                            $itemexist = in_array($value['itemID'], $ids);
 
 
                             echo '<div class="product-thumb clearfix">
@@ -542,7 +539,7 @@
 <input type="hidden" name="productname" value="' . $value['name'] . '"/>
                                         <input type="hidden" name="quantity" value="1"/>
                         <div class="image"><a href="' . $value['itemID'] . '">
-                            <img src="http://18.217.149.24/ecommerce/images/' . $value['iconUrl'] . '" alt="' . $value['name'] . '" title="' . $value['name'] . '" class="img-responsive" /></a></div>
+                            <img src="' . $url . '/images/' . $value['iconUrl'] . '" alt="' . $value['name'] . '" title="' . $value['name'] . '" class="img-responsive" /></a></div>
                         <div class="caption">
                             <h4><a href="product/' . $value['itemID'] . '">' . $value['name'] . '</a></h4>
                             <p class="price"><span class="price-new"> GHS ' . $value['price'] . '</span>';
@@ -553,15 +550,13 @@
                             echo'    </p>
                         </div>
                         <div class="button-group">';
-                        if($itemexist ==1){
-                            echo' <button class="btn-primary " type="button" onclick="removeItem('.$value['itemID'].',\''. $value['name'].'\')" ><span>Remove From Cart</span></button>';
-                          
-                        }else{
-                            echo' <button class="btn-primary" type="submit" ><span>Add to Cart</span></button>';
-                          
-                        }
-                            
-                         echo'  </div>
+                            if ($itemexist == 1) {
+                                echo' <button class="btn-primary " type="button" onclick="removeItem(' . $value['itemID'] . ',\'' . $value['name'] . '\')" ><span>Remove From Cart</span></button>';
+                            } else {
+                                echo' <button class="btn-primary" type="submit" ><span>Add to Cart</span></button>';
+                            }
+
+                            echo'  </div>
                              </form>
                             <div class="button-group">
                               <div class="add-to-links">

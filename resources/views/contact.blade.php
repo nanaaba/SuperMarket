@@ -81,22 +81,25 @@
                 <div class="list-group">
                     <h2 class="subtitle">About Us </h2>
                     <p>
-                        We are a family-oriented supermarket that brings culinary adventure and diversity into the homes of our customers. 
-                    </p>
-                    <p>
-                        Visit us and enjoy high- quality products from all over world. We are widely recognized as the first retail store in Ghana to meet international standards with experienced professionals ready and committed to provide quality goods and services to meet the needs of Ghanaians and foreigners who come into the country. 
-                    </p>
+                       We are a dynamic team driven by our love for fashion, design and marketing of
+                            lifestyle products. Inherently projecting the image of Africa to a global audience.
+                            Established in 2018, MAVA Industries was set-up with the aim of disrupting the
+                            African garment and apparel market by providing a diverse array of quality, trendy,
+                            affordable and sustainable clothing using technology as an enabler.
+                         </p>
+                   
                 </div>
 
                 <h2 class="subtitle">Promotions </h2>
                 <div class="banner owl-carousel">
                     <?php
+                              $url = config('constants.TEST_URL');
                     $setupObj = session('setupdata');
 
                     $promotions = $setupObj['promotions'];
 
                     foreach ($promotions as $value) {
-                        echo '<div class="item"> <a href="../promotion/' . $value['promotionID'] . '"><img src="http://18.217.149.24/ecommerce/images/' . $value['bannerUrl'] . '"" alt="small banner1" class="img-responsive" /></a> </div>';
+                        echo '<div class="item"> <a href="../promotion/' . $value['promotionID'] . '"><img src="'.$url.'/images/' . $value['bannerUrl'] . '"" alt="small banner1" class="img-responsive" /></a> </div>';
                     }
                     ?> </div>
 

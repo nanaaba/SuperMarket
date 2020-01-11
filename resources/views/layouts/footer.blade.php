@@ -83,7 +83,7 @@
 </footer>
 <!--Footer End-->
 <!-- Facebook Side Block Start -->
-<div id="facebook" class="fb-left sort-order-1">
+<!--<div id="facebook" class="fb-left sort-order-1">
     <div class="facebook_icon"><i class="fa fa-facebook"></i></div>
     <div class="fb-page" data-href="https://www.facebook.com/KoalaGhana/" data-small-header="true" data-adapt-container-width="true" data-hide-cover="true" data-show-facepile="true" data-show-posts="false">
         <div class="fb-xfbml-parse-ignore">
@@ -100,17 +100,17 @@
             js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.4";
             fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));</script>
-</div>
+</div>-->
 
 
 <!-- Facebook Side Block End -->
 <!-- Twitter Side Block Start -->
-<div id="twitter_footer" class="twit-left sort-order-2">
+<!--<div id="twitter_footer" class="twit-left sort-order-2">
     <div class="twitter_icon"><i class="fa fa-twitter"></i></div>
     <a href="https://twitter.com/intent/tweet?screen_name=KoalaGhana&ref_src=twsrc%5Etfw" class="twitter-mention-button" data-show-count="false">Tweet to @KoalaGhana</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
     <a class="twitter-timeline" href="https://twitter.com/KoalaGhana?ref_src=twsrc%5Etfw">Tweets by KoalaGhana</a> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script> 
 
-</div>
+</div>-->
 
 
 <script type="text/javascript" src="{{ asset('js/jquery-2.1.1.min.js')}}"></script>

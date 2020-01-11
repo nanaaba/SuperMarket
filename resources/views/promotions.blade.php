@@ -20,6 +20,7 @@
                     <ul id="cat_accordion">
 
                         <?php
+                        $url = config('constants.TEST_URL');
                         $setupObj = session('setupdata');
                         $categories = $setupObj['categories'];
 
@@ -42,7 +43,7 @@
                         $price_diff = $value['price'] - $value['promoPrice'];
                         $savings = ($price_diff / $value['price']) * 100;
                         echo '  <div class="product-thumb clearfix">
-                        <div class="image"><a href="../product/' . $value['itemID'] . '">           <img src="http://18.217.149.24/ecommerce/images/' . $value['iconUrl'] . '" alt="' . $value['name'] . '" title="' . $value['name'] . '" class="img-responsive" /></a></div>
+                        <div class="image"><a href="../product/' . $value['itemID'] . '">           <img src="' . $url . '/images/' . $value['iconUrl'] . '" alt="' . $value['name'] . '" title="' . $value['name'] . '" class="img-responsive" /></a></div>
                         <div class="caption">
                             <h4><a href="../product/' . $value['itemID'] . '">' . $value['name'] . '</a></h4>
                             <p class="price"> <span class="price-new">GHS ' . $value['promoPrice'] . '</span> <span class="price-old">GHS ' . $value['price'] . '</span> <span class="saving">-' . round($savings, 2) . '%</span> </p>
@@ -61,7 +62,7 @@
                     $promotions = $setupObj['promotions'];
 
                     foreach ($promotions as $value) {
-                        echo '<div class="item"> <a href="../promotion/' . $value['promotionID'] . '"><img src="http://18.217.149.24/ecommerce/images/' . $value['bannerUrl'] . '"" alt="small banner1" class="img-responsive" /></a> </div>';
+                        echo '<div class="item"> <a href="../promotion/' . $value['promotionID'] . '"><img src="'.$url.'/images/' . $value['bannerUrl'] . '"" alt="small banner1" class="img-responsive" /></a> </div>';
                     }
                     ?>
 
@@ -71,7 +72,7 @@
             <!--Left Part End -->
             <!--Middle Part Start-->
             <div id="content" class="col-sm-9">
-                 <h1> All Promotions</h1>
+                <h1> All Promotions</h1>
 
                 <div class="marketshop-banner">
                     <div class="row">
@@ -79,8 +80,8 @@
                         //print_r(sizeof($promotions));
                         foreach ($promotions as $value) {
                             echo ' <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                            <a href="promotion/'.$value['promotionID'] .'">
-                            <img src="http://18.217.149.24/ecommerce/images/' . $value['bannerUrl'] . '" alt="' . $value['name'] . '" title="' . $value['name'] . '"></a></div>
+                            <a href="promotion/' . $value['promotionID'] . '">
+                            <img src="' . $url . '/images/' . $value['bannerUrl'] . '" alt="' . $value['name'] . '" title="' . $value['name'] . '"></a></div>
              ';
                         }
                         ?>
